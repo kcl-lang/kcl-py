@@ -127,3 +127,32 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# kcl files
+.pytest_cache
+__pycache__
+__kclcache__/
+build-result/
+dist/
+kclvm.egg-info/
+.eggs/
+
+# Mac OS X files
+.DS_Store
+
+_python37_home_
+_site-packages
+
+__kcl_test_main.k
+
+# kclvm bundles
+/kclvm-*.zip
+/kcl-go*
+/_build_dist
+.kusion
+
+/venv/
+
+# Coverage
+.coverage
+.coverage.*
