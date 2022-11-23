@@ -4,7 +4,7 @@ import inspect
 
 from dataclasses import dataclass
 from collections import OrderedDict
-from typing import Dict, List
+from typing import Dict, List, Union
 from ruamel.yaml import YAML
 
 import kclvm
@@ -72,9 +72,16 @@ def handle_schema(value: dict):
     return filtered, standalone
 
 
-def filter_results(keyvalues: dict) -> List[dict]:
+def filter_results(keyvalues: Union[dict, list]) -> List[dict]:
     if keyvalues is None:
         return None
+
+    # Plan list value with the yaml stream format.
+    if isinstance(keyvalues, list):
+        result = []
+        for kv in keyvalues:
+            result += filter_results(kv)
+        return result
 
     # index 0 for in-line keyvalues output, index 1: for standalone keyvalues outputs
     results = [OrderedDict()]
@@ -198,14 +205,21 @@ class ObjectPlanner:
         else:
             raise Exception("Invalid KCL Object")
 
-    def plan(self, var_dict: Dict[str, obj.KCLObject]) -> Dict[str, any]:
-        assert isinstance(var_dict, dict)
-        data = {
+    def plan_dict(self, var_dict: Dict[str, obj.KCLObject]) -> Dict[str, any]:
+        return {
             k: self.to_python(v)
             for k, v in var_dict.items()
             if v and v.type() in KCL_PLAN_TYPE
         }
-        return data
+
+    def plan(
+        self, var: Union[Dict[str, obj.KCLObject], list]
+    ) -> Union[Dict[str, obj.KCLObject], list]:
+        if isinstance(var, dict):
+            return self.plan_dict(var)
+        elif isinstance(var, list):
+            return [self.plan_dict(v) for v in var]
+        raise Exception("Invalid plan object type")
 
 
 @dataclass
@@ -218,7 +232,6 @@ class YAMLPlanner(ObjectPlanner):
         )
 
     def plan(self, var_dict: Dict[str, obj.KCLObject], to_py: bool = True) -> str:
-        assert isinstance(var_dict, dict)
         plan_obj = super().plan(var_dict) if to_py else var_dict
         # Represent OrderedDict as dict.
         yaml = YAML()
@@ -239,13 +252,13 @@ class YAMLPlanner(ObjectPlanner):
         yaml.representer.add_representer(
             type(None),
             lambda dumper, data: dumper.represent_scalar(
-                u"tag:yaml.org,2002:null", u"null"
+                "tag:yaml.org,2002:null", "null"
             ),
         )
         yaml.representer.add_representer(
             str,
             lambda dumper, data: dumper.represent_scalar(
-                u"tag:yaml.org,2002:str", data, style="|"
+                "tag:yaml.org,2002:str", data, style="|"
             )
             if "\n" in data
             else dumper.represent_str(data),
@@ -276,13 +289,12 @@ class JSONPlanner(ObjectPlanner):
 
     def plan(
         self,
-        var_dict: Dict[str, obj.KCLObject],
+        var: Union[Dict[str, obj.KCLObject], list],
         *,
         only_first=False,
         to_py: bool = True
     ) -> str:
-        assert isinstance(var_dict, dict)
-        plan_obj = super().plan(var_dict) if to_py else var_dict
+        plan_obj = super().plan(var) if to_py else var
         results = filter_results(plan_obj)
         if self.sort_keys:
             results = [order_dict(r) for r in results]

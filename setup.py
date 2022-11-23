@@ -11,8 +11,8 @@ import setuptools
 # Steps:
 # 1. cd internal
 # 2. modify kclvm version in setup.py
-# 3. run `python setup.py sdist` to build package
-# 4. run `twine upload dist/kclvm-0.x.x` to upload package to PyPI
+# 3. run `python3 setup.py sdist` to build package
+# 4. run `python3 -m twine upload dist/kclvm-0.x.x.tar.gz` to upload package to PyPI
 # 5. input username and password of PyPI
 
 install_requires = []
@@ -25,7 +25,7 @@ with open(require_path) as f:
 setup(
     name='kclvm',
     author='KCL Authors',
-    version='0.4.4.1',
+    version='0.4.5.4',
     license='Apache License 2.0',
 
     description='KCLVM', 

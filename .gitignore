@@ -150,6 +150,7 @@ __kcl_test_main.k
 /kcl-go*
 /_build_dist
 .kusion
+lark_parser.pickle
 
 /venv/
 
