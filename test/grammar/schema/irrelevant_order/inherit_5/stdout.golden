@@ -1,0 +1,15 @@
+config:
+  name: defualt
+  help: defualt
+  labels: null
+  metaLabels: null
+  overQuota: false
+appConfig:
+  name: app
+  help: app
+  labels:
+    key2: value2
+  metaLabels:
+    key2: value2
+  overQuota: true
+  appName: myApp

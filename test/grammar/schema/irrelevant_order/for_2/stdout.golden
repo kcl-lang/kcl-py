@@ -1,0 +1,7 @@
+data:
+  keys:
+  - key2
+  data:
+    key2: value2
+  dataOther:
+    key2: value2

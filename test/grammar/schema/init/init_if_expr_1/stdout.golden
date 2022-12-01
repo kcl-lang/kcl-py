@@ -1,0 +1,11 @@
+alice:
+  name: alice
+  age: 10
+  info:
+    age: 10
+    gender: girl
+John:
+  name: john
+  age: null
+  info:
+    gender: boy
