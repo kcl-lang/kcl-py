@@ -27,12 +27,24 @@ class KCLResult:
             return self.m
         selector_index = internal.build_selector_index()
         filtered_result = {}
-        for k, v in self.m.items():
-            if k in selector_index:
-                select_data = internal.select_instance_attributes(
-                    to_python_obj(self.m[k]), selector_index[k]
-                )
-                filtered_result[k] = to_kcl_obj(select_data) if to_kcl else select_data
+        if isinstance(self.m, list) and len(self.m) > 0:
+            for k, v in self.m[0].items():
+                if k in selector_index:
+                    select_data = internal.select_instance_attributes(
+                        to_python_obj(self.m[0][k]), selector_index[k]
+                    )
+                    filtered_result[k] = (
+                        to_kcl_obj(select_data) if to_kcl else select_data
+                    )
+        else:
+            for k, v in self.m.items():
+                if k in selector_index:
+                    select_data = internal.select_instance_attributes(
+                        to_python_obj(self.m[k]), selector_index[k]
+                    )
+                    filtered_result[k] = (
+                        to_kcl_obj(select_data) if to_kcl else select_data
+                    )
         self.m = filtered_result or self.m
         return self.m
 
