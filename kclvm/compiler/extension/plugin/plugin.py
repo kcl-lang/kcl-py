@@ -99,7 +99,7 @@ def _find_plugin_root() -> typing.Optional[str]:
         return env_plugin_root
 
     # 2. try ${pwd}/.../plugins/hello/plugin.py
-    cwd_plugin_path = pathlib.Path(os.getcwd()).absolute()
+    cwd_plugin_path = pathlib.Path(os.environ.get("KCLVM_CLI_BIN_PATH") or os.getcwd()).absolute()
     root = cwd_plugin_path.root
     while cwd_plugin_path:
         if cwd_plugin_path == cwd_plugin_path.parent or str(cwd_plugin_path) == root:
