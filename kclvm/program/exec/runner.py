@@ -21,7 +21,6 @@ from kclvm.api.object.internal import (
     kcl_option_reset,
     kcl_option_init_all,
 )
-from .native_runner import native_run, is_linux_platform
 from .kclvm_cli import kclvm_cli_native_run_dylib
 
 
@@ -127,28 +126,6 @@ def Run(
 
         return kclvm_cli_native_run_dylib(args)
 
-    # Only for linux debug directly run
-    from .native_runner import (
-        get_path_list_dylib_path,
-        native_run_dylib,
-        native_try_run_dylib,
-    )
-
-    if (
-        target == "native"
-        and is_linux_platform()
-        and not cmd_overrides
-        and os.environ.get(KCLVM_RUN_MODE_WITHIN_CACHE_ENV)
-    ):
-        dylib_path = get_path_list_dylib_path(root, path_list)
-        if os.path.exists(dylib_path):
-            try:
-                return native_run_dylib(path_list, dylib_path, should_exit=True)
-            except Exception:
-                result = native_try_run_dylib(root, path_list, dylib_path)
-                if result:
-                    return result
-
     ast_prog = parser.LoadProgram(
         *path_list,
         work_dir=work_dir,
@@ -162,27 +139,13 @@ def Run(
     kcl_option_reset()
     kcl_option_init_all()
 
-    if target == "native":
-        if platform.system() == "Windows":
-            from .native_runner_windows_amd64 import native_run_windows
+    # AST to bytecode list
+    bin_prog = compiler.CompileProgram(
+        ast_prog, enable_cache=not bool(ast_prog.cmd_overrides)
+    )
 
-            result = native_run_windows(path_list, ast_prog=ast_prog)
-        else:
-            result = native_run(path_list, ast_prog=ast_prog)
-
-    elif target == "wasm":
-        from .native_runner_wasm32 import native_run_wasm32
-
-        result = native_run_wasm32(path_list, ast_prog=ast_prog)
-
-    else:
-        # AST to bytecode list
-        bin_prog = compiler.CompileProgram(
-            ast_prog, enable_cache=not bool(ast_prog.cmd_overrides)
-        )
-
-        # Run bytecode list
-        result = vm.Run(bin_prog)
+    # Run bytecode list
+    result = vm.Run(bin_prog)
 
     # If cmd overrides are used and config.debug is True, write back KCL files
     if print_override_ast:

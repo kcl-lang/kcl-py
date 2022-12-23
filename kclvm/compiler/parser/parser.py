@@ -329,6 +329,9 @@ class ASTBuilderWalker(ast.TreeWalker):
                 else self.get_token_with_pos(node)
             )
 
+        if not node.type:
+            return None
+
         raise AttributeError(f"Some 'walk_{node.type}()' methods are missing")
 
     def get_node_name(self, node: lark_pb.Tree) -> str:
