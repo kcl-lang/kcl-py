@@ -2060,7 +2060,11 @@ class TypeChecker(BaseTypeChecker):
                 # Nest identifier key -> str key
                 if len(key.names) == 1:
                     name = key.get_name(False)
-                    key_type = self.expr(key) if name in self._local_vars else STR_TYPE
+                    key_type = (
+                        self.expr(key)
+                        if name in self._local_vars
+                        else objpkg.KCLStringLitTypeObject(name)
+                    )
                     if key_type != ANY_TYPE and key_type.type_kind() not in KEY_KINDS:
                         self.raise_err(
                             nodes=[key],
