@@ -733,7 +733,7 @@ class Printer(BasePrinter):
         - elts: List[Expr]
         """
         assert isinstance(t, ast.ListExpr)
-        in_one_line = len(set(map(lambda e: e.line, t.elts)).union([t.line])) == 1
+        in_one_line = len(set(map(lambda e: e.line, t.elts))) <= 1
         self.write(ast.TokenValue.LEFT_BRACKETS)
         if t.elts:
             self.print(Indentation.IndentWithNewline if not in_one_line else "")
