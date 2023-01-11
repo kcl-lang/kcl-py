@@ -1717,6 +1717,14 @@ class TypeChecker(BaseTypeChecker):
 
     def walk_SelectorExpr(self, t: ast.SelectorExpr):
         value_type = self.expr(t.value)
+
+        if isinstance(value_type, objpkg.KCLModuleTypeObject) and t.has_question:
+            attr = t.attr.get_name()
+            self.raise_err(
+                [t.value],
+                msg=f"For the module type, the use of '?.{attr}' is unnecessary and it can be modified as '.{attr}'",
+            )
+
         for name in t.attr.names:
             value_type = self.load_attr_type(t, value_type, name)
         return value_type
