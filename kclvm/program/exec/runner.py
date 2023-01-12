@@ -59,7 +59,9 @@ def Run(
 
     root = vfs.MustGetPkgRoot(path_list)
     modfile = vfs.LoadModFile(root)
-    target = (target or modfile.build.target or os.getenv(KCLVM_TARGET_ENV_KEY) or "").lower()
+    target = (
+        target or modfile.build.target or os.getenv(KCLVM_TARGET_ENV_KEY) or ""
+    ).lower()
 
     kclvm.config.input_file = path_list
     kclvm.config.current_path = work_dir

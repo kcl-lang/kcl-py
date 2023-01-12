@@ -4,7 +4,6 @@ PROJECT_NAME = KCLVM
 
 PWD:=$(shell pwd)
 
-KCLVM_VERSION := $(shell cat VERSION)
 BUILD_IMAGE:=kusionstack/kclvm-builder
 
 # export DOCKER_DEFAULT_PLATFORM=linux/amd64
@@ -20,3 +19,6 @@ RUN_IN_DOCKER+=-w /root/kclvm ${BUILD_IMAGE}
 
 sh-in-docker:
 	${RUN_IN_DOCKER} bash
+
+test-grammar:
+	export PYTHONPATH=${PWD} && ./internal/scripts/test_grammar.sh && cd ${PWD}

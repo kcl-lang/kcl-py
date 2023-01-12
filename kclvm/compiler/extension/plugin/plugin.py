@@ -99,7 +99,9 @@ def _find_plugin_root() -> typing.Optional[str]:
         return env_plugin_root
 
     # 2. try ${pwd}/.../plugins/hello/plugin.py
-    cwd_plugin_path = pathlib.Path(os.environ.get("KCLVM_CLI_BIN_PATH") or os.getcwd()).absolute()
+    cwd_plugin_path = pathlib.Path(
+        os.environ.get("KCLVM_CLI_BIN_PATH") or os.getcwd()
+    ).absolute()
     root = cwd_plugin_path.root
     while cwd_plugin_path:
         if cwd_plugin_path == cwd_plugin_path.parent or str(cwd_plugin_path) == root:
@@ -123,7 +125,11 @@ def _find_plugin_root() -> typing.Optional[str]:
         cwd_plugin_path = cwd_plugin_path.parent
 
     # 4. try $HOME/.kusion/kclvm/plugins
-    home_dir = os.getenv("HOME") if platform.system() != "Windows" else os.getenv("UserProfile")
+    home_dir = (
+        os.getenv("HOME")
+        if platform.system() != "Windows"
+        else os.getenv("UserProfile")
+    )
     home_plugin_root = os.path.join(home_dir, ".kusion/kclvm/plugins")
     if os.path.exists(f"{home_plugin_root}/hello/plugin.py"):
         return home_plugin_root

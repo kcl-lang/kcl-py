@@ -90,7 +90,7 @@ class ServiceMeta(metaclass=abc.ABCMeta):
         return self._instance
 
     def call_method(self, method: str, req: _message.Message) -> _message.Message:
-        return getattr(self.get_service_instance(), method[method.rfind(".") + 1:])(
+        return getattr(self.get_service_instance(), method[method.rfind(".") + 1 :])(
             req
         )
 
@@ -142,7 +142,7 @@ class Server:
         hdr = self._read_req_header()
 
         service_name = hdr.method[: hdr.method.rfind(".")]
-        method_name = hdr.method[hdr.method.rfind(".") + 1:]
+        method_name = hdr.method[hdr.method.rfind(".") + 1 :]
         service = self.srv_table[service_name]
 
         req = self._read_req(service, hdr)

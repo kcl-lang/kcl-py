@@ -8,7 +8,7 @@ _yaml = yaml.YAML()
 _yaml.representer.add_representer(
     str,
     lambda dumper, data: dumper.represent_scalar(
-        u"tag:yaml.org,2002:str", data, style="|"
+        "tag:yaml.org,2002:str", data, style="|"
     )
     if "\n" in data
     else dumper.represent_str(data),
@@ -16,7 +16,7 @@ _yaml.representer.add_representer(
 # Convert None to null
 _yaml.representer.add_representer(
     type(None),
-    lambda dumper, data: dumper.represent_scalar(u"tag:yaml.org,2002:null", u"null"),
+    lambda dumper, data: dumper.represent_scalar("tag:yaml.org,2002:null", "null"),
 )
 
 

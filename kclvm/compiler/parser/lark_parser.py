@@ -238,4 +238,3 @@ def ParseCode(src: str, ignore_file_line: bool = False) -> lark_pb.Tree:
     src += "\n"
     tree = GetKclLarkParser().parse(src)
     return _pb_build_Tree(tree)
- 

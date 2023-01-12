@@ -58,7 +58,7 @@ def generate_golden_file(py_file_name):
     if os.path.isfile(py_file_name):
         try:
             process = subprocess.Popen(
-                ["kclvm", py_file_name],
+                ["python3", py_file_name],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 env=dict(os.environ),
@@ -88,13 +88,14 @@ def read_settings_file(settings_file_name):
 
 print("##### K Language Grammar Test Suite #####")
 test_dirs = find_test_dirs(str(pathlib.Path(__file__).parent), "")
-
+pwd = str(pathlib.Path(__file__).parent.parent.parent)
+os.environ["PYTHONPATH"] = pwd
 
 @pytest.mark.parametrize("test_dir", test_dirs)
 def test_grammar(test_dir):
     print("Testing {}".format(test_dir))
     test_settings = read_settings_file(os.path.join(test_dir, SETTINGS_FILE))
-    kcl_command = ["kcl", TEST_FILE]
+    kcl_command = ["python3", "-m", "kclvm", TEST_FILE]
     if test_settings and test_settings["kcl_options"]:
         kcl_command.extend(test_settings["kcl_options"].split())
     process = subprocess.Popen(
