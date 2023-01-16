@@ -2481,7 +2481,7 @@ class TypeChecker(BaseTypeChecker):
                     self.clear_config_expr_context(stack_depth=init_stack_depth)
                 else:
                     value_tpe = self.expr(t.value)
-                    self.must_assignable_to(target, value_tpe, tpe)
+                self.must_assignable_to(target, value_tpe, tpe)
                 if value_tpe != ANY_TYPE and tpe == ANY_TYPE and not t.type_annotation:
                     self.set_type_to_scope(name, value_tpe, target)
                     if self.in_schema_type:

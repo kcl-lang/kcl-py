@@ -219,6 +219,10 @@ def _deal_origin_ast_module(
                             stmt.end_line,
                             stmt.end_column,
                         )
+                        insert_assign_stmt.type_annotation = stmt.type_annotation
+                        insert_assign_stmt.type_annotation_node = (
+                            stmt.type_annotation_node
+                        )
                         for value in values:
                             stmt_copy = deepcopy(insert_assign_stmt)
                             stmt_copy.value = value
