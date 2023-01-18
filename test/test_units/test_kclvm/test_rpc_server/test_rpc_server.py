@@ -11,7 +11,7 @@ import os
 import kclvm.internal.util as util
 
 
-SERVER_CMD = "kclvm -m kclvm.program.rpc-server -http=127.0.0.1:2021"
+SERVER_CMD = "python3 -m kclvm.program.rpc-server -http=127.0.0.1:2021"
 HEADERS = {
     "content-type": "accept/json",
 }

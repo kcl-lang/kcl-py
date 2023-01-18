@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/KusionStack/kclvm-py/workflows/Test/badge.svg">
+  <img src="https://github.com/KusionStack/kclvm-py/workflows/test/badge.svg">
 </p>
 
 # KCLVM Python SDK

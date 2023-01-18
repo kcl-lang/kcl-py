@@ -1,8 +1,8 @@
 name: test
 on: ["push", "pull_request"]
 jobs:
-  test-grammar:
-    name: Test
+  grammar-test:
+    name: Grammar Test
     runs-on: ubuntu-latest
     container:
       image: kusionstack/kclvm-builder
@@ -14,8 +14,9 @@ jobs:
       - name: Grammar test
         run: make test-grammar
         shell: bash
-  test-konfig:
-    name: Test
+
+  konfig-test:
+    name: Konfig Test
     runs-on: ubuntu-latest
     container:
       image: kusionstack/kclvm-builder
@@ -26,6 +27,20 @@ jobs:
           submodules: "true"
       - name: Konfig test
         run: | 
-          ls ./test/integration/konfig-remote
           make test-konfig
+        shell: bash
+
+  unit-test:
+    name: Unit Test
+    runs-on: ubuntu-latest
+    container:
+      image: kusionstack/kclvm-builder
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          submodules: "true"
+      - name: unit test
+        run: | 
+          make test-unit
         shell: bash
