@@ -22,3 +22,6 @@ sh-in-docker:
 
 test-grammar:
 	export PYTHONPATH=${PWD} && ./internal/scripts/test_grammar.sh && cd ${PWD}
+
+test-konfig:
+	export PYTHONPATH=${PWD} && ./internal/scripts/test_konfig.sh && cd ${PWD}

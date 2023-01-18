@@ -1,0 +1,6 @@
+[submodule "test/integration/konfig-remote"]
+	path = test/integration/konfig-remote
+	url = https://github.com/KusionStack/konfig.git
+[submodule "plugins"]
+	path = plugins
+	url = https://github.com/KusionStack/kcl-plugin.git

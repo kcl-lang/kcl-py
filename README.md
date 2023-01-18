@@ -1,4 +1,8 @@
-# KCLVM-Py
+<p align="center">
+  <img src="https://github.com/KusionStack/kclvm-py/workflows/Test/badge.svg">
+</p>
+
+# KCLVM Python SDK
 
 KCLVM binding for Python
 

@@ -1,8 +1,7 @@
 name: test
 on: ["push", "pull_request"]
 jobs:
-  test:
-    # Ref: https://github.com/actions/runner-images/tree/main/images/linux
+  test-grammar:
     name: Test
     runs-on: ubuntu-latest
     container:
@@ -15,4 +14,18 @@ jobs:
       - name: Grammar test
         run: make test-grammar
         shell: bash
- 
+  test-konfig:
+    name: Test
+    runs-on: ubuntu-latest
+    container:
+      image: kusionstack/kclvm-builder
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          submodules: "true"
+      - name: Konfig test
+        run: | 
+          ls ./test/integration/konfig-remote
+          make test-konfig
+        shell: bash
