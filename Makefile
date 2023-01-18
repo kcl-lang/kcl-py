@@ -25,3 +25,6 @@ test-grammar:
 
 test-konfig:
 	export PYTHONPATH=${PWD} && ./internal/scripts/test_konfig.sh && cd ${PWD}
+
+test-unit:
+	export PYTHONPATH=${PWD} && ./internal/scripts/test_unit.sh && cd ${PWD}
