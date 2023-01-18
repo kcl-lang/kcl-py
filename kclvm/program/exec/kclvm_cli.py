@@ -39,7 +39,7 @@ def init_cli_dll():
         _cli_dll_path = f"{_exe_root}/bin/libkclvm_cli_cdylib.so"
         _cli_dll = CDLL(_cli_dll_path)
     elif platform.system() == "Windows":
-        _cli_dll_path = f"{_exe_root}\\bin\kclvm_cli_cdylib.dll"
+        _cli_dll_path = f"{_exe_root}/bin/kclvm_cli_cdylib.dll"
         _cli_dll = CDLL(_cli_dll_path)
     else:
         raise f"unknown os: {platform.system()}"
