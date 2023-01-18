@@ -1,13 +1,11 @@
+<h1 align="center">KCLVM Python SDK</h1>
+
 <p align="center">
   <img src="https://github.com/KusionStack/kclvm-py/workflows/test/badge.svg">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square">
   <img src="https://img.shields.io/github/release/KusionStack/kclvm-py.svg">
   <img src="https://img.shields.io/github/license/KusionStack/kclvm-py.svg">
 </p>
-
-# KCLVM Python SDK
-
-KCLVM binding for Python
 
 ## How to use
 
