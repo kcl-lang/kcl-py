@@ -2560,8 +2560,10 @@ class TypeChecker(BaseTypeChecker):
             key_type=sup(key_types),
             value_type=sup(value_types),
         )
-        or_else_type = self.expr_or_any_type(t.orelse)
-        return sup([dict_type, or_else_type])
+        if t.orelse:
+            or_else_type = self.expr_or_any_type(t.orelse)
+            return sup([dict_type, or_else_type])
+        return dict_type
 
 
 def ResolveProgramImport(prog: ast.Program):
