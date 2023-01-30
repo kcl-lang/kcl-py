@@ -142,7 +142,7 @@ def kclvm_cli_native_run_dylib(args: pb2.ExecProgram_Args) -> objpkg.KCLResult:
         json_result = "{}"
 
     try:
-        data = json.loads(json_result)
+        data = json.loads(json_result or "{}")
     except Exception as e:
         raise Exception(f"Exception={e}, json_result={json_result}")
 
