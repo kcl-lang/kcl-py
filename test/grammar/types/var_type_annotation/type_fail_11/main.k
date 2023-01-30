@@ -1,4 +1,7 @@
-config: {"A"|"B": int} = {
-    if True:
-        C = 1
-}
+schema Foo:
+    foo: int
+
+schema Bar:
+    bar: int
+
+foo: Foo = 1

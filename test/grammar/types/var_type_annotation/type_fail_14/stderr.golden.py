@@ -1,3 +1,4 @@
+
 import sys
 import kclvm.kcl.error as kcl_error
 import os
@@ -10,12 +11,12 @@ kcl_error.print_kcl_error_message(
         file_msgs=[
             kcl_error.ErrFileMsg(
                 filename=cwd + "/main.k",
-                line_no=7,
+                line_no=1,
                 col_no=1,
-                arg_msg='got int(1)',
+                arg_msg="got {str:int(1)}"
             )
         ],
-        arg_msg='expect Foo, got int(1)',
+        arg_msg="expect {str(A)|str(B):int}, got {str:int(1)}"
     ),
-    file=sys.stdout,
+    file=sys.stdout
 )

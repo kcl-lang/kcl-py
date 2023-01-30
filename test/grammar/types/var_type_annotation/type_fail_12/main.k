@@ -4,6 +4,6 @@ schema Foo:
 schema Bar:
     bar: int
 
-foo: Foo = Bar {
-    bar: 1
+foo: int = Foo {
+    foo = 1
 }
