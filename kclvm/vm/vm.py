@@ -46,6 +46,7 @@ class Frame:
     locals: dict = None
     globals: dict = None  # Global symbol and KCL object reference
     free_vars: list = None  # Free symbols
+    locals_list: list = None
     codes: typing.List[int] = None
 
     def update_info(self, filename: str, lineno: int, colno: int):
@@ -323,13 +324,33 @@ class VirtualMachine:
 
     def load_local(self, index: int):
         name = self.names[index]
+
+        if self.ctx.locals_list:
+            index = len(self.ctx.locals_list) - 1
+            while index >= 0:
+                if name in self.ctx.locals_list[index]:
+                    self.push(self.ctx.locals_list[index][name])
+                    return self.ctx.locals_list[index][name]
+                index -= 1
+
         self.push(self.ctx.locals[name])
+        return self.ctx.locals[name]
 
     def store_local(self, index: int):
-        name = self.names[index]
-        self.ctx.locals[name] = self.stack_top()
+        self.update_local(self.names[index], self.stack_top())
 
-    def update_local(self, name: str, value: KCLObject):
+    def update_local(self, name: str, value: KCLObject, is_local_var: bool = False):
+        if self.ctx.locals_list:
+            index = len(self.ctx.locals_list) - 1
+            while index >= 0:
+                if name in self.ctx.locals_list[index] and not is_local_var:
+                    self.ctx.locals_list[index][name] = value
+                    return
+                index -= 1
+
+            self.ctx.locals_list[-1][name] = value
+            return
+
         self.ctx.locals[name] = value
 
     def update_global(self, name: str, value: KCLObject):
@@ -408,6 +429,13 @@ class VirtualMachine:
                     arg_msg=f"schema arguments got an unexpected keyword argument '{name}'",
                 )
             self.update_local(name, kwarg.value)
+
+    def push_frame_locals(self):
+        self.ctx.locals_list = self.ctx.locals_list or []
+        self.ctx.locals_list.append({})
+
+    def pop_frame_locals(self):
+        self.ctx.locals_list.pop()
 
     def pop_frame(self) -> Frame:
         self.last_popped_frame = self.frames.pop()

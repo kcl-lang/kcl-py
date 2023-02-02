@@ -50,6 +50,14 @@ def debug_names(vm, _code: int, arg: int) -> Optional[obj.KCLObject]:
     return vm.debug_names(idx, at)
 
 
+def push_frame_locals(vm, _code: int, arg: int) -> Optional[obj.KCLObject]:
+    vm.push_frame_locals()
+
+
+def pop_frame_locals(vm, _code: int, arg: int) -> Optional[obj.KCLObject]:
+    vm.pop_frame_locals()
+
+
 def unpack_operand(arg: int):
     return int(arg & 0xFF), int((arg >> 8) & 0xFF), int((arg >> 16) & 0xFF)
 
@@ -98,14 +106,29 @@ def build_map(vm, _code: int, _arg: int) -> Optional[obj.KCLObject]:
 
 
 def load_free(vm, _code: int, arg: int) -> Optional[obj.KCLObject]:
+    name = vm.names[arg]
+
+    # If the variable in local:
+    if vm.ctx.locals_list:
+        index = len(vm.ctx.locals_list) - 1
+        while index >= 0:
+            if name in vm.ctx.locals_list[index]:
+                vm.push(vm.ctx.locals_list[index][name])
+                return vm.ctx.locals_list[index][name]
+            index -= 1
+
+    if name in vm.ctx.locals:
+        vm.push(vm.ctx.locals[name])
+        return vm.ctx.locals[name]
+
     free_obj = obj.NONE_INSTANCE
     index = vm.frame_index
-    name = vm.names[arg]
     # Search the local variables from the inside to the outside schema
     while index >= 1:
         index -= 1
         if name in vm.frames[index].locals:
             free_obj = vm.frames[index].locals[name]
+
     vm.push(free_obj)
     return free_obj
 
@@ -1081,6 +1104,8 @@ VM_OP_ACTIONS = {
     Opcode.SCHEMA_NOP: schema_nop,
     Opcode.FORMAT_VALUES: format_values,
     Opcode.MEMBER_SHIP_AS: member_ship_as,
+    Opcode.PUSH_FRAME_LOCALS: push_frame_locals,
+    Opcode.POP_FRAME_LOCALS: pop_frame_locals,
     Opcode.DEBUG_STACK: debug_stack,
     Opcode.DEBUG_LOCALS: debug_locals,
     Opcode.DEBUG_GLOBALS: debug_globals,

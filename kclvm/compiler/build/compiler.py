@@ -23,7 +23,7 @@ in the compiler walk_{AST Name} methods.
 import typing
 
 from dataclasses import dataclass
-from typing import Callable, Any, List, Dict, Optional, Union
+from typing import Callable, Any, List, Set, Dict, Optional, Union
 
 import kclvm.kcl.ast as ast
 import kclvm.kcl.error as kcl_error
@@ -134,7 +134,7 @@ class _CompilerBase(ast.TreeWalker):
         # In if statement
         self._is_in_if_stmt: List[bool] = [False]
         # Local vars
-        self._local_vars: List[str] = []
+        self._local_vars: Set[str] = set()
         # Schema func body and check cache
         self._schema_build_cache: Dict[str, objpkg.RuntimeCode] = {}
         # Lambda temp var index
@@ -232,13 +232,20 @@ class _CompilerBase(ast.TreeWalker):
 
     # Emit functions
 
+    def push_symtable(self):
+        self.symtable = SymbolTable.new(self.symtable, self.symtable.num_definitions)
+
+    def pop_symtable(self):
+        self.symtable.outer.num_definitions = self.symtable.num_definitions
+        self.symtable = self.symtable.outer
+
     def enter_scope(self):
         """
         Enter scope such as internal of function and schema
         """
         scope = vm.CompilationScope(instructions=[])
         self.scopes.append(scope)
-        self.symtable = SymbolTable.new(self.symtable, self.symtable.num_definitions)
+        self.push_symtable()
 
     def leave_scope(self) -> List[int]:
         """
@@ -248,8 +255,7 @@ class _CompilerBase(ast.TreeWalker):
             self.raise_err(CompilerInternalErrorMeta.INVALID_GLOBAL_IMPLICIT_SCOPE)
         instructions = self.current_instruction()
         self.scopes.pop()
-        self.symtable.outer.num_definitions = self.symtable.num_definitions
-        self.symtable = self.symtable.outer
+        self.pop_symtable()
         return instructions  # Return internal scope instructions
 
     def current_instruction(self) -> List[int]:
@@ -1163,7 +1169,7 @@ class Compiler(_CompilerBase):
         - is_optional
         - op: vm.Opcode.
         """
-        self._local_vars = []
+        self._local_vars = set()
         self.load_constant(ARG_OP_MAPPING.get(t.op))
         # Optional
         self.load_constant(bool(t.is_optional))
@@ -1464,7 +1470,7 @@ class Compiler(_CompilerBase):
             val_name = name if i == 1 else val_name
             self.update_line_column(v)
             self.store_symbol(name, scope=SymbolScope.LOCAL)
-            self._local_vars.append(name)
+            self._local_vars.add(name)
             # POP the temp var_key variable
             self.emit(vm.Opcode.POP_TOP)
 
@@ -1522,7 +1528,7 @@ class Compiler(_CompilerBase):
         for v in t.variables:
             name = v.get_name(False)
             self.symtable.delete(name, SymbolScope.LOCAL)
-        self._local_vars = []
+            self._local_vars.discard(name)
 
     def walk_ListExpr(self, t: ast.ListExpr):
         """ast.AST: ListExpr
@@ -1635,7 +1641,7 @@ class Compiler(_CompilerBase):
             self.store_symbol(
                 target_name, scope=SymbolScope.LOCAL
             )  # Target in for_comp is a local variable
-            self._local_vars.append(target_name)
+            self._local_vars.add(target_name)
             self.emit(vm.Opcode.POP_TOP)  # POP the temp target variable
 
         for e in gen.ifs:
@@ -1663,7 +1669,7 @@ class Compiler(_CompilerBase):
         for target in gen.targets:
             target_name = target.get_name(False)
             self.symtable.delete(target_name, SymbolScope.LOCAL)
-        self._local_vars = []
+            self._local_vars.discard(target_name)
 
     def walk_ListComp(self, t: ast.ListComp):
         """ast.AST: ListComp
@@ -1726,10 +1732,13 @@ class Compiler(_CompilerBase):
     def op_config_data_entries(
         self, keys: List[ast.Expr], values: List[ast.Expr], operations: List[int]
     ):
+        self.push_symtable()
+        self.emit(vm.Opcode.PUSH_FRAME_LOCALS, 0)
         self.emit(vm.Opcode.BUILD_SCHEMA_CONFIG)
         for key, value, operation in zip(keys, values, operations):
             insert_index_node = None
             is_nest_key = False
+            name = None
             if key is None:
                 self.load_constant(None)
                 self.expr(value)
@@ -1749,15 +1758,24 @@ class Compiler(_CompilerBase):
                         else:
                             self.load_constant(name)
                     else:
+                        name = key.get_name()
                         is_nest_key = True
-                        self.load_constant(key.get_name())
+                        self.load_constant(name)
+                elif isinstance(key, ast.StringLit):
+                    name = key.value
+                    self.expr(key)
                 else:
                     self.expr(key)
                 self.expr(value)
+            # Store a local variable for every entry key.
+            if name:
+                self.store_symbol(name, scope=SymbolScope.LOCAL, do_check=False)
             self.load_constant(is_nest_key)
             self.load_constant(operation)
             self.expr_or_load_none(insert_index_node)
             self.emit(vm.Opcode.STORE_SCHEMA_CONFIG)
+        self.pop_symtable()
+        self.emit(vm.Opcode.POP_FRAME_LOCALS, 0)
 
     def op_config_data(self, t: ast.ConfigExpr):
         assert isinstance(t, ast.ConfigExpr)
@@ -2063,7 +2081,7 @@ class Compiler(_CompilerBase):
         - target: Identifier
         - value: Expr
         """
-        self._local_vars = []
+        self._local_vars = set()
         name = t.target.get_name()
         if self._is_in_schema_stmt[-1]:
             # Assign operator
@@ -2106,7 +2124,7 @@ class Compiler(_CompilerBase):
         - targets: List[Identifier]
         - value: Expr
         """
-        self._local_vars = []
+        self._local_vars = set()
         # Infer to schema
         if t.type_annotation and isinstance(
             self.get_type_from_identifier(t.targets[0]), objpkg.KCLSchemaTypeObject

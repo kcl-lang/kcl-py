@@ -405,8 +405,18 @@ class SchemaEvalContext:
 
     def get_from_frame_locals(self, key: str) -> Optional[obj.KCLDictObject]:
         """Get kcl object from vm frame locals dict"""
+
+        # If the variable in the internal local scope:
+        if self.vm.ctx.locals_list:
+            index = len(self.vm.ctx.locals_list) - 1
+            while index >= 0:
+                if key in self.vm.ctx.locals_list[index]:
+                    return self.vm.ctx.locals_list[index][key]
+                index -= 1
+
         if self.key_is_in_frame_locals(key):
             return self.vm.ctx.locals[key]
+
         index = self.vm.frame_index
         # Search the local variables from the inside to the outside schema
         while index >= self.vm.frame_index:
