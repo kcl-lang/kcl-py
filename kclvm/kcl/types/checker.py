@@ -2029,103 +2029,7 @@ class TypeChecker(BaseTypeChecker):
         return ANY_TYPE
 
     def walk_ConfigExpr(self, t: ast.ConfigExpr):
-        value_types = []
-        key_types = []
-        fix_values = []
-        for i, key, value, op in zip(
-            range(len(t.keys)), t.keys, t.values, t.operations
-        ):
-            stack_depth = 0
-            fix_value = self.check_config_entry(key, value, [self.check_defined])
-            fix_values.append((i, fix_value))
-            stack_depth += self.switch_config_expr_context_by_key(key)
-            value_type = ANY_TYPE
-            has_insert_index = False
-            # Double_star expr and dict_if_entry expr
-            if not key:
-                value_type = self.expr(value)
-                if value_type == ANY_TYPE or value_type == NONE_TYPE:
-                    value_types.append(value_type)
-                elif isinstance(
-                    value_type, (objpkg.KCLDictTypeObject, objpkg.KCLSchemaTypeObject)
-                ):
-                    key_types.append(value_type.key_type)
-                    value_types.append(value_type.value_type)
-                elif is_kind_type_or_kind_union_type(
-                    value_type,
-                    [objpkg.KCLTypeKind.DictKind, objpkg.KCLTypeKind.SchemaKind],
-                ):
-                    key_types.append(sup([tpe.key_type for tpe in value_type.types]))
-                    value_types.append(
-                        sup([tpe.value_type for tpe in value_type.types])
-                    )
-                else:
-                    self.raise_err(
-                        nodes=[value],
-                        msg=f"only dict and schema can be used ** unpack, got '{value_type.type_str()}'",
-                    )
-            elif isinstance(key, ast.Identifier):
-                # Nest identifier key -> str key
-                if len(key.names) == 1:
-                    name = key.get_name(False)
-                    key_type = (
-                        self.expr(key)
-                        if name in self._local_vars
-                        else objpkg.KCLStringLitTypeObject(name)
-                    )
-                    if key_type != ANY_TYPE and key_type.type_kind() not in KEY_KINDS:
-                        self.raise_err(
-                            nodes=[key],
-                            category=kcl_error.ErrType.IllegalAttributeError_TYPE,
-                            msg=f"type '{key_type.type_str()}'",
-                        )
-                else:
-                    key_type = STR_TYPE
-                key_types.append(key_type)
-                value_type = self.expr(value)
-                nest_value_type = value_type
-                for _ in range(len(key.names) - 1):
-                    nest_value_type = objpkg.KCLDictTypeObject(
-                        key_type=STR_TYPE, value_type=nest_value_type
-                    )
-                value_types.append(nest_value_type)
-            elif isinstance(key, ast.Subscript):
-                if isinstance(key.value, ast.Identifier) and isinstance(
-                    key.index, ast.NumberLit
-                ):
-                    has_insert_index = True
-                    value_type = self.expr(value)
-                    key_types.append(STR_TYPE)
-                    value_types.append(objpkg.KCLListTypeObject(value_type))
-            else:
-                key_type, value_type = self.expr(key), self.expr(value)
-                if key_type != ANY_TYPE and key_type.type_kind() not in KEY_KINDS:
-                    self.raise_err(
-                        [key],
-                        kcl_error.ErrType.IllegalAttributeError_TYPE,
-                        f"type '{key_type.type_str()}'",
-                    )
-                key_types.append(key_type)
-                value_types.append(value_type)
-            if (
-                op == ast.ConfigEntryOperation.INSERT
-                and not has_insert_index
-                and value_type != ANY_TYPE
-                and not isinstance(value_type, objpkg.KCLListTypeObject)
-            ):
-                self.raise_err(
-                    [value],
-                    kcl_error.ErrType.IllegalAttributeError_TYPE,
-                    f"only list type can in inserted, got '{value_type.type_str()}'",
-                )
-            self.clear_config_expr_context(stack_depth=stack_depth)
-        key_type = sup(key_types)
-        value_type = sup(value_types)
-        for i, fix_value in fix_values:
-            if fix_value:
-                t.items[i].value = fix_value
-        # self.clear_config_expr_context(stack_depth=init_stack_depth)
-        return objpkg.KCLDictTypeObject(key_type=key_type, value_type=value_type)
+        return self.walk_config_entries(t.keys, t.values, t.operations, t)
 
     def walk_CheckExpr(self, t: ast.CheckExpr):
         self.must_be_type(t.msg, STR_TYPE)
@@ -2517,53 +2421,141 @@ class TypeChecker(BaseTypeChecker):
 
     def walk_ConfigIfEntryExpr(self, t: ast.ConfigIfEntryExpr):
         self.expr_or_any_type(t.if_cond)
-        key_types, value_types = [], []
-        for key, value in zip(t.keys, t.values):
+        dict_type = self.walk_config_entries(t.keys, t.values, t.operations, t)
+        if t.orelse:
+            or_else_type = self.expr_or_any_type(t.orelse)
+            return sup([dict_type, or_else_type])
+        return dict_type
+
+    def walk_config_entries(
+        self,
+        keys: typing.List[ast.Expr],
+        values: typing.List[ast.Expr],
+        operations: typing.List[int],
+        node: ast.AST,
+    ) -> objpkg.KCLDictTypeObject:
+        value_types = []
+        key_types = []
+        self.enter_scope(node)
+        for i, key, value, op in zip(range(len(keys)), keys, values, operations):
             stack_depth = 0
             self.check_config_entry(key, value, [self.check_defined])
             stack_depth += self.switch_config_expr_context_by_key(key)
+            value_type = ANY_TYPE
+            has_insert_index = False
+            # Double_star expr and dict_if_entry expr
             if not key:
-                key_type = ANY_TYPE
                 value_type = self.expr(value)
                 if value_type == ANY_TYPE or value_type == NONE_TYPE:
                     value_types.append(value_type)
                 elif isinstance(
                     value_type, (objpkg.KCLDictTypeObject, objpkg.KCLSchemaTypeObject)
                 ):
-                    key_type = value_type.key_type
-                    value_type = value_type.value_type
+                    key_types.append(value_type.key_type)
+                    value_types.append(value_type.value_type)
                 elif is_kind_type_or_kind_union_type(
                     value_type,
                     [objpkg.KCLTypeKind.DictKind, objpkg.KCLTypeKind.SchemaKind],
                 ):
-                    key_type = sup([tpe.key_type for tpe in value_type.types])
-                    value_type = sup([tpe.value_type for tpe in value_type.types])
+                    key_types.append(sup([tpe.key_type for tpe in value_type.types]))
+                    value_types.append(
+                        sup([tpe.value_type for tpe in value_type.types])
+                    )
                 else:
                     self.raise_err(
                         nodes=[value],
                         msg=f"only dict and schema can be used ** unpack, got '{value_type.type_str()}'",
                     )
             elif isinstance(key, ast.Identifier):
-                key_type = STR_TYPE
                 value_type = self.expr(value)
+                nest_value_type = value_type
                 for _ in range(len(key.names) - 1):
-                    value_type = objpkg.KCLDictTypeObject(
-                        key_type=STR_TYPE, value_type=value_type
+                    nest_value_type = objpkg.KCLDictTypeObject(
+                        key_type=STR_TYPE, value_type=nest_value_type
                     )
+                # Nest identifier key -> str key
+                if len(key.names) == 1:
+                    name = key.get_name(False)
+                    key_type = (
+                        self.expr(key)
+                        if name in self._local_vars
+                        else objpkg.KCLStringLitTypeObject(name)
+                    )
+                    self.scope.elems[name] = ScopeObject(
+                        name=name,
+                        node=key,
+                        type=nest_value_type,
+                        pos=ast.Position(
+                            filename=self.filename,
+                            line=key.line,
+                            column=key.column,
+                        ),
+                        end=ast.Position(
+                            filename=self.filename,
+                            line=key.end_line,
+                            column=key.end_column,
+                        ),
+                    )
+                    if key_type != ANY_TYPE and key_type.type_kind() not in KEY_KINDS:
+                        self.raise_err(
+                            nodes=[key],
+                            category=kcl_error.ErrType.IllegalAttributeError_TYPE,
+                            msg=f"type '{key_type.type_str()}'",
+                        )
+                else:
+                    key_type = STR_TYPE
+                key_types.append(key_type)
+                value_types.append(nest_value_type)
+            elif isinstance(key, ast.Subscript):
+                if isinstance(key.value, ast.Identifier) and isinstance(
+                    key.index, ast.NumberLit
+                ):
+                    has_insert_index = True
+                    value_type = self.expr(value)
+                    key_types.append(STR_TYPE)
+                    value_types.append(objpkg.KCLListTypeObject(value_type))
             else:
-                key_type = self.expr(key)
-                value_type = self.expr(value)
-            key_types.append(key_type)
-            value_types.append(value_type)
+                key_type, value_type = self.expr(key), self.expr(value)
+                if isinstance(key, ast.StringLit):
+                    self.scope.elems[key.value] = ScopeObject(
+                        name=key.value,
+                        node=key,
+                        type=value_type,
+                        pos=ast.Position(
+                            filename=self.filename,
+                            line=key.line,
+                            column=key.column,
+                        ),
+                        end=ast.Position(
+                            filename=self.filename,
+                            line=key.end_line,
+                            column=key.end_column,
+                        ),
+                    )
+                if key_type != ANY_TYPE and key_type.type_kind() not in KEY_KINDS:
+                    self.raise_err(
+                        [key],
+                        kcl_error.ErrType.IllegalAttributeError_TYPE,
+                        f"type '{key_type.type_str()}'",
+                    )
+                key_types.append(key_type)
+                value_types.append(value_type)
+            if (
+                op == ast.ConfigEntryOperation.INSERT
+                and not has_insert_index
+                and value_type != ANY_TYPE
+                and not isinstance(value_type, objpkg.KCLListTypeObject)
+            ):
+                self.raise_err(
+                    [value],
+                    kcl_error.ErrType.IllegalAttributeError_TYPE,
+                    f"only list type can in inserted, got '{value_type.type_str()}'",
+                )
             self.clear_config_expr_context(stack_depth=stack_depth)
-        dict_type = objpkg.KCLDictTypeObject(
-            key_type=sup(key_types),
-            value_type=sup(value_types),
-        )
-        if t.orelse:
-            or_else_type = self.expr_or_any_type(t.orelse)
-            return sup([dict_type, or_else_type])
-        return dict_type
+        key_type = sup(key_types)
+        value_type = sup(value_types)
+        self.leave_scope()
+        return objpkg.KCLDictTypeObject(key_type=key_type, value_type=value_type)
 
 
 def ResolveProgramImport(prog: ast.Program):

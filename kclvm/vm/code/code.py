@@ -141,6 +141,9 @@ class Opcode(IntEnum):
 
     FORMAT_VALUES = 170  # Format value in the string interpolation
 
+    PUSH_FRAME_LOCALS = 175
+    POP_FRAME_LOCALS = 176
+
     DEBUG_STACK = 180  # Debug stack
     DEBUG_LOCALS = 181  # Debug VM locals
     DEBUG_GLOBALS = 182  # Debug VM globals

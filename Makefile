@@ -17,6 +17,17 @@ RUN_IN_DOCKER+=-v ~/go/pkg/mod:/go/pkg/mod
 RUN_IN_DOCKER+=-v ${PWD}:/root/kclvm
 RUN_IN_DOCKER+=-w /root/kclvm ${BUILD_IMAGE}
 
+run:
+	python3 -m kclvm ./samples/hello.k
+
+fmt:
+	python3 -m pip install black
+	python3 -m black kclvm
+
+lint:
+	python3 -m pip install flake8
+	python3 -m flake8 kclvm --config .flake8
+
 sh-in-docker:
 	${RUN_IN_DOCKER} bash
 
