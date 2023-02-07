@@ -1801,8 +1801,13 @@ class Compiler(_CompilerBase):
             check_table.add(kw)
             self.load_constant(kw.arg.names[0])
             self.expr(kw.value)
+        # Whether schema attribute value eval finalize.
+        finalize = not self._is_in_schema_stmt[-1]
+        self.load_constant(finalize)
+        # Config meta
         self.load_constant(config_meta)
         self._is_in_schema_exprs.append(True)
+        # Config
         self.expr(t.config)
         self.expr(t.name)
         n = len(t.args) + (len(t.kwargs) << 8)
@@ -2129,6 +2134,9 @@ class Compiler(_CompilerBase):
         if t.type_annotation and isinstance(
             self.get_type_from_identifier(t.targets[0]), objpkg.KCLSchemaTypeObject
         ):
+            # Whether schema attribute value eval finalize.
+            finalize = not self._is_in_schema_stmt[-1]
+            self.load_constant(finalize)
             # Config meta
             self.load_constant({})
             # Config

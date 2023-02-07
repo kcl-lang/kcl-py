@@ -452,6 +452,7 @@ class KCLSchemaTypeObject(KCLBaseTypeObject):
         args: List[KCLObject],
         kwargs: List[KWArg],
         vm,
+        finalize: bool = False,
     ):
         from kclvm.vm.runtime.evaluator import SchemaEvalContext
 
@@ -484,6 +485,7 @@ class KCLSchemaTypeObject(KCLBaseTypeObject):
             vm,
             # Put the schema instance reference
             inst=context.schema_obj,
+            finalize=finalize,
         )
         # Reset the eval status after the evaluation
         context.eval_reset()
@@ -506,6 +508,7 @@ class KCLSchemaTypeObject(KCLBaseTypeObject):
         vm,
         inst: KCLSchemaObject = None,
         is_sub_schema: bool = False,
+        finalize: bool = False,
     ) -> KCLSchemaObject:
         self.do_args_type_check(args, kwargs, config_meta, vm)
         inst = inst or self.new_empty_instance()
@@ -514,7 +517,14 @@ class KCLSchemaTypeObject(KCLBaseTypeObject):
             inst.add_decorator(self.name, decorator=decorator)
         if self.base and isinstance(self.base, KCLSchemaTypeObject):
             inst = self.base._new_instance(
-                config, config_meta, [], [], vm, inst, is_sub_schema=True
+                config,
+                config_meta,
+                [],
+                [],
+                vm,
+                inst,
+                is_sub_schema=True,
+                finalize=finalize,
             )
         # Record all schema attributes
         inst.union_with(self.attrs, should_idempotent_check=False)
@@ -560,7 +570,14 @@ class KCLSchemaTypeObject(KCLBaseTypeObject):
         if self.mixins:
             for mixin in self.mixins:
                 inst = mixin._new_instance(
-                    config, config_meta, [], [], vm, inst, is_sub_schema=True
+                    config,
+                    config_meta,
+                    [],
+                    [],
+                    vm,
+                    inst,
+                    is_sub_schema=True,
+                    finalize=finalize,
                 )
 
         # Record the schema name, runtime_type and relaxed
@@ -603,7 +620,8 @@ class KCLSchemaTypeObject(KCLBaseTypeObject):
                 KCLSchemaReverseFields.SETTINGS: ast.ConfigEntryOperation.OVERRIDE
             }
             inst.update_attr_op_using_obj(config)
-            inst.check_optional_attrs()
+            if finalize:
+                inst.check_optional_attrs(True)
             self.do_check(inst, config_meta, config, relaxed_keys, vm)
         # Return the schema object
         return inst

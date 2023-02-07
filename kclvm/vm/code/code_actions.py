@@ -899,11 +899,14 @@ def build_schema(vm, _code: int, arg: int) -> Optional[obj.KCLObject]:
     schema_obj = vm.pop()
     config_obj = vm.pop()
     config_meta = obj.to_python_obj(vm.pop())
+    finalize = vm.pop().value
     args, kwargs = _evaluator_inst.call_vars_and_keywords(arg, vm)
     # Schema type object
     if isinstance(schema_obj, obj.KCLSchemaTypeObject):
         if isinstance(config_obj, obj.KCLDictObject):
-            inst = schema_obj.new_instance(config_obj, config_meta, args, kwargs, vm)
+            inst = schema_obj.new_instance(
+                config_obj, config_meta, args, kwargs, vm, finalize=finalize
+            )
         else:
             inst = config_obj
     # Schema value object
