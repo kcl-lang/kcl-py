@@ -819,7 +819,7 @@ class KCLSchemaObject(KCLObject, KCLConfigObjectMixin):
             self.__tags__ = {}
         return self.__tags__.get(tagged, False)
 
-    def check_optional_attrs(self):
+    def check_optional_attrs(self, recursive: bool = False):
         """Check all schema attributes are optional.
         If the schema attribute is not optional and its value is None, an error is reported
         """
@@ -840,6 +840,8 @@ class KCLSchemaObject(KCLObject, KCLConfigObjectMixin):
                     err_type=kcl_error.ErrType.EvaluationError_TYPE,
                     arg_msg=f"attribute '{k}' of {self.name} is required and can't be None or Undefined",
                 )
+            if recursive and isinstance(v, KCLSchemaObject):
+                v.check_optional_attrs(recursive)
 
     # Attribute mutable
 
