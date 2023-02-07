@@ -426,6 +426,9 @@ class _CompilerBase(ast.TreeWalker):
             check_table.add(kw)
             self.load_constant(kw.arg.names[0])
             self.expr(kw.value)
+        # Whether schema attribute value eval finalize.
+        finalize = not self._is_in_schema_stmt[-1]
+        self.load_constant(finalize)
         op = vm.Opcode.CALL_FUNCTION
         self.emit(op, len(args) + (len(keywords) << 8))
 

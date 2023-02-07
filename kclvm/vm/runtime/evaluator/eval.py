@@ -200,6 +200,8 @@ class Evaluator:
 
     def eval_call(self, code: Union[int, Opcode], argc: int, vm) -> objpkg.KCLObject:
         if code == Opcode.CALL_FUNCTION:
+            # Whether schema attribute value eval finalize.
+            finalize = vm.pop().value
             # Function callable without `*args` and `**kwargs`
             args, kwargs = self.call_vars_and_keywords(argc, vm)
             callable_obj = vm.pop()
@@ -218,7 +220,9 @@ class Evaluator:
                 return result_obj
             elif isinstance(callable_obj, objpkg.KCLSchemaTypeObject):
                 schema_type_obj = cast(objpkg.KCLSchemaTypeObject, callable_obj)
-                inst = schema_type_obj.new_instance({}, {}, args, kwargs, vm)
+                inst = schema_type_obj.new_instance(
+                    {}, {}, args, kwargs, vm, finalize=finalize
+                )
                 vm.push(inst)
                 return inst
             elif isinstance(
