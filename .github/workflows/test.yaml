@@ -1,9 +1,18 @@
 name: test
-on: ["push", "pull_request"]
+on:
+  pull_request:
+    branches:
+    - main
+  push:
+    branches:
+    - main
 jobs:
   grammar-test:
     name: Grammar Test
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [macos-12, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     container:
       image: kusionstack/kclvm-builder
     steps:
