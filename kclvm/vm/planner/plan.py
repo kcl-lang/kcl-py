@@ -38,6 +38,7 @@ def is_kcl_schema(value: dict):
         value is not None
         and isinstance(value, dict)
         and SCHEMA_SETTINGS_ATTR_NAME in value
+        and SETTINGS_OUTPUT_KEY in value[SCHEMA_SETTINGS_ATTR_NAME]
     )
 
 

@@ -100,9 +100,9 @@ def bin_true_divide(vm, code: int, arg: int) -> Optional[obj.KCLObject]:
 
 
 def build_map(vm, _code: int, _arg: int) -> Optional[obj.KCLObject]:
-    dict_obj = obj.KCLDictObject(value={})
-    vm.push(dict_obj)
-    return dict_obj
+    config_obj = obj.KCLSchemaConfigObject(value={})
+    vm.push(config_obj)
+    return config_obj
 
 
 def load_free(vm, _code: int, arg: int) -> Optional[obj.KCLObject]:
@@ -779,6 +779,7 @@ def map_add(vm, _code: int, arg: int) -> Optional[obj.KCLObject]:
         config_ref.insert_with(data_obj, -1)
     else:
         config_ref.update(data_obj)
+    config_ref.add_operation(key.value, operation)
     return config_ref
 
 
