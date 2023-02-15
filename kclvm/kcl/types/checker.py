@@ -1808,27 +1808,34 @@ class TypeChecker(BaseTypeChecker):
 
     def walk_StarredExpr(self, t: ast.StarredExpr):
         """Single star unpack expression *t.value"""
-        value_type = self.expr(t.value)
-        if value_type == ANY_TYPE:
-            return ANY_TYPE
-        if isinstance(value_type, objpkg.KCLNoneTypeObject):
-            return NONE_TYPE
-        if isinstance(value_type, objpkg.KCLListTypeObject):
-            return value_type.item_type
-        if isinstance(
-            value_type, (objpkg.KCLDictTypeObject, objpkg.KCLSchemaTypeObject)
-        ):
-            return value_type.key_type
-        if is_kind_type_or_kind_union_type(
-            value_type,
-            [objpkg.KCLTypeKind.DictKind, objpkg.KCLTypeKind.SchemaKind],
-        ):
-            return sup([tpe.key_type for tpe in value_type.types])
-        self.raise_err(
-            [t.value],
-            msg=f"only list, dict, schema object can be used * unpacked, got {value_type.type_str()}",
-        )
-        return ANY_TYPE
+        value_ty = self.expr(t.value)
+
+        def starred_ty_walk_fn(
+            ty: objpkg.KCLBaseTypeObject,
+        ) -> typing.Tuple[objpkg.KCLBaseTypeObject, bool]:
+            if ty == ANY_TYPE:
+                return ANY_TYPE, True
+            elif isinstance(ty, objpkg.KCLNoneTypeObject):
+                return NONE_TYPE, True
+            elif isinstance(ty, objpkg.KCLListTypeObject):
+                return ty.item_type, True
+            elif isinstance(ty, (objpkg.KCLDictTypeObject, objpkg.KCLSchemaTypeObject)):
+                return ty.key_type, True
+            elif isinstance(ty, objpkg.KCLUnionTypeObject):
+                results = [starred_ty_walk_fn(ty) for ty in ty.types]
+                types = [r[0] for r in results]
+                results = [r[1] for r in results]
+                return sup(types), all(results)
+            else:
+                return ANY_TYPE, False
+
+        ty, result = starred_ty_walk_fn(value_ty)
+        if not result:
+            self.raise_err(
+                [t.value],
+                msg=f"only list, dict, schema object can be used * unpacked, got {value_ty.type_str()}",
+            )
+        return ty
 
     def walk_ListComp(self, t: ast.ListComp):
         self.enter_scope(t)

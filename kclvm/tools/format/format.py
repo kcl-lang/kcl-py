@@ -387,22 +387,22 @@ class Formatter(TextAdapterWalker):
     def walk_star_expr(self, node: AstType) -> None:
         """AST: star_expr
 
-        star_expr: MULTIPLY primary_expr
+        star_expr: MULTIPLY test
         """
         # Do not write space between * in list iter and var
         if self.get(node, Token.MULTIPLY):
             self.write("*")
-        self.write_expr(self.get(node, Tree.PRIMARY_EXPR))
+        self.write_expr(self.get(node, Tree.TEST))
 
     def walk_double_star_expr(self, node: AstType) -> None:
         """AST: double_star_expr
 
-        double_star_expr: DOUBLE_STAR primary_expr
+        double_star_expr: DOUBLE_STAR test
         """
         # Do not write space between ** in dict iter and var
         if self.get(node, Token.DOUBLE_STAR):
             self.write("**")
-        self.write_expr(self.get(node, Tree.PRIMARY_EXPR))
+        self.write_expr(self.get(node, Tree.TEST))
 
     def walk_lambda_expr(self, node: AstType) -> None:
         """AST: if_expr

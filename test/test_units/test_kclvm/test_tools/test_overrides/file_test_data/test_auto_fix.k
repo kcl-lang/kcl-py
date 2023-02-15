@@ -15,6 +15,6 @@ config = Config {
     image = "image/image:v1"
     data = {
         id = 1
-        value = str(1)
+        value = 1
     }
 }
