@@ -124,8 +124,8 @@ if_entry_exec_block: (test (COLON | ASSIGN | COMP_PLUS) test | double_star_expr 
 if_item: IF test COLON if_item_exec_block (ELIF test COLON if_item_exec_block)* (ELSE COLON if_item_exec_block)?
 if_item_exec_block: list_item [NEWLINE] | NEWLINE _INDENT list_item ((COMMA [NEWLINE] | NEWLINE) list_item)* [COMMA] [NEWLINE] _DEDENT
 
-star_expr: MULTIPLY primary_expr
-double_star_expr: DOUBLE_STAR primary_expr
+star_expr: MULTIPLY test
+double_star_expr: DOUBLE_STAR test
 loop_variables: primary_expr (COMMA primary_expr)*
 schema_expr: identifier (LEFT_PARENTHESES [arguments] RIGHT_PARENTHESES)? config_expr
 config_expr: LEFT_BRACE [config_entries | NEWLINE [_INDENT config_entries _DEDENT]] RIGHT_BRACE

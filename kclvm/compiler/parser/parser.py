@@ -2295,7 +2295,7 @@ class ASTBuilder(ASTBuilderWalker):
 
     def walk_star_expr(self, node: lark_pb.Tree) -> ast.StarredExpr:
         """Syntax
-        star_expr: MULTIPLY primary_expr
+        star_expr: MULTIPLY test
         """
         p = check_utils.check_not_none(
             ast.ASTFactory.get_ast(ast.StarredExpr, node, self.filename),
@@ -2307,10 +2307,10 @@ class ASTBuilder(ASTBuilderWalker):
 
     def walk_double_star_expr(self, node: lark_pb.Tree) -> typing.Tuple:
         """Syntax
-        double_star_expr: DOUBLE_STAR primary_expr
+        double_star_expr: DOUBLE_STAR test
         """
         val = check_utils.check_not_none(
-            self.walk_one_by_type(node, ast.LarkToken.L_primary_expr),
+            self.walk_one_by_type(node, ast.LarkToken.L_test),
             ast.Literal,
             ast.Expr,
         )
