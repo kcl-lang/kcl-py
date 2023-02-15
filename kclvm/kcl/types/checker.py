@@ -1826,11 +1826,6 @@ class TypeChecker(BaseTypeChecker):
                 types = [r[0] for r in results]
                 results = [r[1] for r in results]
                 return sup(types), all(results)
-            if is_kind_type_or_kind_union_type(
-                value_type,
-                [objpkg.KCLTypeKind.DictKind, objpkg.KCLTypeKind.SchemaKind],
-            ):
-                return sup([tpe.key_type for tpe in value_type.types])
             else:
                 return ANY_TYPE, False
 
@@ -1838,7 +1833,7 @@ class TypeChecker(BaseTypeChecker):
         if not result:
             self.raise_err(
                 [t.value],
-                msg=f"only list, dict, schema object can be used * unpacked, got {value_type.type_str()}",
+                msg=f"only list, dict, schema object can be used * unpacked, got {value_ty.type_str()}",
             )
         return ty
 
