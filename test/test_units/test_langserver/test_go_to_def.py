@@ -408,13 +408,13 @@ class GoToDefTest(unittest.TestCase):
         for i, t_case in enumerate(self.test_cases):
             got_locations = go_to_def.go_to_def(
                 pos=ast.Position(
-                    filename=str(_DIR_PATH / t_case.filename).replace("\\", "\\\\"),
+                    filename=str(_DIR_PATH / t_case.filename),
                     line=t_case.line,
                     column=t_case.column,
                 ),
             )
             expect_locations = [
-                Location(uri=str(_DIR_PATH / loc.uri), range=loc.range)
+                Location(uri=str(_DIR_PATH / loc.uri).replace("\\", "\\\\"), range=loc.range)
                 for loc in t_case.locations
             ]
             self.assertEqual(

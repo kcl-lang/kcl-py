@@ -73,16 +73,15 @@ def read_info_cache(root: str, cache_dir: str = DEFAULT_CACHE_DIR) -> Cache:
     """Read the cache if it exists and is well formed.
     If it is not well formed, the call to write_info_cache later should resolve the issue.
     """
-    cache_file = pathlib.Path(_get_cache_info_filename(root, cache_dir=cache_dir))
-    with FileLock(str(cache_file) + LOCK_SUFFIX):
+    try:
+        cache_file = pathlib.Path(_get_cache_info_filename(root, cache_dir=cache_dir))
         if not cache_file.exists():
             return {}
-        try:
-            with cache_file.open("rb") as fobj:
-                cache: Cache = pickle.load(fobj)
-                return cache
-        except (pickle.UnpicklingError, ValueError):
-            return {}
+        with cache_file.open("rb") as fobj:
+            cache: Cache = pickle.load(fobj)
+            return cache
+    except Exception:
+        return {}
 
 
 def write_info_cache(
