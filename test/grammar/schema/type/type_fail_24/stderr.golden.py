@@ -15,7 +15,7 @@ kcl_error.print_kcl_error_message(
                                     err_level=kcl_error.ErrLevel.ORDINARY
                                 ),
                                 kcl_error.ErrFileMsg(
-                                    filename=cwd + "/main.k",
+                                    filename=str(os.path.join(cwd, "main.k")),
                                     line_no=5,
                                     col_no=9,
                                     arg_msg="got {str(image)|str(name):str(image)|str(name)}"

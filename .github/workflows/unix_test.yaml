@@ -1,4 +1,4 @@
-name: test
+name: unix-test
 on: ["push", "pull_request"]
 jobs:
   grammar-test:
@@ -15,21 +15,6 @@ jobs:
         run: make test-grammar
         shell: bash
 
-  konfig-test:
-    name: Konfig Test
-    runs-on: ubuntu-latest
-    container:
-      image: kusionstack/kclvm-builder
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-        with:
-          submodules: "true"
-      - name: Konfig test
-        run: | 
-          make test-konfig
-        shell: bash
-
   unit-test:
     name: Unit Test
     runs-on: ubuntu-latest
@@ -43,4 +28,19 @@ jobs:
       - name: unit test
         run: | 
           make test-unit
+        shell: bash
+
+  konfig-test:
+    name: Konfig Test
+    runs-on: ubuntu-latest
+    container:
+      image: kusionstack/kclvm-builder
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          submodules: "true"
+      - name: Konfig test
+        run: | 
+          make test-konfig
         shell: bash

@@ -8,7 +8,7 @@ kcl_error.print_kcl_error_message(
     kcl_error.get_exception(err_type=kcl_error.ErrType.ImmutableCompileError_TYPE,
                             file_msgs=[
                                 kcl_error.ErrFileMsg(
-                                    filename=cwd + "/main.k",
+                                    filename=str(os.path.join(cwd, "main.k")),
                                     line_no=2,
                                     col_no=1,
                                 ),

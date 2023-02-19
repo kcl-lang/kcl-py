@@ -408,7 +408,7 @@ class GoToDefTest(unittest.TestCase):
         for i, t_case in enumerate(self.test_cases):
             got_locations = go_to_def.go_to_def(
                 pos=ast.Position(
-                    filename=str(_DIR_PATH / t_case.filename),
+                    filename=str(_DIR_PATH / t_case.filename).replace("\\", "\\\\"),
                     line=t_case.line,
                     column=t_case.column,
                 ),

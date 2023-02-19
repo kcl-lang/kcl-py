@@ -9,7 +9,7 @@ kcl_error.print_kcl_error_message(
         err_type=kcl_error.ErrType.TypeError_Compile_TYPE,
         file_msgs=[
             kcl_error.ErrFileMsg(
-                filename=cwd + "/main.k",
+                filename=str(os.path.join(cwd, "main.k")),
                 line_no=3,
                 col_no=5,
                 indent_count=1,
@@ -17,7 +17,7 @@ kcl_error.print_kcl_error_message(
                 err_level=kcl_error.ErrLevel.ORDINARY
             ),
             kcl_error.ErrFileMsg(
-                filename=cwd + "/main.k",
+                filename=str(os.path.join(cwd, "main.k")),
                 line_no=7,
                 col_no=15,
                 arg_msg="got str(error)"

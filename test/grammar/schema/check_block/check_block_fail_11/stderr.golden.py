@@ -14,7 +14,7 @@ kcl_error.print_kcl_error_message(
                                     arg_msg=kcl_error.SCHEMA_CHECK_FILE_MSG_COND
                                 ),
                                 kcl_error.ErrFileMsg(
-                                    filename=cwd + "/main.k",
+                                    filename=str(os.path.join(cwd, "main.k")),
                                     line_no=3,
                                     col_no=9,
                                     arg_msg=kcl_error.SCHEMA_CHECK_FILE_MSG_ERR

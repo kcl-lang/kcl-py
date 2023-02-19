@@ -14,7 +14,7 @@ class TestVfsGetRoot(unittest.TestCase):
         cases = [
             {"path": "../..", "expected": None},
             {"path": f"{CURRENT_PATH}/pkg", "expected": str(CURRENT_PATH)},
-            {"path": f"{CURRENT_PATH}/test_get_pkg_root", "expected": f"{CURRENT_PATH}/test_get_pkg_root"},
+            {"path": f"{CURRENT_PATH}/test_get_pkg_root", "expected": str(pathlib.Path(CURRENT_PATH).joinpath("test_get_pkg_root"))},
         ]
         for case in cases:
             path, expected = case["path"], case["expected"]

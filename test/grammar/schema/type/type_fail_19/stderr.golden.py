@@ -17,7 +17,7 @@ kcl_error.print_kcl_error_message(
                 err_level=kcl_error.ErrLevel.ORDINARY
             ),
             kcl_error.ErrFileMsg(
-                filename=cwd + "/main.k",
+                filename=str(os.path.join(cwd, "main.k")),
                 line_no=19,
                 col_no=25,
                 arg_msg="got int(123)"
