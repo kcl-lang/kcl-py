@@ -73,15 +73,18 @@ def read_info_cache(root: str, cache_dir: str = DEFAULT_CACHE_DIR) -> Cache:
     """Read the cache if it exists and is well formed.
     If it is not well formed, the call to write_info_cache later should resolve the issue.
     """
-    try:
-        cache_file = pathlib.Path(_get_cache_info_filename(root, cache_dir=cache_dir))
-        if not cache_file.exists():
+    cache_file = pathlib.Path(_get_cache_info_filename(root, cache_dir=cache_dir))
+    cache_dir = _get_cache_dir(root, cache_dir=cache_dir)
+    pathlib.Path(cache_dir).mkdir(parents=True, exist_ok=True)
+    with FileLock(str(cache_file) + LOCK_SUFFIX):
+        try:
+            if not cache_file.exists():
+                return {}
+            with cache_file.open("rb") as fobj:
+                cache: Cache = pickle.load(fobj)
+                return cache
+        except Exception:
             return {}
-        with cache_file.open("rb") as fobj:
-            cache: Cache = pickle.load(fobj)
-            return cache
-    except Exception:
-        return {}
 
 
 def write_info_cache(
@@ -137,17 +140,18 @@ def get_pkg_realpath_from_pkgpath(root: str, pkgpath: str) -> str:
 
 
 def load_data_from_file(filename) -> any:
-    f = open(filename, "rb")
-    # PyCharm
-    # noinspection PyBroadException
-    try:
-        x = pickle.load(f)
-        f.close()
-        return x
-    except Exception:
-        f.close()
-        os.remove(filename)
-        return None
+    with FileLock(filename + LOCK_SUFFIX):
+        f = open(filename, "rb")
+        # PyCharm
+        # noinspection PyBroadException
+        try:
+            x = pickle.load(f)
+            f.close()
+            return x
+        except Exception:
+            f.close()
+            os.remove(filename)
+            return None
 
 
 def save_data_to_file(dst_filename: str, tmp_filename: str, x: any):
