@@ -9,7 +9,7 @@ kcl_error.print_kcl_error_message(
         err_type=kcl_error.ErrType.TypeError_Compile_TYPE,
         file_msgs=[
             kcl_error.ErrFileMsg(
-                filename=cwd + "/pkg/info.k",
+                filename=str(os.path.join(cwd, "pkg", "c.k")),
                 line_no=2,
                 col_no=5,
                 indent_count=1,

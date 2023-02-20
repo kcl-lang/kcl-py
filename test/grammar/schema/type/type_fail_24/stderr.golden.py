@@ -8,7 +8,7 @@ kcl_error.print_kcl_error_message(
     kcl_error.get_exception(err_type=kcl_error.ErrType.TypeError_Compile_TYPE,
                             file_msgs=[
                                 kcl_error.ErrFileMsg(
-                                    filename=cwd + "/pkg/person.k",
+                                    filename=str(os.path.join(cwd, "pkg", "person.k")),
                                     line_no=3,
                                     col_no=5,
                                     arg_msg="expect [pkg.Container]",
