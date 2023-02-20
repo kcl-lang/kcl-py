@@ -9,7 +9,7 @@ from pygls.lsp.types.language_features.document_symbol import DocumentSymbol, Sy
 import kclvm.tools.langserver.document_symbol as symbol
 
 _DOCUMENT_SYMBOL_DIR = pathlib.Path(__file__).parent.joinpath(
-    "test_data/document_symbol"
+    "test_data", "document_symbol"
 )
 
 

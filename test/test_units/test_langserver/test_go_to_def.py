@@ -78,7 +78,7 @@ class GoToDefTest(unittest.TestCase):
             column=11,
             locations=[
                 Location(
-                    uri="pkg/parent.k",
+                    uri=str(pathlib.Path("pkg") / "parent.k"),
                     range=Range(
                         start=Position(line=0, character=7),
                         end=Position(line=0, character=13),
@@ -87,12 +87,12 @@ class GoToDefTest(unittest.TestCase):
             ],
         ),
         GoToDefTestCase(
-            filename="pkg/import_abs.k",
+            filename=str(pathlib.Path("pkg") / "import_abs.k"),
             line=4,
             column=5,
             locations=[
                 Location(
-                    uri="pkg/parent.k",
+                    uri=str(pathlib.Path("pkg") / "parent.k"),
                     range=Range(
                         start=Position(line=1, character=4),
                         end=Position(line=1, character=8),
@@ -101,12 +101,12 @@ class GoToDefTest(unittest.TestCase):
             ],
         ),
         GoToDefTestCase(
-            filename="pkg/import_abs.k",
+            filename=str(pathlib.Path("pkg") / "import_abs.k"),
             line=1,
             column=12,
             locations=[
                 Location(
-                    uri="pkg/parent.k",
+                    uri=str(pathlib.Path("pkg") / "parent.k"),
                     range=Range(
                         start=Position(line=0, character=0),
                         end=Position(line=0, character=0),
@@ -148,7 +148,7 @@ class GoToDefTest(unittest.TestCase):
             column=13,
             locations=[
                 Location(
-                    uri="pkg/parent.k",
+                    uri=str(pathlib.Path("pkg") / "parent.k"),
                     range=common.emptyRange(),
                 )
             ],
@@ -159,7 +159,7 @@ class GoToDefTest(unittest.TestCase):
             column=11,
             locations=[
                 Location(
-                    uri="pkg/parent.k",
+                    uri=str(pathlib.Path("pkg") / "parent.k"),
                     range=Range(
                         start=Position(line=0, character=7),
                         end=Position(line=0, character=13),
@@ -297,7 +297,7 @@ class GoToDefTest(unittest.TestCase):
             column=5,
             locations=[
                 Location(
-                    uri="pkg/parent.k",
+                    uri=str(pathlib.Path("pkg") / "parent.k"),
                     range=Range(
                         start=Position(line=1, character=4),
                         end=Position(line=1, character=8),
@@ -414,7 +414,7 @@ class GoToDefTest(unittest.TestCase):
                 ),
             )
             expect_locations = [
-                Location(uri=str(_DIR_PATH / loc.uri).replace("\\", "\\\\"), range=loc.range)
+                Location(uri=str(_DIR_PATH / loc.uri), range=loc.range)
                 for loc in t_case.locations
             ]
             self.assertEqual(

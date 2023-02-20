@@ -41,7 +41,7 @@ class HoverTest(unittest.TestCase):
             filename="incomplete.k",
             line=4,
             column=23,
-            msg=f"ProviderConfig\ntype: ProviderConfig\ndefined in:{_DIR_PATH}/incomplete.k",
+            msg=str(pathlib.Path(f"ProviderConfig\ntype: ProviderConfig\ndefined in:{_DIR_PATH}").joinpath("incomplete.k")),
             range=Range(
                 start=Position(line=3, character=15),
                 end=Position(line=3, character=29),
@@ -81,7 +81,7 @@ class HoverTest(unittest.TestCase):
             filename="hello.k",
             line=8,
             column=5,
-            msg=f"image\ntype: str\ndefined in:{_DIR_PATH}/hello.k",
+            msg=str(pathlib.Path(f"image\ntype: str\ndefined in:{_DIR_PATH}").joinpath("hello.k")),
             range=Range(
                 start=Position(line=7, character=4),
                 end=Position(line=7, character=9),
@@ -91,7 +91,7 @@ class HoverTest(unittest.TestCase):
             filename="hello.k",
             line=12,
             column=15,
-            msg=f"name\ntype: str\ndefined in:{_DIR_PATH}/hello.k",
+            msg=str(pathlib.Path(f"name\ntype: str\ndefined in:{_DIR_PATH}").joinpath("hello.k")),
             range=Range(
                 start=Position(line=11, character=13),
                 end=Position(line=11, character=17),
