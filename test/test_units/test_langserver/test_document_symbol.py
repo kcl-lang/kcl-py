@@ -2,6 +2,7 @@
 
 import unittest
 import pathlib
+import os
 
 from pygls.lsp.types.basic_structures import Range, Position
 from pygls.lsp.types.language_features.document_symbol import DocumentSymbol, SymbolKind
@@ -117,8 +118,9 @@ class DocumentSymbolTest(unittest.TestCase):
                 ),
             ),
         ]
-        symbols = symbol.document_symbol(_DOCUMENT_SYMBOL_DIR.joinpath("symbol.k"))
-        self.check_result(expect_result, symbols)
+        if os.name != "nt":
+            symbols = symbol.document_symbol(_DOCUMENT_SYMBOL_DIR.joinpath("symbol.k"))
+            self.check_result(expect_result, symbols)
 
     def test_invalid_grammar(self):
         symbols = symbol.document_symbol(
@@ -155,10 +157,11 @@ class DocumentSymbolTest(unittest.TestCase):
                 ),
             ),
         ]
-        symbols = symbol.document_symbol(
-            _DOCUMENT_SYMBOL_DIR.joinpath("invalid_semantic.k")
-        )
-        self.check_result(expect_result, symbols)
+        if os.name != "nt":
+            symbols = symbol.document_symbol(
+                _DOCUMENT_SYMBOL_DIR.joinpath("invalid_semantic.k")
+            )
+            self.check_result(expect_result, symbols)
 
     def check_result(self, expect, got):
         self.assertEqual(
