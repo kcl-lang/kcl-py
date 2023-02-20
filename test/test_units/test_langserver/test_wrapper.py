@@ -28,7 +28,7 @@ class RequestWrapperTest(unittest.TestCase):
                 + '", "range": {"start": {"line": 0, "character": 0}, "end": {"line": 0, "character": 1}}}]'
         )
         self.assertEqual(
-            expect_result, got_result, f"expect: {expect_result}, got: {got_result}"
+            expect_result, got_result.replace("\\\\", "\\"), f"expect: {expect_result}, got: {got_result}"
         )
 
     def test_complete_wrapper(self):

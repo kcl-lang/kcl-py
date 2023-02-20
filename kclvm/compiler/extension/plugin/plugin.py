@@ -34,19 +34,21 @@ def _is_valid_plugin_name(plugin_name: str) -> bool:
 
 
 def _normalize_plugin_name(plugin_name: str) -> str:
-    if plugin_name.startswith("kcl_plugin.") or plugin_name.startswith("kcl_plugin/"):
+    if plugin_name.startswith("kcl_plugin.") or plugin_name.startswith(
+        f"kcl_plugin{os.sep}"
+    ):
         plugin_name = plugin_name[len("kcl_plugin.") :]
     return plugin_name
 
 
 def _get_plugin(root: str, plugin_name: str) -> typing.Optional[any]:
-    if not os.path.exists(f"{root}/{plugin_name}/plugin.py"):
+    if not os.path.exists(f"{root}{os.sep}{plugin_name}{os.sep}plugin.py"):
         return None
 
     import importlib.util
 
     spec = importlib.util.spec_from_file_location(
-        f"kcl_plugin.{plugin_name}", f"{root}/{plugin_name}/plugin.py"
+        f"kcl_plugin.{plugin_name}", f"{root}{os.sep}{plugin_name}{os.sep}plugin.py"
     )
     pkg = importlib.util.module_from_spec(spec)
 
@@ -55,7 +57,7 @@ def _get_plugin(root: str, plugin_name: str) -> typing.Optional[any]:
     except Exception:
         ex_type, ex_val, ex_stack = sys.exc_info()
         print(
-            f"WARN: {root}/{plugin_name}/plugin.py:{traceback.extract_tb(ex_stack)[-1].lineno}: init_plugin failed: {ex_val}"
+            f"WARN: {root}{os.sep}{plugin_name}{os.sep}plugin.py:{traceback.extract_tb(ex_stack)[-1].lineno}: init_plugin failed: {ex_val}"
         )
         return None
 
@@ -98,7 +100,7 @@ def _find_plugin_root() -> typing.Optional[str]:
     if env_plugin_root != "":
         return env_plugin_root
 
-    # 2. try ${pwd}/.../plugins/hello/plugin.py
+    # 2. try ${pwd}{os.sep}...{os.sep}plugins{os.sep}hello{os.sep}plugin.py
     cwd_plugin_path = pathlib.Path(
         os.environ.get("KCLVM_CLI_BIN_PATH") or os.getcwd()
     ).absolute()
@@ -106,32 +108,36 @@ def _find_plugin_root() -> typing.Optional[str]:
     while cwd_plugin_path:
         if cwd_plugin_path == cwd_plugin_path.parent or str(cwd_plugin_path) == root:
             break
-        plugin_list_file_path = cwd_plugin_path.joinpath("plugins/hello/plugin.py")
+        plugin_list_file_path = cwd_plugin_path.joinpath(
+            f"plugins{os.sep}hello{os.sep}plugin.py"
+        )
         if plugin_list_file_path.exists() and plugin_list_file_path.is_file():
             return str(cwd_plugin_path.joinpath("plugins"))
         if cwd_plugin_path.joinpath("kcl.mod").exists():
             break
         cwd_plugin_path = cwd_plugin_path.parent
 
-    # 3. try ${__file__}/.../plugins/hello/plugin.py
+    # 3. try ${__file__}{os.sep}...{os.sep}plugins{os.sep}hello{os.sep}plugin.py
     cwd_plugin_path = pathlib.Path(__file__).parent.absolute()
     root = cwd_plugin_path.root
     while cwd_plugin_path:
         if cwd_plugin_path == cwd_plugin_path.parent or str(cwd_plugin_path) == root:
             break
-        plugin_list_file_path = cwd_plugin_path.joinpath("plugins/hello/plugin.py")
+        plugin_list_file_path = cwd_plugin_path.joinpath(
+            f"plugins{os.sep}hello{os.sep}plugin.py"
+        )
         if plugin_list_file_path.exists() and plugin_list_file_path.is_file():
             return str(cwd_plugin_path.joinpath("plugins"))
         cwd_plugin_path = cwd_plugin_path.parent
 
-    # 4. try $HOME/.kusion/kclvm/plugins
+    # 4. try $HOME{os.sep}.kusion{os.sep}kclvm{os.sep}plugins
     home_dir = (
         os.getenv("HOME")
         if platform.system() != "Windows"
         else os.getenv("UserProfile")
     )
-    home_plugin_root = os.path.join(home_dir, ".kusion/kclvm/plugins")
-    if os.path.exists(f"{home_plugin_root}/hello/plugin.py"):
+    home_plugin_root = os.path.join(home_dir, f".kusion{os.sep}kclvm{os.sep}plugins")
+    if os.path.exists(f"{home_plugin_root}{os.sep}hello{os.sep}plugin.py"):
         return home_plugin_root
 
     # 5. not found
@@ -146,18 +152,18 @@ def _init_plugin_root() -> typing.Tuple[typing.Optional[str], dict]:
     plugins_info = {}
 
     # 'hello' is builtin plugin, and used in test code
-    if not os.path.exists(f"{plugins_root}/hello/plugin.py"):
-        os.makedirs(f"{plugins_root}/hello")
+    if not os.path.exists(f"{plugins_root}{os.sep}hello{os.sep}plugin.py"):
+        os.makedirs(f"{plugins_root}{os.sep}hello")
 
-        with open(f"{plugins_root}/hello/plugin.py", "w") as file:
+        with open(f"{plugins_root}{os.sep}hello{os.sep}plugin.py", "w") as file:
             file.write(plugin_template.get_plugin_template_code("hello"))
-        with open(f"{plugins_root}/hello/plugin_test.py", "w") as file:
+        with open(f"{plugins_root}{os.sep}hello{os.sep}plugin_test.py", "w") as file:
             file.write(plugin_template.get_plugin_test_template_code("hello"))
 
     # scan all plugins
-    k_files = glob.glob(f"{plugins_root}/*/plugin.py", recursive=False)
+    k_files = glob.glob(f"{plugins_root}{os.sep}*{os.sep}plugin.py", recursive=False)
     for i in range(len(k_files)):
-        plugin_name = os.path.basename(k_files[i][: -len("/plugin.py")])
+        plugin_name = os.path.basename(k_files[i][: -len(f"{os.sep}plugin.py")])
         if _is_valid_plugin_name(plugin_name):
             pkg = _get_plugin(plugins_root, plugin_name)
             if not pkg:
@@ -191,7 +197,7 @@ def reset_plugin(plugin_root: str = ""):
 def get_plugin_version() -> str:
     if not init_.plugins_root:
         return UNKNOWN_VERSION
-    version_path = pathlib.Path(f"{init_.plugins_root}/VERSION")
+    version_path = pathlib.Path(f"{init_.plugins_root}{os.sep}VERSION")
     if version_path.exists():
         return version_path.read_text()
     return UNKNOWN_VERSION
@@ -202,7 +208,7 @@ def get_plugin_root(plugin_name: str = "") -> typing.Optional[str]:
         return None
     if plugin_name != "":
         plugin_name = _normalize_plugin_name(plugin_name)
-        return f"{init_.plugins_root}/{plugin_name}"
+        return f"{init_.plugins_root}{os.sep}{plugin_name}"
 
     return init_.plugins_root
 
@@ -239,7 +245,7 @@ def get_source_code(plugin_name: str) -> typing.Optional[str]:
         return None
 
     code = ""
-    with open(f"{init_.plugins_root}/{plugin_name}/plugin.py") as f:
+    with open(f"{init_.plugins_root}{os.sep}{plugin_name}{os.sep}plugin.py") as f:
         code += f.read()
     return code
 
@@ -267,7 +273,7 @@ def init_plugin(plugin_name: str):
         print(f'WARN: init_plugin("{plugin_name}") failed, invalid name')
         return
 
-    if os.path.exists(f"{init_.plugins_root}/{plugin_name}/plugin.py"):
+    if os.path.exists(f"{init_.plugins_root}{os.sep}{plugin_name}{os.sep}plugin.py"):
         print(f'WARN: init_plugin("{plugin_name}") failed, plugin exists')
         return
 
@@ -276,13 +282,17 @@ def init_plugin(plugin_name: str):
         plugin_name
     )
 
-    if not os.path.exists(f"{init_.plugins_root}/{plugin_name}"):
-        os.makedirs(f"{init_.plugins_root}/{plugin_name}")
+    if not os.path.exists(f"{init_.plugins_root}{os.sep}{plugin_name}"):
+        os.makedirs(f"{init_.plugins_root}{os.sep}{plugin_name}")
 
-    with open(f"{init_.plugins_root}/{plugin_name}/plugin.py", "w") as file:
+    with open(
+        f"{init_.plugins_root}{os.sep}{plugin_name}{os.sep}plugin.py", "w"
+    ) as file:
         file.write(golden_plugin_skectch_code)
 
-    with open(f"{init_.plugins_root}/{plugin_name}/plugin_test.py", "w") as file:
+    with open(
+        f"{init_.plugins_root}{os.sep}{plugin_name}{os.sep}plugin_test.py", "w"
+    ) as file:
         file.write(golden_plugin_skectch_code_test)
 
     gendoc(plugin_name)
@@ -306,7 +316,7 @@ def gendoc(plugin_name: str):
         print(f'WARN: gendoc("{plugin_name}") failed, not found plugin')
         return
 
-    with open(f"{init_.plugins_root}/{plugin_name}/api.md", "w") as file:
+    with open(f"{init_.plugins_root}{os.sep}{plugin_name}{os.sep}api.md", "w") as file:
         file.write(f"# plugin: `{info['name']}` - {info['describe']}\n\n")
         file.write(f"{info['long_describe']}\n\n")
         file.write(f"*version: {info['version']}*\n\n")

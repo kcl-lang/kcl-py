@@ -4,6 +4,7 @@ kcl-doc parses KCL source code - including comments - and produces documentation
 """
 import argparse
 import sys
+import os
 
 import kclvm.kcl.error as kcl_error
 import kclvm.tools.docs.doc as doc
@@ -22,7 +23,7 @@ class DocGenMeta:
     )
     LOCALE_DESC = "I18n locale, e.g.: zh, zh_CN, en, en_AS. Defaults to en"
     OUTPUT_DIR_DESC = (
-        f"Specify the output directory. Defaults to ./{DEFAULT_OUTPUT_DIR}"
+        f"Specify the output directory. Defaults to .{os.sep}{DEFAULT_OUTPUT_DIR}"
     )
     REPO_URL_DESC = "The source code repository url. It will displayed in the generated doc to link to the source code."
     I18N_INPUT_PATH_DESC = (

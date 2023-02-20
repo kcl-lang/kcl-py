@@ -32,8 +32,8 @@ def compare_results(result, golden_result):
     list of strings with line ending stripped, then compare.
     """
 
-    result_strings = result.decode().split("\n")
-    golden_strings = golden_result.decode().split("\n")
+    result_strings = result.decode().replace("\r\n", "\n").split("\n")
+    golden_strings = golden_result.decode().replace("\r\n", "\n").split("\n")
     compare_strings(result_strings, golden_strings)
 
 
@@ -42,7 +42,7 @@ def compare_results_with_lines(result, golden_lines):
     list of strings with line ending stripped, then compare.
     """
 
-    result_strings = result.decode().split("\n")
+    result_strings = result.decode().replace("\r\n", "\n").split("\n")
     golden_strings = []
     for line in golden_lines:
         clean_line = re.sub("\n$", "", line)

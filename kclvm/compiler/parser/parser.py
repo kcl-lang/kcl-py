@@ -2854,7 +2854,9 @@ def _loadPackages(
                 return
 
     # scan all kcl files
-    all_k_files = glob.glob(f"{root}/{pkgpath.replace('.', '/')}/*.k", recursive=False)
+    all_k_files = glob.glob(
+        f"{root}{os.sep}{pkgpath.replace('.', os.sep)}{os.sep}*.k", recursive=False
+    )
 
     # skip `_*.k` and `*_test.k` kcl files
     k_files: typing.List[str] = []
@@ -2866,8 +2868,10 @@ def _loadPackages(
 
         k_files.append(s)
 
-    if len(k_files) == 0 and os.path.isfile(f"{root}/{pkgpath.replace('.', '/')}.k"):
-        file = f"{root}/{pkgpath.replace('.', '/')}.k"
+    if len(k_files) == 0 and os.path.isfile(
+        f"{root}{os.sep}{pkgpath.replace('.', os.sep)}.k"
+    ):
+        file = f"{root}{os.sep}{pkgpath.replace('.', os.sep)}.k"
         k_files.append(file)
 
     if len(k_files) == 0:
@@ -2945,7 +2949,7 @@ def LoadProgram(
     for i, s in enumerate(path_list):
         s = os.path.abspath(s)
         if os.path.isdir(s):
-            for filename in glob.glob(f"{s}/*.k", recursive=False):
+            for filename in glob.glob(f"{s}{os.sep}*.k", recursive=False):
                 if os.path.basename(filename).startswith("_"):
                     continue
                 k_files.append(os.path.abspath(filename))

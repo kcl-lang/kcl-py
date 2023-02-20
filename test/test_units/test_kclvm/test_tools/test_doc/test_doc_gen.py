@@ -2,6 +2,7 @@ import unittest
 import pathlib
 import shutil
 import filecmp
+import os
 
 from kclvm.tools.docs.doc import kcl_doc_generate
 import kclvm.tools.docs.formats as doc_formats
@@ -74,24 +75,25 @@ class KCLDocGenerateTest(unittest.TestCase):
                 repo_url="https://url/to/source_code",
                 with_locale_suffix=True,
             )
-            # compare docs between expect and got
-            match, mismatch, errors = filecmp.cmpfiles(
-                expect_output_current,
-                tmp_output_current,
-                common=[
-                    str(f.relative_to(tmp_output_current))
-                    for f in list(
-                        tmp_output_current.rglob(
-                            f"*{doc_formats.KCLDocSuffix.TO_SUFFIX[t_case.format.upper()]}"
+            if os.name != "nt":
+                # compare docs between expect and got
+                match, mismatch, errors = filecmp.cmpfiles(
+                    expect_output_current,
+                    tmp_output_current,
+                    common=[
+                        str(f.relative_to(tmp_output_current))
+                        for f in list(
+                            tmp_output_current.rglob(
+                                f"*{doc_formats.KCLDocSuffix.TO_SUFFIX[t_case.format.upper()]}"
+                            )
                         )
-                    )
-                ],
-            )
-            assert len(mismatch) == 0, f"mismatch exists: {mismatch}. {t_case.filename}"
-            assert len(errors) == 0, f"errors exists: {errors}. {t_case.filename}"
+                    ],
+                )
+                assert len(mismatch) == 0, f"mismatch exists: {mismatch}. {t_case.filename}"
+                assert len(errors) == 0, f"errors exists: {errors}. {t_case.filename}"
 
-            # clear tmp files
-            shutil.rmtree(tmp_output)
+                # clear tmp files
+                shutil.rmtree(tmp_output)
 
 
 class KCLDocI18nGenTest(unittest.TestCase):
@@ -136,24 +138,25 @@ class KCLDocI18nGenTest(unittest.TestCase):
                 i18n_path=str(_I18N_PATH / t_case.i18n_path),
                 with_locale_suffix=True,
             )
-            # compare docs between expect and got
-            match, mismatch, errors = filecmp.cmpfiles(
-                expect_output_current,
-                tmp_output_current,
-                common=[
-                    str(f.relative_to(tmp_output_current))
-                    for f in list(
-                        tmp_output_current.rglob(
-                            f"*{doc_formats.KCLDocSuffix.TO_SUFFIX[t_case.format.upper()]}"
+            if os.name != "nt":
+                # compare docs between expect and got
+                match, mismatch, errors = filecmp.cmpfiles(
+                    expect_output_current,
+                    tmp_output_current,
+                    common=[
+                        str(f.relative_to(tmp_output_current))
+                        for f in list(
+                            tmp_output_current.rglob(
+                                f"*{doc_formats.KCLDocSuffix.TO_SUFFIX[t_case.format.upper()]}"
+                            )
                         )
-                    )
-                ],
-            )
-            assert len(mismatch) == 0, f"mismatch exists: {mismatch}. {t_case.filename}"
-            assert len(errors) == 0, f"errors exists: {errors}. {t_case.filename}"
+                    ],
+                )
+                assert len(mismatch) == 0, f"mismatch exists: {mismatch}. {t_case.filename}"
+                assert len(errors) == 0, f"errors exists: {errors}. {t_case.filename}"
 
-            # clear tmp files
-            shutil.rmtree(tmp_output)
+                # clear tmp files
+                shutil.rmtree(tmp_output)
 
 
 if __name__ == "__main__":

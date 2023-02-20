@@ -66,7 +66,7 @@ def MustGetPkgRoot(file_paths: typing.List[str]) -> typing.Optional[str]:
 
 
 def LoadModFile(root: str) -> kclvm.config.KclModFile:
-    k_mod_file_path = f"{root}/kcl.mod"
+    k_mod_file_path = f"{root}{os.sep}kcl.mod"
 
     if not os.path.exists(k_mod_file_path):
         mod_file = kclvm.config.KclModFile(root=root)

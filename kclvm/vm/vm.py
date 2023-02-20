@@ -12,6 +12,7 @@ is also executed.
 :copyright: Copyright 2020 The KCL Authors. All rights reserved.
 """
 
+import os
 import pathlib
 import dataclasses
 import typing
@@ -208,7 +209,7 @@ class VirtualMachine:
                 pkgpath,
                 str(
                     pathlib.Path(self.get_filename()).parent
-                    / (pkgpath.replace(".", "/"))
+                    / (pkgpath.replace(".", os.sep))
                 ),
             ),
         )

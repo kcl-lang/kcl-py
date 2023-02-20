@@ -10,7 +10,7 @@ kcl_error.print_kcl_error_message(
         err_type=kcl_error.ErrType.CompileError_TYPE,
         file_msgs=[
             kcl_error.ErrFileMsg(
-                filename=cwd + "/main.k",
+                filename=str(os.path.join(cwd, "main.k")),
                 line_no=2,
                 col_no=19,
                 end_col_no=22

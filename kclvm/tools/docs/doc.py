@@ -326,7 +326,12 @@ def _parse_file_docs(
     root: str = vfs.GetPkgRoot(pkgs[0]) or os.path.dirname(pkgs[0])
     module_docs: Dict[str, model.ModuleDoc] = {}
     trigger_lines = [
-        f"import .{str(Path(pkg).relative_to(root)).replace('/', '.').rstrip('.k')}\n"
+        "import .{}\n".format(
+            str(Path(pkg).relative_to(root))
+            .replace("/", ".")  # Unix path separator
+            .replace("\\", ".")  # Windows path separator
+            .rstrip(".k")
+        )
         for pkg in pkgs
     ]
     trigger_file = Path(root) / "trigger_doc_gen.k"

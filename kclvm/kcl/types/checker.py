@@ -2610,12 +2610,14 @@ def ResolveProgramImport(prog: ast.Program):
                         ],
                         arg_msg=kcl_error.CANNOT_FIND_MODULE_MSG.format(
                             import_spec.rawpath,
-                            str(pathlib.Path(prog.root) / (pkgpath.replace(".", "/"))),
+                            str(
+                                pathlib.Path(prog.root) / (pkgpath.replace(".", os.sep))
+                            ),
                         ),
                     )
 
-                if os.path.isfile(f"{root}/{pkgpath.replace('.', '/')}.k"):
-                    file = f"{root}/{pkgpath.replace('.', '/')}.k"
+                if os.path.isfile(f"{root}{os.sep}{pkgpath.replace('.', os.sep)}.k"):
+                    file = f"{root}{os.sep}{pkgpath.replace('.', os.sep)}.k"
                     if file in main_files or []:
                         kcl_error.report_exception(
                             file_msgs=[

@@ -220,7 +220,7 @@ class ImportsChecker(BaseChecker):
             self.check_reimport(t, t.path)
             return
         fix_path = vfs.FixImportPath(self.root, self.module.filename, t.path).replace(
-            ".", "/"
+            ".", os.sep
         )
         abs_path = os.path.join(self.root, fix_path)
         if self.check_import_file_exist(t, abs_path):

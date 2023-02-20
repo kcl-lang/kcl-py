@@ -1,0 +1,44 @@
+name: windows-test
+on: ["push", "pull_request"]
+jobs:
+  grammar-test:
+    name: Grammar Test
+    runs-on: windows-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          submodules: "true"
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Grammar Test on Windows
+        run: .\internal\scripts\test_grammar.bat
+
+  unit-test:
+    name: Unit Test
+    runs-on: windows-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          submodules: "true"
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Unit Test on Windows
+        run: .\internal\scripts\test_unit.bat
+
+  konfig-test:
+    name: Konfig Test
+    runs-on: windows-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          submodules: "true"
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Konfig Test on Windows
+        run: .\internal\scripts\test_konfig.bat

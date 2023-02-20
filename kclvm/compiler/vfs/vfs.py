@@ -27,8 +27,8 @@ LOCK_SUFFIX = ".lock"
 NORMAL_CACHE_SUFFIX = ".data"
 BYTECODE_CACHE_PREFIX = "bytecode"
 BYTECODE_CACHE_SUFFIX = ".kclc"
-DEFAULT_CACHE_DIR = ".kclvm/cache"
-FST_CACHE_DIR = ".kclvm/fst_cache"
+DEFAULT_CACHE_DIR = str(pathlib.Path(".kclvm").joinpath("cache"))
+FST_CACHE_DIR = str(pathlib.Path(".kclvm").joinpath("fst_cache"))
 CACHE_INFO_FILENAME = "info.pickle"
 
 
@@ -74,16 +74,17 @@ def read_info_cache(root: str, cache_dir: str = DEFAULT_CACHE_DIR) -> Cache:
     If it is not well formed, the call to write_info_cache later should resolve the issue.
     """
     cache_file = pathlib.Path(_get_cache_info_filename(root, cache_dir=cache_dir))
-    if not cache_file.exists():
-        return {}
-
-    with cache_file.open("rb") as fobj:
+    cache_dir = _get_cache_dir(root, cache_dir=cache_dir)
+    pathlib.Path(cache_dir).mkdir(parents=True, exist_ok=True)
+    with FileLock(str(cache_file) + LOCK_SUFFIX):
         try:
-            cache: Cache = pickle.load(fobj)
-        except (pickle.UnpicklingError, ValueError):
+            if not cache_file.exists():
+                return {}
+            with cache_file.open("rb") as fobj:
+                cache: Cache = pickle.load(fobj)
+                return cache
+        except Exception:
             return {}
-
-    return cache
 
 
 def write_info_cache(
@@ -99,7 +100,9 @@ def write_info_cache(
             **cache,
             **{relative_path: get_cache_info(filepath)},
         }
-        tmp_filename = f"{cache_dir}/.{os.getpid()}{time.time_ns()}.tmp"
+        tmp_filename = str(
+            pathlib.Path(cache_dir).joinpath(f".{os.getpid()}{time.time_ns()}.tmp")
+        )
         # Write cache atomic
         with FileLock(dst_filename + LOCK_SUFFIX):
             f = open(tmp_filename, "wb")
@@ -107,10 +110,11 @@ def write_info_cache(
             f.flush()
             os.fsync(f.fileno())
             f.close()
+            if pathlib.Path(dst_filename).exists():
+                os.remove(dst_filename)
             os.rename(tmp_filename, dst_filename)
-    except (pickle.UnpicklingError, ValueError):
-        f.close()
-        os.remove(tmp_filename)
+    except Exception as err:
+        raise err
 
 
 def get_cache_info(path: str) -> CacheInfo:
@@ -129,24 +133,25 @@ def get_cache_info(path: str) -> CacheInfo:
 
 def get_pkg_realpath_from_pkgpath(root: str, pkgpath: str) -> str:
     """Get the pkgpath real path in the file system according to the root and pkgpath"""
-    filepath = f"{root}/{pkgpath.replace('.', '/')}"
+    filepath = str(pathlib.Path(root).joinpath(f"{pkgpath.replace('.', os.sep)}"))
     if os.path.isfile(f"{filepath}.k"):
         filepath = f"{filepath}.k"
     return filepath
 
 
 def load_data_from_file(filename) -> any:
-    f = open(filename, "rb")
-    # PyCharm
-    # noinspection PyBroadException
-    try:
-        x = pickle.load(f)
-        f.close()
-        return x
-    except Exception:
-        f.close()
-        os.remove(filename)
-        return None
+    with FileLock(filename + LOCK_SUFFIX):
+        f = open(filename, "rb")
+        # PyCharm
+        # noinspection PyBroadException
+        try:
+            x = pickle.load(f)
+            f.close()
+            return x
+        except Exception:
+            f.close()
+            os.remove(filename)
+            return None
 
 
 def save_data_to_file(dst_filename: str, tmp_filename: str, x: any):
@@ -160,12 +165,12 @@ def save_data_to_file(dst_filename: str, tmp_filename: str, x: any):
             f.flush()
             os.fsync(f.fileno())
             f.close()
+            if pathlib.Path(dst_filename).exists():
+                os.remove(dst_filename)
             os.rename(tmp_filename, dst_filename)
             return
-    except Exception:
-        f.close()
-        os.remove(tmp_filename)
-        return
+    except Exception as err:
+        raise err
 
 
 def LoadPkgCache(root: str, pkgpath: str, option: CacheOption = CacheOption()) -> any:
@@ -204,7 +209,9 @@ def SavePkgCache(root: str, pkgpath: str, x: any, option: CacheOption = CacheOpt
     cache_dir = _get_cache_dir(root, cache_dir=option.cache_dir)
     pathlib.Path(cache_dir).mkdir(parents=True, exist_ok=True)
 
-    tmp_filename = f"{cache_dir}/{pkgpath}.{os.getpid()}{time.time_ns()}.tmp"
+    tmp_filename = str(
+        pathlib.Path(cache_dir).joinpath(f"{pkgpath}.{os.getpid()}{time.time_ns()}.tmp")
+    )
 
     save_data_to_file(dst_filename, tmp_filename, x)
 
@@ -215,7 +222,7 @@ def LoadMainPkgCache(
     if not root or not filename:
         return None
 
-    cache_name = filename.replace(root, "").replace("/", "_")
+    cache_name = filename.replace(root, "").replace("/", "_").replace("\\", "_")
     cache_filename = _get_cache_filename(root, cache_name, cache_dir=option.cache_dir)
 
     if not os.path.exists(cache_filename):
@@ -239,7 +246,7 @@ def SaveMainPkgCache(
     if not root or not filename:
         return
 
-    cache_name = filename.replace(root, "").replace("/", "_")
+    cache_name = filename.replace(root, "").replace("/", "_").replace("\\", "_")
     dst_filename = _get_cache_filename(root, cache_name, cache_dir=option.cache_dir)
 
     if os.path.exists(filename):
@@ -249,7 +256,11 @@ def SaveMainPkgCache(
     cache_dir = _get_cache_dir(root, cache_dir=option.cache_dir)
     pathlib.Path(cache_dir).mkdir(parents=True, exist_ok=True)
 
-    tmp_filename = f"{cache_dir}/{cache_name}.{os.getpid()}{time.time_ns()}.tmp"
+    tmp_filename = str(
+        pathlib.Path(cache_dir).joinpath(
+            f"{cache_name}.{os.getpid()}{time.time_ns()}.tmp"
+        )
+    )
 
     save_data_to_file(dst_filename, tmp_filename, x)
 
@@ -296,7 +307,9 @@ def SaveBytecodeCache(
     cache_dir = _get_cache_dir(root, cache_dir=option.cache_dir)
     pathlib.Path(cache_dir).mkdir(parents=True, exist_ok=True)
 
-    tmp_filename = f"{cache_dir}/{os.getpid()}{time.time_ns()}.kclc.tmp"
+    tmp_filename = str(
+        pathlib.Path(cache_dir).joinpath(f"{os.getpid()}{time.time_ns()}.kclc.tmp")
+    )
 
     save_data_to_file(dst_filename, tmp_filename, program)
 
@@ -343,6 +356,7 @@ def FixImportPath(root: str, filepath: str, import_path: str) -> str:
     pkgpath: str = (
         os.path.relpath(os.path.dirname(filepath), root).replace("/", ".").rstrip(".")
     )
+    # On the window platform
     pkgpath = pkgpath.replace("\\", ".").rstrip(".")
 
     leading_dot_count = len(import_path)
