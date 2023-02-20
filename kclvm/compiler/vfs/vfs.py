@@ -133,7 +133,7 @@ def get_cache_info(path: str) -> CacheInfo:
 
 def get_pkg_realpath_from_pkgpath(root: str, pkgpath: str) -> str:
     """Get the pkgpath real path in the file system according to the root and pkgpath"""
-    filepath = str(pathlib.Path(root).joinpath(f"{pkgpath.replace('.', '/')}"))
+    filepath = str(pathlib.Path(root).joinpath(f"{pkgpath.replace('.', os.sep)}"))
     if os.path.isfile(f"{filepath}.k"):
         filepath = f"{filepath}.k"
     return filepath

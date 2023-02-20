@@ -7,6 +7,7 @@ import subprocess
 import typing
 import time
 import pathlib
+import os
 
 from dataclasses import dataclass
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -250,9 +251,9 @@ class KclvmServiceImpl(pbrpc.KclvmService):
 
         work_dir = tempfile.mkdtemp()
 
-        with open(f"{work_dir}/kcl.mod", "w") as f:
+        with open(f"{work_dir}{os.sep}kcl.mod", "w") as f:
             pass
-        with open(f"{work_dir}/main.k", "w") as f:
+        with open(f"{work_dir}{os.sep}main.k", "w") as f:
             f.write(args.code)
 
         kcl_result = kclvm_exec.Run(
@@ -262,8 +263,8 @@ class KclvmServiceImpl(pbrpc.KclvmService):
             kcl_result.filter_by_path_selector(), only_first=True
         )
 
-        os.remove(f"{work_dir}/kcl.mod")
-        os.remove(f"{work_dir}/main.k")
+        os.remove(f"{work_dir}{os.sep}kcl.mod")
+        os.remove(f"{work_dir}{os.sep}main.k")
 
         result = pb2.EvalCode_Result(json_result=output_json)
         return result
@@ -274,9 +275,9 @@ class KclvmServiceImpl(pbrpc.KclvmService):
 
         work_dir = tempfile.mkdtemp()
 
-        with open(f"{work_dir}/kcl.mod", "w") as f:
+        with open(f"{work_dir}{os.sep}kcl.mod", "w") as f:
             pass
-        with open(f"{work_dir}/main.k", "w") as f:
+        with open(f"{work_dir}{os.sep}main.k", "w") as f:
             f.write(args.code)
 
         ast_prog = parser.LoadProgram(
@@ -286,8 +287,8 @@ class KclvmServiceImpl(pbrpc.KclvmService):
         )
         types.ResolveProgram(ast_prog)
 
-        os.remove(f"{work_dir}/kcl.mod")
-        os.remove(f"{work_dir}/main.k")
+        os.remove(f"{work_dir}{os.sep}kcl.mod")
+        os.remove(f"{work_dir}{os.sep}main.k")
 
         result = pb2.ResolveCode_Result(success=True)
         return result
@@ -356,10 +357,10 @@ class KclvmServiceImpl(pbrpc.KclvmService):
 
             if os.name == "nt":
                 _executable_root = os.path.dirname(sys.executable)
-                self._kcl_go_exe = f"{_executable_root}/kcl-go.exe"
+                self._kcl_go_exe = f"{_executable_root}\\kcl-go.exe"
             else:
                 _executable_root = os.path.dirname(os.path.dirname(sys.executable))
-                self._kcl_go_exe = f"{_executable_root}/bin/kcl-go"
+                self._kcl_go_exe = f"{_executable_root}{os.sep}bin{os.sep}kcl-go"
 
         # kcl-go list-app -use-fast-parser=<bool> -show-abs=<bool> -show-index=false <work_dir>
         args = [

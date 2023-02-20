@@ -46,14 +46,14 @@ class MarkdownLinkResolver(LinkResolver):
                 if to_dir == from_dir:
                     return ""
                 common_path = os.path.commonpath([from_dir, to_dir])
-                upper_count = len(from_dir.strip(os.pathsep).split(os.pathsep)) - len(
-                    common_path.strip(os.pathsep).split(os.pathsep)
+                upper_count = len(from_dir.strip(os.sep).split(os.sep)) - len(
+                    common_path.strip(os.sep).split(os.sep)
                 )
 
                 return (
-                    f"..{os.pathsep}" * upper_count
-                    + to_dir.replace(common_path, "", 1).lstrip(os.pathsep)
-                    + ("" if to_dir == common_path else os.pathsep)
+                    f"..{os.sep}" * upper_count
+                    + to_dir.replace(common_path, "", 1).lstrip(os.sep)
+                    + ("" if to_dir == common_path else os.sep)
                 )
 
             if tpe.type_category in [

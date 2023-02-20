@@ -45,7 +45,9 @@ def get_import_module(
         ):
             continue
         # import_path to abs_path
-        fix_path = vfs.FixImportPath(root, module.filename, stmt.path).replace(".", "/")
+        fix_path = vfs.FixImportPath(root, module.filename, stmt.path).replace(
+            ".", os.sep
+        )
         abs_path = os.path.join(root, fix_path)
         # Get all .k file if path is a folder
         if os.path.isdir(abs_path):

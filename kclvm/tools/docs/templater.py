@@ -25,9 +25,9 @@ def md_module_doc_templater(module: model.ModuleDoc) -> str:
     # module header
     header = f"# {module.name}\n\n"
     # source code link
-    file_name = module.relative_path.replace(f".{os.pathsep}", "")
+    file_name = module.relative_path.replace(f".{os.sep}", "")
     source_code = (
-        f"Source: [{file_name}]({module.source_code_url}{os.pathsep}{file_name})\n\n"
+        f"Source: [{file_name}]({module.source_code_url}{os.sep}{file_name})\n\n"
         if module.source_code_url
         else ""
     )
