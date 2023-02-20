@@ -3,5 +3,5 @@ schema Person:
     lastName: int
 
 JohnDoe = Person {
-    "firstName": "张张张", "lastName": "Doe"
+    "firstName": "Zhang", "lastName": "Doe"
 }
