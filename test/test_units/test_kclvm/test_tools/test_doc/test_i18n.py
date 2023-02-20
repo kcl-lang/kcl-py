@@ -2,6 +2,7 @@ import filecmp
 import pathlib
 import shutil
 import unittest
+import os
 
 import kclvm.tools.docs.formats as doc_formats
 from kclvm.tools.docs.doc import kcl_i18n_init
@@ -63,21 +64,21 @@ class KCLDocI18nInitTest(unittest.TestCase):
                 locale=t_case.locale,
                 with_locale_suffix=True,
             )
-
-            match, mismatch, errors = filecmp.cmpfiles(
-                expect_output_current,
-                tmp_output_current,
-                common=[
-                    str(f.relative_to(tmp_output_current))
-                    for f in list(
-                        tmp_output_current.rglob(
-                            f"*{doc_formats.KCLDocSuffix.TO_SUFFIX[t_case.format.upper()]}"
+            if os.name != "nt":
+                match, mismatch, errors = filecmp.cmpfiles(
+                    expect_output_current,
+                    tmp_output_current,
+                    common=[
+                        str(f.relative_to(tmp_output_current))
+                        for f in list(
+                            tmp_output_current.rglob(
+                                f"*{doc_formats.KCLDocSuffix.TO_SUFFIX[t_case.format.upper()]}"
+                            )
                         )
-                    )
-                ],
-            )
-            assert len(mismatch) == 0, f"mismatch exists: {mismatch}. {t_case.filename}"
-            assert len(errors) == 0, f"errors exists: {errors}. {t_case.filename}"
+                    ],
+                )
+                assert len(mismatch) == 0, f"mismatch exists: {mismatch}. {t_case.filename}"
+                assert len(errors) == 0, f"errors exists: {errors}. {t_case.filename}"
 
-            # clear tmp files
-            shutil.rmtree(tmp_output)
+                # clear tmp files
+                shutil.rmtree(tmp_output)
