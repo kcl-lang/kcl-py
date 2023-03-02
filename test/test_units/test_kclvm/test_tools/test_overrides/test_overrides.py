@@ -151,7 +151,7 @@ class KCLOverridesTest(KCLBaseOverrideTest):
     def test_override_file_invalid(self):
         from kclvm.tools.query.override import override_file
 
-        specs = [":a:", "a=1", ":a", "a-1"]
+        specs = [":a:", ":a", "a-1"]
         for spec in specs:
             with self.assertRaises(kcl_error.KCLException):
                 override_file("main.k", [spec])

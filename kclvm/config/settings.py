@@ -37,7 +37,7 @@ def load_settings_files(
     key_value_pairs = [
         pb2.KeyValuePair(key=k, value=v)
         for k, v in util.merge_option_same_keys(
-            kclvm.config.KCLCLISettingAction().deal(files)
+            kclvm.config.KCLCLISettingAction().deal(files)[0]
         ).items()
     ]
     if work_dir or kclvm.config.current_path:
