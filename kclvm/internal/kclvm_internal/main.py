@@ -194,6 +194,22 @@ def Main():
                             )
                         )
 
+                if work_dir:
+                    # If the input file or path is a relative path and it is not a absolute path in the KCL module VFS,
+                    # join with the work directory path and convert it to a absolute path.
+                    files = [
+                        os.path.join(work_dir or kclvm.config.current_path, file)
+                        if (
+                            not file.startswith(
+                                kclvm.compiler.parser.parser.KCL_MOD_PATH_ENV
+                            )
+                            and not os.path.isabs(file)
+                        )
+                        and (work_dir or kclvm.config.current_path)
+                        else file
+                        for file in files
+                    ]
+
                 output = kclvm_exec.Run(
                     files,
                     work_dir=work_dir,
