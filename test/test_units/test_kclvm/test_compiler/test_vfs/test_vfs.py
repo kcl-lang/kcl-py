@@ -41,7 +41,7 @@ class TestVfsSavePkgCache(unittest.TestCase):
         )
 
     def tearDown(self):
-        cache_root = f"{os.path.dirname(__file__)}/.kclvm"
+        cache_root = f"{os.path.dirname(__file__)}{os.sep}.kclvm"
         if os.path.exists(cache_root):
             shutil.rmtree(cache_root)
 

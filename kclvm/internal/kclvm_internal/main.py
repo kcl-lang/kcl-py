@@ -158,7 +158,7 @@ def Main():
         argsdict = vars(args)
         kclvm.config.current_path = os.getcwd()
         # 1. Deal KCL CLI using settings file
-        kclvm.config.arguments = kclvm.config.KCLCLISettingAction().deal(
+        kclvm.config.arguments, work_dir = kclvm.config.KCLCLISettingAction().deal(
             argsdict["setting"]
         )
         # 2. Deal KCL CLI config using CLI arguments
@@ -196,6 +196,7 @@ def Main():
 
                 output = kclvm_exec.Run(
                     files,
+                    work_dir=work_dir,
                     cmd_overrides=overrides,
                     print_override_ast=len(overrides) > 0 and kclvm.config.debug,
                     target=f"{target}",

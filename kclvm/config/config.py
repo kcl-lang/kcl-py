@@ -307,7 +307,7 @@ kcl_options:
         # Deal KCL CLI parameters
         data = data.get(self.KCL_CLI_CONFIG_KEY, {})
         parse_config(data)
-        return True
+        return len(data.get(KCLCLIFlag.FILES) or data.get(KCLCLIFlag.FILE) or []) > 0
 
     def deal_setting_file(self, filename, keys, vals):
         data = None
@@ -322,7 +322,7 @@ kcl_options:
                     arg_msg=f"Invalid yaml content of setting file:\n{err_msg}",
                 )
             try:
-                self.deal_config_obj(data or {}, keys, vals)
+                return self.deal_config_obj(data or {}, keys, vals)
             except Exception as err:
                 err_msg = err.arg_msg if isinstance(err, kcl.KCLException) else err
                 kcl.report_exception(
@@ -338,14 +338,16 @@ kcl_options:
             )
 
     def deal(self, filenames: List[str]) -> list:
+        work_dir = ""
         if not filenames and not Path(self.DEFAULT_SETTING_PATH).exists():
-            return []
+            return [], work_dir
         args = []
         for filename in filenames or [self.DEFAULT_SETTING_PATH]:
             _keys, _vals = [], []
-            self.deal_setting_file(filename, _keys, _vals)
+            if self.deal_setting_file(filename, _keys, _vals):
+                work_dir = str(Path(filename).parent)
             args += [(_k, _v) for _k, _v in zip(_keys, _vals)]
-        return args
+        return args, work_dir
 
 
 def _object_to_yaml_str(obj, options=None):

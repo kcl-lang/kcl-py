@@ -2947,6 +2947,12 @@ def LoadProgram(
     k_files: typing.List[str] = []
     kclvm.config.input_file = path_list
     for i, s in enumerate(path_list):
+        # If the input file or path is a relative path and it is not a absolute path in the KCL module VFS,
+        # join with the work directory path and convert it to a absolute path.
+        if not s.startswith(KCL_MOD_PATH_ENV) and not os.path.isabs(s):
+            if work_dir or kclvm.config.current_path:
+                s = os.path.join(work_dir or kclvm.config.current_path, s)
+
         s = os.path.abspath(s)
         if os.path.isdir(s):
             for filename in glob.glob(f"{s}{os.sep}*.k", recursive=False):
