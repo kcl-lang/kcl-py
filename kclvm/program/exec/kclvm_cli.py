@@ -33,16 +33,20 @@ def init_cli_dll():
         return
 
     if platform.system() == "Darwin":
-        _cli_dll_path = f"{_exe_root}/bin/libkclvm_cli_cdylib.dylib"
-        _cli_dll = CDLL(_cli_dll_path)
+        if os.path.exists(f"{_exe_root}/lib/libkclvm_cli_cdylib.dylib"):
+            _cli_dll_path = f"{_exe_root}/lib/libkclvm_cli_cdylib.dylib"
+        else:
+            _cli_dll_path = f"{_exe_root}/bin/libkclvm_cli_cdylib.dylib"
     elif platform.system() == "Linux":
-        _cli_dll_path = f"{_exe_root}/bin/libkclvm_cli_cdylib.so"
-        _cli_dll = CDLL(_cli_dll_path)
+        if os.path.exists(f"{_exe_root}/lib/libkclvm_cli_cdylib.so"):
+            _cli_dll_path = f"{_exe_root}/lib/libkclvm_cli_cdylib.so"
+        else:
+            _cli_dll_path = f"{_exe_root}/bin/libkclvm_cli_cdylib.so"
     elif platform.system() == "Windows":
-        _cli_dll_path = f"{_exe_root}/bin/kclvm_cli_cdylib.dll"
-        _cli_dll = CDLL(_cli_dll_path)
+        _cli_dll_path = f"{_exe_root}\\bin\\kclvm_cli_cdylib.dll"
     else:
         raise f"unknown os: {platform.system()}"
+    _cli_dll = CDLL(_cli_dll_path)
 
 
 class PluginContex:
