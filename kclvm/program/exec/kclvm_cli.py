@@ -162,7 +162,7 @@ def kclvm_cli_native_run_dylib(args: pb2.ExecProgram_Args) -> objpkg.KCLResult:
         else:
             panic_info = {}
 
-    # check panic_info
+    # check panic_info, kcl_col and kcl_config_meta_col are 0-based, kcl_line and kcl_config_meta_line is 1-based
     if panic_info.get(kclvm_PANIC_INFO_KEY):
         err_type_code = panic_info["err_type_code"]
         if err_type_code:
@@ -174,7 +174,9 @@ def kclvm_cli_native_run_dylib(args: pb2.ExecProgram_Args) -> objpkg.KCLResult:
             kcl_error.ErrFileMsg(
                 filename=panic_info.get("kcl_file"),
                 line_no=panic_info.get("kcl_line"),
-                col_no=panic_info.get("kcl_col"),
+                col_no=(panic_info.get("kcl_col") + 1)
+                if panic_info.get("kcl_col")
+                else panic_info.get("kcl_col"),
                 arg_msg=panic_info.get("kcl_arg_msg"),
             )
         ]
@@ -187,7 +189,9 @@ def kclvm_cli_native_run_dylib(args: pb2.ExecProgram_Args) -> objpkg.KCLResult:
         config_meta_file_msg = kcl_error.ErrFileMsg(
             filename=panic_info.get("kcl_config_meta_file"),
             line_no=panic_info.get("kcl_config_meta_line"),
-            col_no=panic_info.get("kcl_config_meta_col"),
+            col_no=(panic_info.get("kcl_config_meta_col") + 1)
+            if panic_info.get("kcl_config_meta_col")
+            else panic_info.get("kcl_config_meta_col"),
             arg_msg=panic_info.get("kcl_config_meta_arg_msg"),
         )
         if config_meta_file_msg.arg_msg:
