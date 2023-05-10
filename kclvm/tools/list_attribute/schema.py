@@ -50,7 +50,9 @@ def get_schema_type_from_code(
         file or "<input>", k_code_list=[code] if code else None
     )
     for name, o in types.ResolveProgram(program).main_scope.elems.items():
-        if isinstance(o.type, objpkg.KCLSchemaDefTypeObject):
+        if isinstance(o.type, objpkg.KCLSchemaDefTypeObject) or isinstance(
+            o.type, objpkg.KCLSchemaTypeObject
+        ):
             if not schema_name or name == schema_name:
                 result.append(kcl_type_obj_to_pb_kcl_type(o.type))
     return result
