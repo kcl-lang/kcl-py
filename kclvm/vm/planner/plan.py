@@ -157,6 +157,8 @@ def filter_results(keyvalues: Union[dict, list]) -> List[dict]:
                         # if the value has derived 'STANDALONE' instances, extend them
                         results.extend(filtered[1:])
             schema_in_list_count = ignore_schema_count + len(standalone_list)
+            if len(results) > 0 and len(value) == 0:
+                results[0][key] = []
             if len(results) > 0 and 0 <= schema_in_list_count < len(value):
                 results[0][key] = filtered_list
             if standalone_list:
