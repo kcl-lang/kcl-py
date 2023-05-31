@@ -3,7 +3,7 @@ lark-parser==0.12.0
 filelock==3.6.0
 protobuf==3.19.5
 schema
-ruamel.yaml
+ruamel.yaml==0.16.12
 toml
 numpydoc
 pygls==0.10.3
