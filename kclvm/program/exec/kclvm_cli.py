@@ -22,7 +22,9 @@ import kclvm.config
 kclvm_PANIC_INFO_KEY = "__kcl_PanicInfo__"
 
 # Using kclvm rust cli PATH or current exec path.
-_exe_root = os.path.dirname(os.environ.get("KCLVM_CLI_BIN_PATH") or sys.executable)
+_exe_root = os.path.dirname(
+    os.environ.get("KCLVM_CLI_BIN_PATH") or os.path.dirname(sys.executable)
+)
 _cli_dll = None
 
 
