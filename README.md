@@ -1,10 +1,10 @@
-<h1 align="center">KCLVM Python SDK</h1>
+<h1 align="center">KCL Python SDK</h1>
 
 <p align="center">
-  <img src="https://github.com/KusionStack/kclvm-py/workflows/test/badge.svg">
+  <img src="https://github.com/kcl-lang/kcl-py/workflows/test/badge.svg">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square">
-  <img src="https://img.shields.io/github/release/KusionStack/kclvm-py.svg">
-  <img src="https://img.shields.io/github/license/KusionStack/kclvm-py.svg">
+  <img src="https://img.shields.io/github/release/kcl-lang/kcl-py.svg">
+  <img src="https://img.shields.io/github/license/kcl-lang/kcl-py.svg">
 </p>
 
 ## How to use
@@ -56,7 +56,7 @@ x1:
 
 ### API
 
-Run KCL code with kclvm-py
+Run KCL code with the KCL Python SDK
 
 ```python3
 import kclvm.program.exec as kclvm_exec
@@ -67,7 +67,7 @@ print(planner.plan(kclvm_exec.Run(["hello.k"]).filter_by_path_selector()))
 
 Output
 
-```
+```shell
 $ python3 main.py
 name: kcl
 age: 1
@@ -77,5 +77,4 @@ x0:
 x1:
   name: kcl
   age: 101
-
 ```
