@@ -1262,19 +1262,26 @@ class Printer(BasePrinter):
 
         def write_item(item):
             key, value, operation = item
-            tok = ast.TokenValue.COLON
-            if operation == ast.ConfigEntryOperation.INSERT:
-                tok = ast.TokenValue.COMP_PLUS
-            elif operation == ast.ConfigEntryOperation.OVERRIDE:
-                tok = ast.TokenValue.ASSIGN
-            self.print(key)
-            if tok != ast.TokenValue.COLON:
-                self.print(WHITESPACE)
-            self.print(
-                tok,
-                WHITESPACE,
-                value,
-            )
+            if key is None:
+                # for dictionary unpacking operator in dicts {**{'y': 2}}
+                # see PEP 448 for details
+                if not isinstance(value, ast.ConfigIfEntryExpr):
+                    self.print(ast.TokenValue.DOUBLE_STAR)
+                self.print(value)
+            else:
+                tok = ast.TokenValue.COLON
+                if operation == ast.ConfigEntryOperation.INSERT:
+                    tok = ast.TokenValue.COMP_PLUS
+                elif operation == ast.ConfigEntryOperation.OVERRIDE:
+                    tok = ast.TokenValue.ASSIGN
+                self.print(key)
+                if tok != ast.TokenValue.COLON:
+                    self.print(WHITESPACE)
+                self.print(
+                    tok,
+                    WHITESPACE,
+                    value,
+                )
 
         self.interleave(
             lambda: self.writeln(),
