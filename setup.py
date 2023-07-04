@@ -10,11 +10,10 @@ from pkg_resources import require
 import setuptools
 
 # Steps:
-# 1. cd internal
-# 2. modify kclvm version in setup.py
-# 3. run `python3 setup.py sdist` to build package
-# 4. run `python3 -m twine upload dist/kclvm-*.tar.gz` to upload package to PyPI
-# 5. input username and password of PyPI
+# 1. modify kclvm version in setup.py
+# 2. run `python3 setup.py sdist` to build package
+# 3. run `python3 -m twine upload dist/kclvm-*.tar.gz` to upload package to PyPI
+# 4. input username and password of PyPI
 
 install_requires = []
 require_path = pathlib.Path(__file__).parent.joinpath("kclvm/scripts/requirements.txt")
