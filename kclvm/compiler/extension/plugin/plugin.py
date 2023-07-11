@@ -130,13 +130,13 @@ def _find_plugin_root() -> typing.Optional[str]:
             return str(cwd_plugin_path.joinpath("plugins"))
         cwd_plugin_path = cwd_plugin_path.parent
 
-    # 4. try $HOME{os.sep}.kusion{os.sep}kclvm{os.sep}plugins
+    # 4. try $HOME{os.sep}.kcl{os.sep}plugins
     home_dir = (
         os.getenv("HOME")
         if platform.system() != "Windows"
         else os.getenv("UserProfile")
     )
-    home_plugin_root = os.path.join(home_dir, f".kusion{os.sep}kclvm{os.sep}plugins")
+    home_plugin_root = os.path.join(home_dir, f".kcl{os.sep}plugins")
     if os.path.exists(f"{home_plugin_root}{os.sep}hello{os.sep}plugin.py"):
         return home_plugin_root
 

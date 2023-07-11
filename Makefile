@@ -4,7 +4,7 @@ PROJECT_NAME = KCLVM
 
 PWD:=$(shell pwd)
 
-BUILD_IMAGE:=kusionstack/kclvm-builder
+BUILD_IMAGE:=kcllang/kcl-builder
 
 # export DOCKER_DEFAULT_PLATFORM=linux/amd64
 # or
@@ -13,7 +13,6 @@ BUILD_IMAGE:=kusionstack/kclvm-builder
 RUN_IN_DOCKER:=docker run -it --rm
 RUN_IN_DOCKER+=-v ~/.ssh:/root/.ssh
 RUN_IN_DOCKER+=-v ~/.gitconfig:/root/.gitconfig
-RUN_IN_DOCKER+=-v ~/go/pkg/mod:/go/pkg/mod
 RUN_IN_DOCKER+=-v ${PWD}:/root/kclvm
 RUN_IN_DOCKER+=-w /root/kclvm ${BUILD_IMAGE}
 

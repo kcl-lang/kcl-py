@@ -3,4 +3,4 @@
 	url = https://github.com/KusionStack/konfig.git
 [submodule "plugins"]
 	path = plugins
-	url = https://github.com/KusionStack/kcl-plugin.git
+	url = https://github.com/kcl-lang/kcl-plugin.git

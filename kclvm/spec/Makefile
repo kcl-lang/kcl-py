@@ -32,10 +32,10 @@ protorpc-stub:
 		&& go install .
 
 	cd gpyrpc && protoc --protorpc-py_out=. gpyrpc.proto
-	cp ./gpyrpc/kusionstack.io/kclvm-go/pkg/spec/gpyrpc/gpyrpc.pb.protorpc.py \
+	cp ./gpyrpc/kcl-lang.io/kcl-go/pkg/spec/gpyrpc/gpyrpc.pb.protorpc.py \
 		../internal/gpyrpc/gpyrpc_pb_protorpc.py
 
-	-rm -rf ./gpyrpc/kusionstack.io
+	-rm -rf ./gpyrpc/kcl-lang.io
 
 	cd .. && make format
 

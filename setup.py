@@ -25,10 +25,10 @@ with open(require_path) as f:
 setup(
     name="kclvm",
     author="KCL Authors",
-    version="0.5.0.4",
+    version="0.5.0.5",
     license="Apache License 2.0",
     python_requires=">=3.7",
-    description="KCLVM",
+    description="KCL Python SDK",
     long_description="""A constraint-based record & functional language mainly used in configuration and policy scenarios.""",
     author_email="",
     data_files=[
@@ -42,7 +42,7 @@ setup(
         "kclvm/spec/gpyrpc/protorpc_wire.proto",
         "kclvm/spec/modfile/modfile.proto",
     ],
-    url="https://kusionstack.io/",
+    url="https://kcl-lang.io/",
     packages=setuptools.find_packages(),
     include_package_data=True,
     zip_safe=True,

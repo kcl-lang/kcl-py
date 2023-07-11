@@ -11,7 +11,7 @@ jobs:
     name: Grammar Test
     runs-on: ubuntu-latest
     container:
-      image: kusionstack/kclvm-builder
+      image: kcllang/kcl-builder
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -25,7 +25,7 @@ jobs:
     name: Unit Test
     runs-on: ubuntu-latest
     container:
-      image: kusionstack/kclvm-builder
+      image: kcllang/kcl-builder
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -34,19 +34,4 @@ jobs:
       - name: unit test
         run: | 
           make test-unit
-        shell: bash
-
-  konfig-test:
-    name: Konfig Test
-    runs-on: ubuntu-latest
-    container:
-      image: kusionstack/kclvm-builder
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-        with:
-          submodules: "true"
-      - name: Konfig test
-        run: | 
-          make test-konfig
         shell: bash

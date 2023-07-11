@@ -34,17 +34,3 @@ jobs:
           python-version: '3.9'
       - name: Unit Test on Windows
         run: .\internal\scripts\test_unit.bat
-
-  konfig-test:
-    name: Konfig Test
-    runs-on: windows-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-        with:
-          submodules: "true"
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-      - name: Konfig Test on Windows
-        run: .\internal\scripts\test_konfig.bat
