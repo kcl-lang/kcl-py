@@ -263,7 +263,7 @@ def PostSimpleExprCheck(
                 for i in Signature.from_callable(func).parameters.items()
                 if len(i) > 0
             ]
-            for (k, v) in Signature.from_callable(func).parameters.items():
+            for k, v in Signature.from_callable(func).parameters.items():
                 sig_params[k] = (k, v)
             inputs = {}
 

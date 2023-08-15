@@ -6,6 +6,7 @@ import platform
 import typing
 import json
 import inspect
+import pathlib
 
 from ctypes import *
 
@@ -48,6 +49,42 @@ def init_cli_dll():
         _cli_dll_path = f"{_exe_root}\\bin\\kclvm_cli_cdylib.dll"
     else:
         raise f"unknown os: {platform.system()}"
+    _cli_dll = CDLL(_cli_dll_path)
+
+
+def init_kcl_artifact_cli_dll():
+    global _cli_dll
+
+    if _cli_dll:
+        return
+
+    artifact_root = str(
+        pathlib.Path(__file__).parent.parent.parent.joinpath("kcl_artifact")
+    )
+
+    system = platform.system()
+    if system == "Windows":
+        # Windows default arch is amd64, module `os`` has no attribute `uname` on the windows platform
+        arch = "amd64"
+    else:
+        arch = os.uname().machine
+    if arch in ["armv7", "armv7*", "aarch64"]:
+        arch = "arm64"
+    elif arch in ["x86_64"]:
+        arch = "amd64"
+    arch = arch.lower()
+    system_wtih_arch = f"{system.lower()}-{arch}"
+    path = f"{artifact_root}/lib/{system_wtih_arch}"
+    os.environ["KCLVM_CLI_BIN_PATH"] = path
+
+    if system == "Darwin":
+        _cli_dll_path = f"{path}/libkclvm_cli_cdylib.dylib"
+    elif system == "Linux":
+        _cli_dll_path = f"{path}/libkclvm_cli_cdylib.so"
+    elif system == "Windows":
+        _cli_dll_path = f"{path}\\kclvm_cli_cdylib.dll"
+    else:
+        raise f"unsupported os {system} and arch {arch}"
     _cli_dll = CDLL(_cli_dll_path)
 
 
@@ -126,7 +163,7 @@ def plugin_method_agent(method: str, args_json: str, kwargs_json: str) -> c_char
 
 
 def kclvm_cli_run(args: pb2.ExecProgram_Args) -> str:
-    init_cli_dll()
+    init_kcl_artifact_cli_dll()
 
     _cli_dll.kclvm_cli_run.restype = c_char_p
     _cli_dll.kclvm_cli_run.argtypes = [c_char_p, c_void_p]

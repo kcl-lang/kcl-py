@@ -4,7 +4,6 @@
 
 
 class LarkToken:
-
     # kcl.lark rules and tokens (len=186)
     L_start = "start"  # start: (NEWLINE | statement)* ...
     L_statement = "statement"  # statement: simple_stmt | compound_stmt ...

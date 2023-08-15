@@ -127,7 +127,6 @@ class _KclOptionDict:
         file="",
         line=0,
     ) -> typing.Any:
-
         if value_type and value_type not in [
             "bool",
             "int",

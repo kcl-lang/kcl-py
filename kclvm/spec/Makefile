@@ -22,22 +22,8 @@ default:
 
 	# protorpc
 	protoc -I. --python_out=./_output ./gpyrpc/protorpc_wire.proto
-	make protorpc-stub
 
 	-rm -rf ./_output
-
-protorpc-stub:
-	cd ./gpyrpc/protoc-gen-protorpc-py && go fmt \
-		&& go install github.com/golang/protobuf/protoc-gen-go@latest \
-		&& go install .
-
-	cd gpyrpc && protoc --protorpc-py_out=. gpyrpc.proto
-	cp ./gpyrpc/kcl-lang.io/kcl-go/pkg/spec/gpyrpc/gpyrpc.pb.protorpc.py \
-		../internal/gpyrpc/gpyrpc_pb_protorpc.py
-
-	-rm -rf ./gpyrpc/kcl-lang.io
-
-	cd .. && make format
 
 clean:
 	-rm -rf ./_output

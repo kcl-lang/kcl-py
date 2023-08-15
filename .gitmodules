@@ -4,3 +4,6 @@
 [submodule "plugins"]
 	path = plugins
 	url = https://github.com/kcl-lang/kcl-plugin.git
+[submodule "kclvm/kcl_artifact"]
+	path = kclvm/kcl_artifact
+	url = https://github.com/kcl-lang/kcl-artifact-go.git

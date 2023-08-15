@@ -34,3 +34,18 @@ jobs:
           python-version: '3.9'
       - name: Unit Test on Windows
         run: .\internal\scripts\test_unit.bat
+
+  run-test:
+    name: Run Test
+    runs-on: windows-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          submodules: "true"
+      - name: Run
+        shell: bash
+        run: |
+          python3 -m pip install -r .\\kclvm\\scripts\\requirements.txt
+          python3 -m kclvm .\\samples\\hello.k
+          python3 -m kclvm .\\samples\\hello.k --target native
