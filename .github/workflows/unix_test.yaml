@@ -35,3 +35,24 @@ jobs:
         run: | 
           make test-unit
         shell: bash
+
+  run-test:
+    name: Run Test
+    strategy:
+      matrix:
+        os: [macos-11, macos-12, macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          submodules: "true"
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Run
+        shell: bash
+        run: | 
+          python3 -m pip install -r ./kclvm/scripts/requirements.txt
+          python3 -m kclvm ./samples/hello.k
+          python3 -m kclvm ./samples/hello.k --target native

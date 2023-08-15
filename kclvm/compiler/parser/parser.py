@@ -1468,7 +1468,6 @@ class ASTBuilder(ASTBuilderWalker):
     def add_cal_expr_precedence(
         self, expr: typing.Union[ast.BinaryExpr, ast.UnaryExpr]
     ) -> typing.Union[ast.UnaryExpr, ast.BinaryExpr, ast.Compare, ast.Expr]:
-
         if isinstance(expr, ast.UnaryExpr):
             right_expr = expr.operand
         elif isinstance(expr, ast.BinaryExpr):

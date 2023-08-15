@@ -1060,7 +1060,6 @@ class BaseTypeChecker(ast.TreeWalker):
         """Init all global variable types"""
 
         def get_top_level_assign_list(module: ast.Module) -> List[ast.AssignStmt]:
-
             attr_list = []
 
             def loop_body(body: List[ast.Stmt]):

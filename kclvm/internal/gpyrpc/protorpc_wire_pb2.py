@@ -49,7 +49,6 @@ ResponseHeader = _reflection.GeneratedProtocolMessageType(
 _sym_db.RegisterMessage(ResponseHeader)
 
 if _descriptor._USE_C_DESCRIPTORS == False:
-
     DESCRIPTOR._options = None
     _CONST._serialized_start = 301
     _CONST._serialized_end = 347

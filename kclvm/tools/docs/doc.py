@@ -360,7 +360,6 @@ def _parse_file_docs(
 def _parse_program_docs(
     program: ast.Program, checker: type_checker.TypeChecker, repo_url: str = None
 ) -> Dict[str, model.ModuleDoc]:
-
     pkgs: Dict[str, List[ast.Module]] = program.pkgs
     module_docs: Dict[str, model.ModuleDoc] = {}
     for pkgpath, modules in pkgs.items():

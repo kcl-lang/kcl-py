@@ -448,7 +448,6 @@ def runStdioProtorpcServer():
 
 
 def runHttpServer(*, addr: str = "", port: int = 2021):
-
     rpc_server = _makeRpcServer()
 
     class MyHTTPServer(HTTPServer):
@@ -459,7 +458,6 @@ def runHttpServer(*, addr: str = "", port: int = 2021):
 
     class httpHandler(BaseHTTPRequestHandler):
         def do_GET(self):
-
             # http://localhost:2021/api:protorpc/BuiltinService.Ping
             # http://localhost:2021/api:protorpc/BuiltinService.ListMethod
 

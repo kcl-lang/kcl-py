@@ -18,10 +18,11 @@ from google.protobuf import descriptor_pb2 as google_dot_protobuf_dot_descriptor
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n\x13gpyrpc/gpyrpc.proto\x12\x06gpyrpc\x1a\x19google/protobuf/any.proto\x1a google/protobuf/descriptor.proto")\n\nCmdArgSpec\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t"[\n\x0f\x43mdOverrideSpec\x12\x0f\n\x07pkgpath\x18\x01 \x01(\t\x12\x12\n\nfield_path\x18\x02 \x01(\t\x12\x13\n\x0b\x66ield_value\x18\x03 \x01(\t\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t"f\n\x0cRestResponse\x12$\n\x06result\x18\x01 \x01(\x0b\x32\x14.google.protobuf.Any\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x12!\n\x07kcl_err\x18\x03 \x01(\x0b\x32\x10.gpyrpc.KclError"`\n\x08KclError\x12\x0e\n\x06\x65wcode\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0b\n\x03msg\x18\x03 \x01(\t\x12)\n\x0b\x65rror_infos\x18\x04 \x03(\x0b\x32\x14.gpyrpc.KclErrorInfo"w\n\x0cKclErrorInfo\x12\x11\n\terr_level\x18\x01 \x01(\t\x12\x0f\n\x07\x61rg_msg\x18\x02 \x01(\t\x12\x10\n\x08\x66ilename\x18\x03 \x01(\t\x12\x10\n\x08src_code\x18\x04 \x01(\t\x12\x0f\n\x07line_no\x18\x05 \x01(\t\x12\x0e\n\x06\x63ol_no\x18\x06 \x01(\t"\x1a\n\tPing_Args\x12\r\n\x05value\x18\x01 \x01(\t"\x1c\n\x0bPing_Result\x12\r\n\x05value\x18\x01 \x01(\t"\x11\n\x0fListMethod_Args"-\n\x11ListMethod_Result\x12\x18\n\x10method_name_list\x18\x01 \x03(\t"Z\n\x17ParseFile_LarkTree_Args\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x13\n\x0bsource_code\x18\x02 \x01(\t\x12\x18\n\x10ignore_file_line\x18\x03 \x01(\x08"3\n\x19ParseFile_LarkTree_Result\x12\x16\n\x0elark_tree_json\x18\x01 \x01(\t";\n\x12ParseFile_AST_Args\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x13\n\x0bsource_code\x18\x02 \x01(\t"(\n\x14ParseFile_AST_Result\x12\x10\n\x08\x61st_json\x18\x01 \x01(\t"0\n\x15ParseProgram_AST_Args\x12\x17\n\x0fk_filename_list\x18\x01 \x03(\t"+\n\x17ParseProgram_AST_Result\x12\x10\n\x08\x61st_json\x18\x01 \x01(\t"\xe0\x02\n\x10\x45xecProgram_Args\x12\x10\n\x08work_dir\x18\x01 \x01(\t\x12\x17\n\x0fk_filename_list\x18\x02 \x03(\t\x12\x13\n\x0bk_code_list\x18\x03 \x03(\t\x12 \n\x04\x61rgs\x18\x04 \x03(\x0b\x32\x12.gpyrpc.CmdArgSpec\x12*\n\toverrides\x18\x05 \x03(\x0b\x32\x17.gpyrpc.CmdOverrideSpec\x12\x1b\n\x13\x64isable_yaml_result\x18\x06 \x01(\x08\x12\x1a\n\x12print_override_ast\x18\x07 \x01(\x08\x12\x1a\n\x12strict_range_check\x18\x08 \x01(\x08\x12\x14\n\x0c\x64isable_none\x18\t \x01(\x08\x12\x0f\n\x07verbose\x18\n \x01(\x05\x12\r\n\x05\x64\x65\x62ug\x18\x0b \x01(\x05\x12\x11\n\tsort_keys\x18\x0c \x01(\x08\x12 \n\x18include_schema_type_path\x18\r \x01(\x08"T\n\x12\x45xecProgram_Result\x12\x13\n\x0bjson_result\x18\x01 \x01(\t\x12\x13\n\x0byaml_result\x18\x02 \x01(\t\x12\x14\n\x0c\x65scaped_time\x18\x65 \x01(\t"\'\n\x10ResetPlugin_Args\x12\x13\n\x0bplugin_root\x18\x01 \x01(\t"\x14\n\x12ResetPlugin_Result"!\n\x0f\x46ormatCode_Args\x12\x0e\n\x06source\x18\x01 \x01(\t"&\n\x11\x46ormatCode_Result\x12\x11\n\tformatted\x18\x01 \x01(\x0c"\x1f\n\x0f\x46ormatPath_Args\x12\x0c\n\x04path\x18\x01 \x01(\t")\n\x11\x46ormatPath_Result\x12\x14\n\x0c\x63hangedPaths\x18\x01 \x03(\t"\x1d\n\rLintPath_Args\x12\x0c\n\x04path\x18\x01 \x01(\t""\n\x0fLintPath_Result\x12\x0f\n\x07results\x18\x01 \x03(\t"F\n\x11OverrideFile_Args\x12\x0c\n\x04\x66ile\x18\x01 \x01(\t\x12\r\n\x05specs\x18\x02 \x03(\t\x12\x14\n\x0cimport_paths\x18\x03 \x03(\t"%\n\x13OverrideFile_Result\x12\x0e\n\x06result\x18\x01 \x01(\x08"\x1d\n\rEvalCode_Args\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t"&\n\x0f\x45valCode_Result\x12\x13\n\x0bjson_result\x18\x02 \x01(\t" \n\x10ResolveCode_Args\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t"%\n\x12ResolveCode_Result\x12\x0f\n\x07success\x18\x01 \x01(\x08"E\n\x12GetSchemaType_Args\x12\x0c\n\x04\x66ile\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t\x12\x13\n\x0bschema_name\x18\x03 \x01(\t"A\n\x14GetSchemaType_Result\x12)\n\x10schema_type_list\x18\x01 \x03(\x0b\x32\x0f.gpyrpc.KclType"g\n\x11ValidateCode_Args\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t\x12\x0e\n\x06schema\x18\x03 \x01(\t\x12\x16\n\x0e\x61ttribute_name\x18\x04 \x01(\t\x12\x0e\n\x06\x66ormat\x18\x05 \x01(\t";\n\x13ValidateCode_Result\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x13\n\x0b\x65rr_message\x18\x02 \x01(\t"+\n\x0b\x43odeSnippet\x12\x0e\n\x06schema\x18\x01 \x01(\t\x12\x0c\n\x04rule\x18\x02 \x01(\t"<\n\x0fSpliceCode_Args\x12)\n\x0c\x63odeSnippets\x18\x01 \x03(\x0b\x32\x13.gpyrpc.CodeSnippet"\'\n\x11SpliceCode_Result\x12\x12\n\nspliceCode\x18\x01 \x01(\t":\n\x08Position\x12\x0c\n\x04line\x18\x01 \x01(\x03\x12\x0e\n\x06\x63olumn\x18\x02 \x01(\x03\x12\x10\n\x08\x66ilename\x18\x03 \x01(\t"J\n\rComplete_Args\x12\x1d\n\x03pos\x18\x01 \x01(\x0b\x32\x10.gpyrpc.Position\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04\x63ode\x18\x03 \x01(\t"(\n\x0f\x43omplete_Result\x12\x15\n\rcompleteItems\x18\x01 \x01(\t";\n\x0cGoToDef_Args\x12\x1d\n\x03pos\x18\x01 \x01(\x0b\x32\x10.gpyrpc.Position\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t"#\n\x0eGoToDef_Result\x12\x11\n\tlocations\x18\x01 \x01(\t"1\n\x13\x44ocumentSymbol_Args\x12\x0c\n\x04\x66ile\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t"\'\n\x15\x44ocumentSymbol_Result\x12\x0e\n\x06symbol\x18\x01 \x01(\t"9\n\nHover_Args\x12\x1d\n\x03pos\x18\x01 \x01(\x0b\x32\x10.gpyrpc.Position\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t"#\n\x0cHover_Result\x12\x13\n\x0bhoverResult\x18\x01 \x01(\t"i\n\x11ListDepFiles_Args\x12\x10\n\x08work_dir\x18\x01 \x01(\t\x12\x14\n\x0cuse_abs_path\x18\x02 \x01(\x08\x12\x13\n\x0binclude_all\x18\x03 \x01(\x08\x12\x17\n\x0fuse_fast_parser\x18\x04 \x01(\x08"F\n\x13ListDepFiles_Result\x12\x0f\n\x07pkgroot\x18\x01 \x01(\t\x12\x0f\n\x07pkgpath\x18\x02 \x01(\t\x12\r\n\x05\x66iles\x18\x03 \x03(\t"9\n\x16LoadSettingsFiles_Args\x12\x10\n\x08work_dir\x18\x01 \x01(\t\x12\r\n\x05\x66iles\x18\x02 \x03(\t"q\n\x18LoadSettingsFiles_Result\x12*\n\x0fkcl_cli_configs\x18\x01 \x01(\x0b\x32\x11.gpyrpc.CliConfig\x12)\n\x0bkcl_options\x18\x02 \x03(\x0b\x32\x14.gpyrpc.KeyValuePair"\xa6\x01\n\tCliConfig\x12\r\n\x05\x66iles\x18\x01 \x03(\t\x12\x0e\n\x06output\x18\x02 \x01(\t\x12\x11\n\toverrides\x18\x03 \x03(\t\x12\x15\n\rpath_selector\x18\x04 \x03(\t\x12\x1a\n\x12strict_range_check\x18\x05 \x01(\x08\x12\x14\n\x0c\x64isable_none\x18\x06 \x01(\x08\x12\x0f\n\x07verbose\x18\x07 \x01(\x03\x12\r\n\x05\x64\x65\x62ug\x18\x08 \x01(\x08"*\n\x0cKeyValuePair\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t"\xf4\x02\n\x07KclType\x12\x0c\n\x04type\x18\x01 \x01(\t\x12$\n\x0bunion_types\x18\x02 \x03(\x0b\x32\x0f.gpyrpc.KclType\x12\x0f\n\x07\x64\x65\x66\x61ult\x18\x03 \x01(\t\x12\x13\n\x0bschema_name\x18\x04 \x01(\t\x12\x12\n\nschema_doc\x18\x05 \x01(\t\x12\x33\n\nproperties\x18\x06 \x03(\x0b\x32\x1f.gpyrpc.KclType.PropertiesEntry\x12\x10\n\x08required\x18\x07 \x03(\t\x12\x1c\n\x03key\x18\x08 \x01(\x0b\x32\x0f.gpyrpc.KclType\x12\x1d\n\x04item\x18\t \x01(\x0b\x32\x0f.gpyrpc.KclType\x12\x0c\n\x04line\x18\n \x01(\x05\x12%\n\ndecorators\x18\x0b \x03(\x0b\x32\x11.gpyrpc.Decorator\x1a\x42\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1e\n\x05value\x18\x02 \x01(\x0b\x32\x0f.gpyrpc.KclType:\x02\x38\x01"\x90\x01\n\tDecorator\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x11\n\targuments\x18\x02 \x03(\t\x12\x31\n\x08keywords\x18\x03 \x03(\x0b\x32\x1f.gpyrpc.Decorator.KeywordsEntry\x1a/\n\rKeywordsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x32\x82\x01\n\x0e\x42uiltinService\x12.\n\x04Ping\x12\x11.gpyrpc.Ping_Args\x1a\x13.gpyrpc.Ping_Result\x12@\n\nListMethod\x12\x17.gpyrpc.ListMethod_Args\x1a\x19.gpyrpc.ListMethod_Result2\xb4\x0b\n\x0cKclvmService\x12.\n\x04Ping\x12\x11.gpyrpc.Ping_Args\x1a\x13.gpyrpc.Ping_Result\x12X\n\x12ParseFile_LarkTree\x12\x1f.gpyrpc.ParseFile_LarkTree_Args\x1a!.gpyrpc.ParseFile_LarkTree_Result\x12I\n\rParseFile_AST\x12\x1a.gpyrpc.ParseFile_AST_Args\x1a\x1c.gpyrpc.ParseFile_AST_Result\x12R\n\x10ParseProgram_AST\x12\x1d.gpyrpc.ParseProgram_AST_Args\x1a\x1f.gpyrpc.ParseProgram_AST_Result\x12\x43\n\x0b\x45xecProgram\x12\x18.gpyrpc.ExecProgram_Args\x1a\x1a.gpyrpc.ExecProgram_Result\x12\x43\n\x0bResetPlugin\x12\x18.gpyrpc.ResetPlugin_Args\x1a\x1a.gpyrpc.ResetPlugin_Result\x12@\n\nFormatCode\x12\x17.gpyrpc.FormatCode_Args\x1a\x19.gpyrpc.FormatCode_Result\x12@\n\nFormatPath\x12\x17.gpyrpc.FormatPath_Args\x1a\x19.gpyrpc.FormatPath_Result\x12:\n\x08LintPath\x12\x15.gpyrpc.LintPath_Args\x1a\x17.gpyrpc.LintPath_Result\x12\x46\n\x0cOverrideFile\x12\x19.gpyrpc.OverrideFile_Args\x1a\x1b.gpyrpc.OverrideFile_Result\x12:\n\x08\x45valCode\x12\x15.gpyrpc.EvalCode_Args\x1a\x17.gpyrpc.EvalCode_Result\x12\x43\n\x0bResolveCode\x12\x18.gpyrpc.ResolveCode_Args\x1a\x1a.gpyrpc.ResolveCode_Result\x12I\n\rGetSchemaType\x12\x1a.gpyrpc.GetSchemaType_Args\x1a\x1c.gpyrpc.GetSchemaType_Result\x12\x46\n\x0cValidateCode\x12\x19.gpyrpc.ValidateCode_Args\x1a\x1b.gpyrpc.ValidateCode_Result\x12@\n\nSpliceCode\x12\x17.gpyrpc.SpliceCode_Args\x1a\x19.gpyrpc.SpliceCode_Result\x12:\n\x08\x43omplete\x12\x15.gpyrpc.Complete_Args\x1a\x17.gpyrpc.Complete_Result\x12\x37\n\x07GoToDef\x12\x14.gpyrpc.GoToDef_Args\x1a\x16.gpyrpc.GoToDef_Result\x12L\n\x0e\x44ocumentSymbol\x12\x1b.gpyrpc.DocumentSymbol_Args\x1a\x1d.gpyrpc.DocumentSymbol_Result\x12\x31\n\x05Hover\x12\x12.gpyrpc.Hover_Args\x1a\x14.gpyrpc.Hover_Result\x12\x46\n\x0cListDepFiles\x12\x19.gpyrpc.ListDepFiles_Args\x1a\x1b.gpyrpc.ListDepFiles_Result\x12U\n\x11LoadSettingsFiles\x12\x1e.gpyrpc.LoadSettingsFiles_Args\x1a .gpyrpc.LoadSettingsFiles_ResultB0Z.kusionstack.io/kclvm-go/pkg/spec/gpyrpc;gpyrpcb\x06proto3'
+    b'\n\x13gpyrpc/gpyrpc.proto\x12\x06gpyrpc\x1a\x19google/protobuf/any.proto\x1a google/protobuf/descriptor.proto"8\n\x12\x43mdExternalPkgSpec\x12\x10\n\x08pkg_name\x18\x01 \x01(\t\x12\x10\n\x08pkg_path\x18\x02 \x01(\t")\n\nCmdArgSpec\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t"[\n\x0f\x43mdOverrideSpec\x12\x0f\n\x07pkgpath\x18\x01 \x01(\t\x12\x12\n\nfield_path\x18\x02 \x01(\t\x12\x13\n\x0b\x66ield_value\x18\x03 \x01(\t\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t"f\n\x0cRestResponse\x12$\n\x06result\x18\x01 \x01(\x0b\x32\x14.google.protobuf.Any\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x12!\n\x07kcl_err\x18\x03 \x01(\x0b\x32\x10.gpyrpc.KclError"`\n\x08KclError\x12\x0e\n\x06\x65wcode\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0b\n\x03msg\x18\x03 \x01(\t\x12)\n\x0b\x65rror_infos\x18\x04 \x03(\x0b\x32\x14.gpyrpc.KclErrorInfo"w\n\x0cKclErrorInfo\x12\x11\n\terr_level\x18\x01 \x01(\t\x12\x0f\n\x07\x61rg_msg\x18\x02 \x01(\t\x12\x10\n\x08\x66ilename\x18\x03 \x01(\t\x12\x10\n\x08src_code\x18\x04 \x01(\t\x12\x0f\n\x07line_no\x18\x05 \x01(\t\x12\x0e\n\x06\x63ol_no\x18\x06 \x01(\t"\x1a\n\tPing_Args\x12\r\n\x05value\x18\x01 \x01(\t"\x1c\n\x0bPing_Result\x12\r\n\x05value\x18\x01 \x01(\t"\x11\n\x0fListMethod_Args"-\n\x11ListMethod_Result\x12\x18\n\x10method_name_list\x18\x01 \x03(\t"Z\n\x17ParseFile_LarkTree_Args\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x13\n\x0bsource_code\x18\x02 \x01(\t\x12\x18\n\x10ignore_file_line\x18\x03 \x01(\x08"3\n\x19ParseFile_LarkTree_Result\x12\x16\n\x0elark_tree_json\x18\x01 \x01(\t";\n\x12ParseFile_AST_Args\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x13\n\x0bsource_code\x18\x02 \x01(\t"(\n\x14ParseFile_AST_Result\x12\x10\n\x08\x61st_json\x18\x01 \x01(\t"0\n\x15ParseProgram_AST_Args\x12\x17\n\x0fk_filename_list\x18\x01 \x03(\t"+\n\x17ParseProgram_AST_Result\x12\x10\n\x08\x61st_json\x18\x01 \x01(\t"\x93\x03\n\x10\x45xecProgram_Args\x12\x10\n\x08work_dir\x18\x01 \x01(\t\x12\x17\n\x0fk_filename_list\x18\x02 \x03(\t\x12\x13\n\x0bk_code_list\x18\x03 \x03(\t\x12 \n\x04\x61rgs\x18\x04 \x03(\x0b\x32\x12.gpyrpc.CmdArgSpec\x12*\n\toverrides\x18\x05 \x03(\x0b\x32\x17.gpyrpc.CmdOverrideSpec\x12\x1b\n\x13\x64isable_yaml_result\x18\x06 \x01(\x08\x12\x1a\n\x12print_override_ast\x18\x07 \x01(\x08\x12\x1a\n\x12strict_range_check\x18\x08 \x01(\x08\x12\x14\n\x0c\x64isable_none\x18\t \x01(\x08\x12\x0f\n\x07verbose\x18\n \x01(\x05\x12\r\n\x05\x64\x65\x62ug\x18\x0b \x01(\x05\x12\x11\n\tsort_keys\x18\x0c \x01(\x08\x12\x31\n\rexternal_pkgs\x18\r \x03(\x0b\x32\x1a.gpyrpc.CmdExternalPkgSpec\x12 \n\x18include_schema_type_path\x18\x0e \x01(\x08"T\n\x12\x45xecProgram_Result\x12\x13\n\x0bjson_result\x18\x01 \x01(\t\x12\x13\n\x0byaml_result\x18\x02 \x01(\t\x12\x14\n\x0c\x65scaped_time\x18\x65 \x01(\t"\'\n\x10ResetPlugin_Args\x12\x13\n\x0bplugin_root\x18\x01 \x01(\t"\x14\n\x12ResetPlugin_Result"!\n\x0f\x46ormatCode_Args\x12\x0e\n\x06source\x18\x01 \x01(\t"&\n\x11\x46ormatCode_Result\x12\x11\n\tformatted\x18\x01 \x01(\x0c"\x1f\n\x0f\x46ormatPath_Args\x12\x0c\n\x04path\x18\x01 \x01(\t")\n\x11\x46ormatPath_Result\x12\x14\n\x0c\x63hangedPaths\x18\x01 \x03(\t"\x1d\n\rLintPath_Args\x12\x0c\n\x04path\x18\x01 \x01(\t""\n\x0fLintPath_Result\x12\x0f\n\x07results\x18\x01 \x03(\t"F\n\x11OverrideFile_Args\x12\x0c\n\x04\x66ile\x18\x01 \x01(\t\x12\r\n\x05specs\x18\x02 \x03(\t\x12\x14\n\x0cimport_paths\x18\x03 \x03(\t"%\n\x13OverrideFile_Result\x12\x0e\n\x06result\x18\x01 \x01(\x08"\x1d\n\rEvalCode_Args\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t"&\n\x0f\x45valCode_Result\x12\x13\n\x0bjson_result\x18\x02 \x01(\t" \n\x10ResolveCode_Args\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t"%\n\x12ResolveCode_Result\x12\x0f\n\x07success\x18\x01 \x01(\x08"E\n\x12GetSchemaType_Args\x12\x0c\n\x04\x66ile\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t\x12\x13\n\x0bschema_name\x18\x03 \x01(\t"A\n\x14GetSchemaType_Result\x12)\n\x10schema_type_list\x18\x01 \x03(\x0b\x32\x0f.gpyrpc.KclType"L\n\x19GetSchemaTypeMapping_Args\x12\x0c\n\x04\x66ile\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t\x12\x13\n\x0bschema_name\x18\x03 \x01(\t"\xc1\x01\n\x1bGetSchemaTypeMapping_Result\x12W\n\x13schema_type_mapping\x18\x01 \x03(\x0b\x32:.gpyrpc.GetSchemaTypeMapping_Result.SchemaTypeMappingEntry\x1aI\n\x16SchemaTypeMappingEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1e\n\x05value\x18\x02 \x01(\x0b\x32\x0f.gpyrpc.KclType:\x02\x38\x01"g\n\x11ValidateCode_Args\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t\x12\x0e\n\x06schema\x18\x03 \x01(\t\x12\x16\n\x0e\x61ttribute_name\x18\x04 \x01(\t\x12\x0e\n\x06\x66ormat\x18\x05 \x01(\t";\n\x13ValidateCode_Result\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x13\n\x0b\x65rr_message\x18\x02 \x01(\t"+\n\x0b\x43odeSnippet\x12\x0e\n\x06schema\x18\x01 \x01(\t\x12\x0c\n\x04rule\x18\x02 \x01(\t"<\n\x0fSpliceCode_Args\x12)\n\x0c\x63odeSnippets\x18\x01 \x03(\x0b\x32\x13.gpyrpc.CodeSnippet"\'\n\x11SpliceCode_Result\x12\x12\n\nspliceCode\x18\x01 \x01(\t":\n\x08Position\x12\x0c\n\x04line\x18\x01 \x01(\x03\x12\x0e\n\x06\x63olumn\x18\x02 \x01(\x03\x12\x10\n\x08\x66ilename\x18\x03 \x01(\t"J\n\rComplete_Args\x12\x1d\n\x03pos\x18\x01 \x01(\x0b\x32\x10.gpyrpc.Position\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04\x63ode\x18\x03 \x01(\t"(\n\x0f\x43omplete_Result\x12\x15\n\rcompleteItems\x18\x01 \x01(\t";\n\x0cGoToDef_Args\x12\x1d\n\x03pos\x18\x01 \x01(\x0b\x32\x10.gpyrpc.Position\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t"#\n\x0eGoToDef_Result\x12\x11\n\tlocations\x18\x01 \x01(\t"1\n\x13\x44ocumentSymbol_Args\x12\x0c\n\x04\x66ile\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t"\'\n\x15\x44ocumentSymbol_Result\x12\x0e\n\x06symbol\x18\x01 \x01(\t"9\n\nHover_Args\x12\x1d\n\x03pos\x18\x01 \x01(\x0b\x32\x10.gpyrpc.Position\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t"#\n\x0cHover_Result\x12\x13\n\x0bhoverResult\x18\x01 \x01(\t"i\n\x11ListDepFiles_Args\x12\x10\n\x08work_dir\x18\x01 \x01(\t\x12\x14\n\x0cuse_abs_path\x18\x02 \x01(\x08\x12\x13\n\x0binclude_all\x18\x03 \x01(\x08\x12\x17\n\x0fuse_fast_parser\x18\x04 \x01(\x08"F\n\x13ListDepFiles_Result\x12\x0f\n\x07pkgroot\x18\x01 \x01(\t\x12\x0f\n\x07pkgpath\x18\x02 \x01(\t\x12\r\n\x05\x66iles\x18\x03 \x03(\t"9\n\x16LoadSettingsFiles_Args\x12\x10\n\x08work_dir\x18\x01 \x01(\t\x12\r\n\x05\x66iles\x18\x02 \x03(\t"q\n\x18LoadSettingsFiles_Result\x12*\n\x0fkcl_cli_configs\x18\x01 \x01(\x0b\x32\x11.gpyrpc.CliConfig\x12)\n\x0bkcl_options\x18\x02 \x03(\x0b\x32\x14.gpyrpc.KeyValuePair"\xdb\x01\n\tCliConfig\x12\r\n\x05\x66iles\x18\x01 \x03(\t\x12\x0e\n\x06output\x18\x02 \x01(\t\x12\x11\n\toverrides\x18\x03 \x03(\t\x12\x15\n\rpath_selector\x18\x04 \x03(\t\x12\x1a\n\x12strict_range_check\x18\x05 \x01(\x08\x12\x14\n\x0c\x64isable_none\x18\x06 \x01(\x08\x12\x0f\n\x07verbose\x18\x07 \x01(\x03\x12\r\n\x05\x64\x65\x62ug\x18\x08 \x01(\x08\x12\x11\n\tsort_keys\x18\t \x01(\x08\x12 \n\x18include_schema_type_path\x18\n \x01(\x08"*\n\x0cKeyValuePair\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t"\xa0\x04\n\x07KclType\x12\x0c\n\x04type\x18\x01 \x01(\t\x12$\n\x0bunion_types\x18\x02 \x03(\x0b\x32\x0f.gpyrpc.KclType\x12\x0f\n\x07\x64\x65\x66\x61ult\x18\x03 \x01(\t\x12\x13\n\x0bschema_name\x18\x04 \x01(\t\x12\x12\n\nschema_doc\x18\x05 \x01(\t\x12\x33\n\nproperties\x18\x06 \x03(\x0b\x32\x1f.gpyrpc.KclType.PropertiesEntry\x12\x10\n\x08required\x18\x07 \x03(\t\x12\x1c\n\x03key\x18\x08 \x01(\x0b\x32\x0f.gpyrpc.KclType\x12\x1d\n\x04item\x18\t \x01(\x0b\x32\x0f.gpyrpc.KclType\x12\x0c\n\x04line\x18\n \x01(\x05\x12%\n\ndecorators\x18\x0b \x03(\x0b\x32\x11.gpyrpc.Decorator\x12\x10\n\x08\x66ilename\x18\x0c \x01(\t\x12\x10\n\x08pkg_path\x18\r \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x0e \x01(\t\x12/\n\x08\x65xamples\x18\x0f \x03(\x0b\x32\x1d.gpyrpc.KclType.ExamplesEntry\x1a\x42\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1e\n\x05value\x18\x02 \x01(\x0b\x32\x0f.gpyrpc.KclType:\x02\x38\x01\x1a@\n\rExamplesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1e\n\x05value\x18\x02 \x01(\x0b\x32\x0f.gpyrpc.Example:\x02\x38\x01"\x90\x01\n\tDecorator\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x11\n\targuments\x18\x02 \x03(\t\x12\x31\n\x08keywords\x18\x03 \x03(\x0b\x32\x1f.gpyrpc.Decorator.KeywordsEntry\x1a/\n\rKeywordsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01"T\n\x07\x45xample\x12\x0f\n\x07summary\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12#\n\x05value\x18\x03 \x01(\x0b\x32\x14.google.protobuf.Any2\x82\x01\n\x0e\x42uiltinService\x12.\n\x04Ping\x12\x11.gpyrpc.Ping_Args\x1a\x13.gpyrpc.Ping_Result\x12@\n\nListMethod\x12\x17.gpyrpc.ListMethod_Args\x1a\x19.gpyrpc.ListMethod_Result2\x94\x0c\n\x0cKclvmService\x12.\n\x04Ping\x12\x11.gpyrpc.Ping_Args\x1a\x13.gpyrpc.Ping_Result\x12X\n\x12ParseFile_LarkTree\x12\x1f.gpyrpc.ParseFile_LarkTree_Args\x1a!.gpyrpc.ParseFile_LarkTree_Result\x12I\n\rParseFile_AST\x12\x1a.gpyrpc.ParseFile_AST_Args\x1a\x1c.gpyrpc.ParseFile_AST_Result\x12R\n\x10ParseProgram_AST\x12\x1d.gpyrpc.ParseProgram_AST_Args\x1a\x1f.gpyrpc.ParseProgram_AST_Result\x12\x43\n\x0b\x45xecProgram\x12\x18.gpyrpc.ExecProgram_Args\x1a\x1a.gpyrpc.ExecProgram_Result\x12\x43\n\x0bResetPlugin\x12\x18.gpyrpc.ResetPlugin_Args\x1a\x1a.gpyrpc.ResetPlugin_Result\x12@\n\nFormatCode\x12\x17.gpyrpc.FormatCode_Args\x1a\x19.gpyrpc.FormatCode_Result\x12@\n\nFormatPath\x12\x17.gpyrpc.FormatPath_Args\x1a\x19.gpyrpc.FormatPath_Result\x12:\n\x08LintPath\x12\x15.gpyrpc.LintPath_Args\x1a\x17.gpyrpc.LintPath_Result\x12\x46\n\x0cOverrideFile\x12\x19.gpyrpc.OverrideFile_Args\x1a\x1b.gpyrpc.OverrideFile_Result\x12:\n\x08\x45valCode\x12\x15.gpyrpc.EvalCode_Args\x1a\x17.gpyrpc.EvalCode_Result\x12\x43\n\x0bResolveCode\x12\x18.gpyrpc.ResolveCode_Args\x1a\x1a.gpyrpc.ResolveCode_Result\x12I\n\rGetSchemaType\x12\x1a.gpyrpc.GetSchemaType_Args\x1a\x1c.gpyrpc.GetSchemaType_Result\x12^\n\x14GetSchemaTypeMapping\x12!.gpyrpc.GetSchemaTypeMapping_Args\x1a#.gpyrpc.GetSchemaTypeMapping_Result\x12\x46\n\x0cValidateCode\x12\x19.gpyrpc.ValidateCode_Args\x1a\x1b.gpyrpc.ValidateCode_Result\x12@\n\nSpliceCode\x12\x17.gpyrpc.SpliceCode_Args\x1a\x19.gpyrpc.SpliceCode_Result\x12:\n\x08\x43omplete\x12\x15.gpyrpc.Complete_Args\x1a\x17.gpyrpc.Complete_Result\x12\x37\n\x07GoToDef\x12\x14.gpyrpc.GoToDef_Args\x1a\x16.gpyrpc.GoToDef_Result\x12L\n\x0e\x44ocumentSymbol\x12\x1b.gpyrpc.DocumentSymbol_Args\x1a\x1d.gpyrpc.DocumentSymbol_Result\x12\x31\n\x05Hover\x12\x12.gpyrpc.Hover_Args\x1a\x14.gpyrpc.Hover_Result\x12\x46\n\x0cListDepFiles\x12\x19.gpyrpc.ListDepFiles_Args\x1a\x1b.gpyrpc.ListDepFiles_Result\x12U\n\x11LoadSettingsFiles\x12\x1e.gpyrpc.LoadSettingsFiles_Args\x1a .gpyrpc.LoadSettingsFiles_Resultb\x06proto3'
 )
 
 
+_CMDEXTERNALPKGSPEC = DESCRIPTOR.message_types_by_name["CmdExternalPkgSpec"]
 _CMDARGSPEC = DESCRIPTOR.message_types_by_name["CmdArgSpec"]
 _CMDOVERRIDESPEC = DESCRIPTOR.message_types_by_name["CmdOverrideSpec"]
 _RESTRESPONSE = DESCRIPTOR.message_types_by_name["RestResponse"]
@@ -57,6 +58,15 @@ _RESOLVECODE_ARGS = DESCRIPTOR.message_types_by_name["ResolveCode_Args"]
 _RESOLVECODE_RESULT = DESCRIPTOR.message_types_by_name["ResolveCode_Result"]
 _GETSCHEMATYPE_ARGS = DESCRIPTOR.message_types_by_name["GetSchemaType_Args"]
 _GETSCHEMATYPE_RESULT = DESCRIPTOR.message_types_by_name["GetSchemaType_Result"]
+_GETSCHEMATYPEMAPPING_ARGS = DESCRIPTOR.message_types_by_name[
+    "GetSchemaTypeMapping_Args"
+]
+_GETSCHEMATYPEMAPPING_RESULT = DESCRIPTOR.message_types_by_name[
+    "GetSchemaTypeMapping_Result"
+]
+_GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY = (
+    _GETSCHEMATYPEMAPPING_RESULT.nested_types_by_name["SchemaTypeMappingEntry"]
+)
 _VALIDATECODE_ARGS = DESCRIPTOR.message_types_by_name["ValidateCode_Args"]
 _VALIDATECODE_RESULT = DESCRIPTOR.message_types_by_name["ValidateCode_Result"]
 _CODESNIPPET = DESCRIPTOR.message_types_by_name["CodeSnippet"]
@@ -79,8 +89,21 @@ _CLICONFIG = DESCRIPTOR.message_types_by_name["CliConfig"]
 _KEYVALUEPAIR = DESCRIPTOR.message_types_by_name["KeyValuePair"]
 _KCLTYPE = DESCRIPTOR.message_types_by_name["KclType"]
 _KCLTYPE_PROPERTIESENTRY = _KCLTYPE.nested_types_by_name["PropertiesEntry"]
+_KCLTYPE_EXAMPLESENTRY = _KCLTYPE.nested_types_by_name["ExamplesEntry"]
 _DECORATOR = DESCRIPTOR.message_types_by_name["Decorator"]
 _DECORATOR_KEYWORDSENTRY = _DECORATOR.nested_types_by_name["KeywordsEntry"]
+_EXAMPLE = DESCRIPTOR.message_types_by_name["Example"]
+CmdExternalPkgSpec = _reflection.GeneratedProtocolMessageType(
+    "CmdExternalPkgSpec",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _CMDEXTERNALPKGSPEC,
+        "__module__": "gpyrpc.gpyrpc_pb2"
+        # @@protoc_insertion_point(class_scope:gpyrpc.CmdExternalPkgSpec)
+    },
+)
+_sym_db.RegisterMessage(CmdExternalPkgSpec)
+
 CmdArgSpec = _reflection.GeneratedProtocolMessageType(
     "CmdArgSpec",
     (_message.Message,),
@@ -444,6 +467,38 @@ GetSchemaType_Result = _reflection.GeneratedProtocolMessageType(
 )
 _sym_db.RegisterMessage(GetSchemaType_Result)
 
+GetSchemaTypeMapping_Args = _reflection.GeneratedProtocolMessageType(
+    "GetSchemaTypeMapping_Args",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _GETSCHEMATYPEMAPPING_ARGS,
+        "__module__": "gpyrpc.gpyrpc_pb2"
+        # @@protoc_insertion_point(class_scope:gpyrpc.GetSchemaTypeMapping_Args)
+    },
+)
+_sym_db.RegisterMessage(GetSchemaTypeMapping_Args)
+
+GetSchemaTypeMapping_Result = _reflection.GeneratedProtocolMessageType(
+    "GetSchemaTypeMapping_Result",
+    (_message.Message,),
+    {
+        "SchemaTypeMappingEntry": _reflection.GeneratedProtocolMessageType(
+            "SchemaTypeMappingEntry",
+            (_message.Message,),
+            {
+                "DESCRIPTOR": _GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY,
+                "__module__": "gpyrpc.gpyrpc_pb2"
+                # @@protoc_insertion_point(class_scope:gpyrpc.GetSchemaTypeMapping_Result.SchemaTypeMappingEntry)
+            },
+        ),
+        "DESCRIPTOR": _GETSCHEMATYPEMAPPING_RESULT,
+        "__module__": "gpyrpc.gpyrpc_pb2"
+        # @@protoc_insertion_point(class_scope:gpyrpc.GetSchemaTypeMapping_Result)
+    },
+)
+_sym_db.RegisterMessage(GetSchemaTypeMapping_Result)
+_sym_db.RegisterMessage(GetSchemaTypeMapping_Result.SchemaTypeMappingEntry)
+
 ValidateCode_Args = _reflection.GeneratedProtocolMessageType(
     "ValidateCode_Args",
     (_message.Message,),
@@ -677,6 +732,15 @@ KclType = _reflection.GeneratedProtocolMessageType(
                 # @@protoc_insertion_point(class_scope:gpyrpc.KclType.PropertiesEntry)
             },
         ),
+        "ExamplesEntry": _reflection.GeneratedProtocolMessageType(
+            "ExamplesEntry",
+            (_message.Message,),
+            {
+                "DESCRIPTOR": _KCLTYPE_EXAMPLESENTRY,
+                "__module__": "gpyrpc.gpyrpc_pb2"
+                # @@protoc_insertion_point(class_scope:gpyrpc.KclType.ExamplesEntry)
+            },
+        ),
         "DESCRIPTOR": _KCLTYPE,
         "__module__": "gpyrpc.gpyrpc_pb2"
         # @@protoc_insertion_point(class_scope:gpyrpc.KclType)
@@ -684,6 +748,7 @@ KclType = _reflection.GeneratedProtocolMessageType(
 )
 _sym_db.RegisterMessage(KclType)
 _sym_db.RegisterMessage(KclType.PropertiesEntry)
+_sym_db.RegisterMessage(KclType.ExamplesEntry)
 
 Decorator = _reflection.GeneratedProtocolMessageType(
     "Decorator",
@@ -706,132 +771,157 @@ Decorator = _reflection.GeneratedProtocolMessageType(
 _sym_db.RegisterMessage(Decorator)
 _sym_db.RegisterMessage(Decorator.KeywordsEntry)
 
+Example = _reflection.GeneratedProtocolMessageType(
+    "Example",
+    (_message.Message,),
+    {
+        "DESCRIPTOR": _EXAMPLE,
+        "__module__": "gpyrpc.gpyrpc_pb2"
+        # @@protoc_insertion_point(class_scope:gpyrpc.Example)
+    },
+)
+_sym_db.RegisterMessage(Example)
+
 _BUILTINSERVICE = DESCRIPTOR.services_by_name["BuiltinService"]
 _KCLVMSERVICE = DESCRIPTOR.services_by_name["KclvmService"]
 if _descriptor._USE_C_DESCRIPTORS == False:
-
     DESCRIPTOR._options = None
-    DESCRIPTOR._serialized_options = b"Z.kusionstack.io/kclvm-go/pkg/spec/gpyrpc;gpyrpc"
+    _GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY._options = None
+    _GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY._serialized_options = b"8\001"
     _KCLTYPE_PROPERTIESENTRY._options = None
     _KCLTYPE_PROPERTIESENTRY._serialized_options = b"8\001"
+    _KCLTYPE_EXAMPLESENTRY._options = None
+    _KCLTYPE_EXAMPLESENTRY._serialized_options = b"8\001"
     _DECORATOR_KEYWORDSENTRY._options = None
     _DECORATOR_KEYWORDSENTRY._serialized_options = b"8\001"
-    _CMDARGSPEC._serialized_start = 92
-    _CMDARGSPEC._serialized_end = 133
-    _CMDOVERRIDESPEC._serialized_start = 135
-    _CMDOVERRIDESPEC._serialized_end = 226
-    _RESTRESPONSE._serialized_start = 228
-    _RESTRESPONSE._serialized_end = 330
-    _KCLERROR._serialized_start = 332
-    _KCLERROR._serialized_end = 428
-    _KCLERRORINFO._serialized_start = 430
-    _KCLERRORINFO._serialized_end = 549
-    _PING_ARGS._serialized_start = 551
-    _PING_ARGS._serialized_end = 577
-    _PING_RESULT._serialized_start = 579
-    _PING_RESULT._serialized_end = 607
-    _LISTMETHOD_ARGS._serialized_start = 609
-    _LISTMETHOD_ARGS._serialized_end = 626
-    _LISTMETHOD_RESULT._serialized_start = 628
-    _LISTMETHOD_RESULT._serialized_end = 673
-    _PARSEFILE_LARKTREE_ARGS._serialized_start = 675
-    _PARSEFILE_LARKTREE_ARGS._serialized_end = 765
-    _PARSEFILE_LARKTREE_RESULT._serialized_start = 767
-    _PARSEFILE_LARKTREE_RESULT._serialized_end = 818
-    _PARSEFILE_AST_ARGS._serialized_start = 820
-    _PARSEFILE_AST_ARGS._serialized_end = 879
-    _PARSEFILE_AST_RESULT._serialized_start = 881
-    _PARSEFILE_AST_RESULT._serialized_end = 921
-    _PARSEPROGRAM_AST_ARGS._serialized_start = 923
-    _PARSEPROGRAM_AST_ARGS._serialized_end = 971
-    _PARSEPROGRAM_AST_RESULT._serialized_start = 973
-    _PARSEPROGRAM_AST_RESULT._serialized_end = 1016
-    _EXECPROGRAM_ARGS._serialized_start = 1019
-    _EXECPROGRAM_ARGS._serialized_end = 1371
-    _EXECPROGRAM_RESULT._serialized_start = 1373
-    _EXECPROGRAM_RESULT._serialized_end = 1457
-    _RESETPLUGIN_ARGS._serialized_start = 1459
-    _RESETPLUGIN_ARGS._serialized_end = 1498
-    _RESETPLUGIN_RESULT._serialized_start = 1500
-    _RESETPLUGIN_RESULT._serialized_end = 1520
-    _FORMATCODE_ARGS._serialized_start = 1522
-    _FORMATCODE_ARGS._serialized_end = 1555
-    _FORMATCODE_RESULT._serialized_start = 1557
-    _FORMATCODE_RESULT._serialized_end = 1595
-    _FORMATPATH_ARGS._serialized_start = 1597
-    _FORMATPATH_ARGS._serialized_end = 1628
-    _FORMATPATH_RESULT._serialized_start = 1630
-    _FORMATPATH_RESULT._serialized_end = 1671
-    _LINTPATH_ARGS._serialized_start = 1673
-    _LINTPATH_ARGS._serialized_end = 1702
-    _LINTPATH_RESULT._serialized_start = 1704
-    _LINTPATH_RESULT._serialized_end = 1738
-    _OVERRIDEFILE_ARGS._serialized_start = 1740
-    _OVERRIDEFILE_ARGS._serialized_end = 1810
-    _OVERRIDEFILE_RESULT._serialized_start = 1812
-    _OVERRIDEFILE_RESULT._serialized_end = 1849
-    _EVALCODE_ARGS._serialized_start = 1851
-    _EVALCODE_ARGS._serialized_end = 1880
-    _EVALCODE_RESULT._serialized_start = 1882
-    _EVALCODE_RESULT._serialized_end = 1920
-    _RESOLVECODE_ARGS._serialized_start = 1922
-    _RESOLVECODE_ARGS._serialized_end = 1954
-    _RESOLVECODE_RESULT._serialized_start = 1956
-    _RESOLVECODE_RESULT._serialized_end = 1993
-    _GETSCHEMATYPE_ARGS._serialized_start = 1995
-    _GETSCHEMATYPE_ARGS._serialized_end = 2064
-    _GETSCHEMATYPE_RESULT._serialized_start = 2066
-    _GETSCHEMATYPE_RESULT._serialized_end = 2131
-    _VALIDATECODE_ARGS._serialized_start = 2133
-    _VALIDATECODE_ARGS._serialized_end = 2236
-    _VALIDATECODE_RESULT._serialized_start = 2238
-    _VALIDATECODE_RESULT._serialized_end = 2297
-    _CODESNIPPET._serialized_start = 2299
-    _CODESNIPPET._serialized_end = 2342
-    _SPLICECODE_ARGS._serialized_start = 2344
-    _SPLICECODE_ARGS._serialized_end = 2404
-    _SPLICECODE_RESULT._serialized_start = 2406
-    _SPLICECODE_RESULT._serialized_end = 2445
-    _POSITION._serialized_start = 2447
-    _POSITION._serialized_end = 2505
-    _COMPLETE_ARGS._serialized_start = 2507
-    _COMPLETE_ARGS._serialized_end = 2581
-    _COMPLETE_RESULT._serialized_start = 2583
-    _COMPLETE_RESULT._serialized_end = 2623
-    _GOTODEF_ARGS._serialized_start = 2625
-    _GOTODEF_ARGS._serialized_end = 2684
-    _GOTODEF_RESULT._serialized_start = 2686
-    _GOTODEF_RESULT._serialized_end = 2721
-    _DOCUMENTSYMBOL_ARGS._serialized_start = 2723
-    _DOCUMENTSYMBOL_ARGS._serialized_end = 2772
-    _DOCUMENTSYMBOL_RESULT._serialized_start = 2774
-    _DOCUMENTSYMBOL_RESULT._serialized_end = 2813
-    _HOVER_ARGS._serialized_start = 2815
-    _HOVER_ARGS._serialized_end = 2872
-    _HOVER_RESULT._serialized_start = 2874
-    _HOVER_RESULT._serialized_end = 2909
-    _LISTDEPFILES_ARGS._serialized_start = 2911
-    _LISTDEPFILES_ARGS._serialized_end = 3016
-    _LISTDEPFILES_RESULT._serialized_start = 3018
-    _LISTDEPFILES_RESULT._serialized_end = 3088
-    _LOADSETTINGSFILES_ARGS._serialized_start = 3090
-    _LOADSETTINGSFILES_ARGS._serialized_end = 3147
-    _LOADSETTINGSFILES_RESULT._serialized_start = 3149
-    _LOADSETTINGSFILES_RESULT._serialized_end = 3262
-    _CLICONFIG._serialized_start = 3265
-    _CLICONFIG._serialized_end = 3431
-    _KEYVALUEPAIR._serialized_start = 3433
-    _KEYVALUEPAIR._serialized_end = 3475
-    _KCLTYPE._serialized_start = 3478
-    _KCLTYPE._serialized_end = 3850
-    _KCLTYPE_PROPERTIESENTRY._serialized_start = 3784
-    _KCLTYPE_PROPERTIESENTRY._serialized_end = 3850
-    _DECORATOR._serialized_start = 3853
-    _DECORATOR._serialized_end = 3997
-    _DECORATOR_KEYWORDSENTRY._serialized_start = 3950
-    _DECORATOR_KEYWORDSENTRY._serialized_end = 3997
-    _BUILTINSERVICE._serialized_start = 4000
-    _BUILTINSERVICE._serialized_end = 4130
-    _KCLVMSERVICE._serialized_start = 4133
-    _KCLVMSERVICE._serialized_end = 5593
+    _CMDEXTERNALPKGSPEC._serialized_start = 92
+    _CMDEXTERNALPKGSPEC._serialized_end = 148
+    _CMDARGSPEC._serialized_start = 150
+    _CMDARGSPEC._serialized_end = 191
+    _CMDOVERRIDESPEC._serialized_start = 193
+    _CMDOVERRIDESPEC._serialized_end = 284
+    _RESTRESPONSE._serialized_start = 286
+    _RESTRESPONSE._serialized_end = 388
+    _KCLERROR._serialized_start = 390
+    _KCLERROR._serialized_end = 486
+    _KCLERRORINFO._serialized_start = 488
+    _KCLERRORINFO._serialized_end = 607
+    _PING_ARGS._serialized_start = 609
+    _PING_ARGS._serialized_end = 635
+    _PING_RESULT._serialized_start = 637
+    _PING_RESULT._serialized_end = 665
+    _LISTMETHOD_ARGS._serialized_start = 667
+    _LISTMETHOD_ARGS._serialized_end = 684
+    _LISTMETHOD_RESULT._serialized_start = 686
+    _LISTMETHOD_RESULT._serialized_end = 731
+    _PARSEFILE_LARKTREE_ARGS._serialized_start = 733
+    _PARSEFILE_LARKTREE_ARGS._serialized_end = 823
+    _PARSEFILE_LARKTREE_RESULT._serialized_start = 825
+    _PARSEFILE_LARKTREE_RESULT._serialized_end = 876
+    _PARSEFILE_AST_ARGS._serialized_start = 878
+    _PARSEFILE_AST_ARGS._serialized_end = 937
+    _PARSEFILE_AST_RESULT._serialized_start = 939
+    _PARSEFILE_AST_RESULT._serialized_end = 979
+    _PARSEPROGRAM_AST_ARGS._serialized_start = 981
+    _PARSEPROGRAM_AST_ARGS._serialized_end = 1029
+    _PARSEPROGRAM_AST_RESULT._serialized_start = 1031
+    _PARSEPROGRAM_AST_RESULT._serialized_end = 1074
+    _EXECPROGRAM_ARGS._serialized_start = 1077
+    _EXECPROGRAM_ARGS._serialized_end = 1480
+    _EXECPROGRAM_RESULT._serialized_start = 1482
+    _EXECPROGRAM_RESULT._serialized_end = 1566
+    _RESETPLUGIN_ARGS._serialized_start = 1568
+    _RESETPLUGIN_ARGS._serialized_end = 1607
+    _RESETPLUGIN_RESULT._serialized_start = 1609
+    _RESETPLUGIN_RESULT._serialized_end = 1629
+    _FORMATCODE_ARGS._serialized_start = 1631
+    _FORMATCODE_ARGS._serialized_end = 1664
+    _FORMATCODE_RESULT._serialized_start = 1666
+    _FORMATCODE_RESULT._serialized_end = 1704
+    _FORMATPATH_ARGS._serialized_start = 1706
+    _FORMATPATH_ARGS._serialized_end = 1737
+    _FORMATPATH_RESULT._serialized_start = 1739
+    _FORMATPATH_RESULT._serialized_end = 1780
+    _LINTPATH_ARGS._serialized_start = 1782
+    _LINTPATH_ARGS._serialized_end = 1811
+    _LINTPATH_RESULT._serialized_start = 1813
+    _LINTPATH_RESULT._serialized_end = 1847
+    _OVERRIDEFILE_ARGS._serialized_start = 1849
+    _OVERRIDEFILE_ARGS._serialized_end = 1919
+    _OVERRIDEFILE_RESULT._serialized_start = 1921
+    _OVERRIDEFILE_RESULT._serialized_end = 1958
+    _EVALCODE_ARGS._serialized_start = 1960
+    _EVALCODE_ARGS._serialized_end = 1989
+    _EVALCODE_RESULT._serialized_start = 1991
+    _EVALCODE_RESULT._serialized_end = 2029
+    _RESOLVECODE_ARGS._serialized_start = 2031
+    _RESOLVECODE_ARGS._serialized_end = 2063
+    _RESOLVECODE_RESULT._serialized_start = 2065
+    _RESOLVECODE_RESULT._serialized_end = 2102
+    _GETSCHEMATYPE_ARGS._serialized_start = 2104
+    _GETSCHEMATYPE_ARGS._serialized_end = 2173
+    _GETSCHEMATYPE_RESULT._serialized_start = 2175
+    _GETSCHEMATYPE_RESULT._serialized_end = 2240
+    _GETSCHEMATYPEMAPPING_ARGS._serialized_start = 2242
+    _GETSCHEMATYPEMAPPING_ARGS._serialized_end = 2318
+    _GETSCHEMATYPEMAPPING_RESULT._serialized_start = 2321
+    _GETSCHEMATYPEMAPPING_RESULT._serialized_end = 2514
+    _GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY._serialized_start = 2441
+    _GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY._serialized_end = 2514
+    _VALIDATECODE_ARGS._serialized_start = 2516
+    _VALIDATECODE_ARGS._serialized_end = 2619
+    _VALIDATECODE_RESULT._serialized_start = 2621
+    _VALIDATECODE_RESULT._serialized_end = 2680
+    _CODESNIPPET._serialized_start = 2682
+    _CODESNIPPET._serialized_end = 2725
+    _SPLICECODE_ARGS._serialized_start = 2727
+    _SPLICECODE_ARGS._serialized_end = 2787
+    _SPLICECODE_RESULT._serialized_start = 2789
+    _SPLICECODE_RESULT._serialized_end = 2828
+    _POSITION._serialized_start = 2830
+    _POSITION._serialized_end = 2888
+    _COMPLETE_ARGS._serialized_start = 2890
+    _COMPLETE_ARGS._serialized_end = 2964
+    _COMPLETE_RESULT._serialized_start = 2966
+    _COMPLETE_RESULT._serialized_end = 3006
+    _GOTODEF_ARGS._serialized_start = 3008
+    _GOTODEF_ARGS._serialized_end = 3067
+    _GOTODEF_RESULT._serialized_start = 3069
+    _GOTODEF_RESULT._serialized_end = 3104
+    _DOCUMENTSYMBOL_ARGS._serialized_start = 3106
+    _DOCUMENTSYMBOL_ARGS._serialized_end = 3155
+    _DOCUMENTSYMBOL_RESULT._serialized_start = 3157
+    _DOCUMENTSYMBOL_RESULT._serialized_end = 3196
+    _HOVER_ARGS._serialized_start = 3198
+    _HOVER_ARGS._serialized_end = 3255
+    _HOVER_RESULT._serialized_start = 3257
+    _HOVER_RESULT._serialized_end = 3292
+    _LISTDEPFILES_ARGS._serialized_start = 3294
+    _LISTDEPFILES_ARGS._serialized_end = 3399
+    _LISTDEPFILES_RESULT._serialized_start = 3401
+    _LISTDEPFILES_RESULT._serialized_end = 3471
+    _LOADSETTINGSFILES_ARGS._serialized_start = 3473
+    _LOADSETTINGSFILES_ARGS._serialized_end = 3530
+    _LOADSETTINGSFILES_RESULT._serialized_start = 3532
+    _LOADSETTINGSFILES_RESULT._serialized_end = 3645
+    _CLICONFIG._serialized_start = 3648
+    _CLICONFIG._serialized_end = 3867
+    _KEYVALUEPAIR._serialized_start = 3869
+    _KEYVALUEPAIR._serialized_end = 3911
+    _KCLTYPE._serialized_start = 3914
+    _KCLTYPE._serialized_end = 4458
+    _KCLTYPE_PROPERTIESENTRY._serialized_start = 4326
+    _KCLTYPE_PROPERTIESENTRY._serialized_end = 4392
+    _KCLTYPE_EXAMPLESENTRY._serialized_start = 4394
+    _KCLTYPE_EXAMPLESENTRY._serialized_end = 4458
+    _DECORATOR._serialized_start = 4461
+    _DECORATOR._serialized_end = 4605
+    _DECORATOR_KEYWORDSENTRY._serialized_start = 4558
+    _DECORATOR_KEYWORDSENTRY._serialized_end = 4605
+    _EXAMPLE._serialized_start = 4607
+    _EXAMPLE._serialized_end = 4691
+    _BUILTINSERVICE._serialized_start = 4694
+    _BUILTINSERVICE._serialized_end = 4824
+    _KCLVMSERVICE._serialized_start = 4827
+    _KCLVMSERVICE._serialized_end = 6383
 # @@protoc_insertion_point(module_scope)

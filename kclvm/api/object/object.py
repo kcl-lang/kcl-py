@@ -185,7 +185,6 @@ class KCLNumberMultiplierObject(KCLFloatObject):
 
 @dataclass
 class KCLStringObject(KCLLiteralObject):
-
     MEMBER_FUNCTIONS = [
         "capitalize",
         "count",
@@ -247,7 +246,6 @@ class KCLStringObject(KCLLiteralObject):
         return KCLMemberFunctionObject(obj=self, name=name)
 
     def call_member_method(self, name: str, *args, **kwargs):
-
         return getattr(self.value, name).__call__(*args, **kwargs)
 
 
@@ -773,7 +771,6 @@ class KCLSchemaObject(KCLObject, KCLConfigObjectMixin):
         self.__tags__[tagged] = types
 
     def get_attr_type(self, attr: str) -> List[str]:
-
         if not attr or not self.__tags__:
             return []
         tagged = kcl_info.tagging("attr_type", attr)

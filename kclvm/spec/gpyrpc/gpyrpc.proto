@@ -1,7 +1,8 @@
-// Copyright 2021 The KCL Authors. All rights reserved.
+// Copyright 2023 The KCL Authors. All rights reserved.
 //
-// This file defines the request parameters and return structure of the KCLVM RPC server.
-// We can use the following command to start a KCLVM RPC server.
+// This file defines the request parameters and return structure of the KCL RPC server.
+//
+// We can use the following command to start a KCL RPC server.
 //
 // ```
 // kclvm -m kclvm.program.rpc-server -http=:2021
@@ -21,17 +22,21 @@ syntax = "proto3";
 
 package gpyrpc;
 
-option go_package = "kcl-lang.io/kcl-go/pkg/spec/gpyrpc;gpyrpc";
-
 import "google/protobuf/any.proto";
 import "google/protobuf/descriptor.proto";
 
 // ----------------------------------------------------------------------------
 
+// kcl main.k -E pkg_name=pkg_path
+message CmdExternalPkgSpec {
+	string pkg_name = 1;
+	string pkg_path = 2;
+}
+
 // kcl main.k -D name=value
 message CmdArgSpec {
 	string name = 1;
-	string value = 2; // TODO: any?
+	string value = 2;
 }
 
 // kcl main.k -O pkgpath:path.to.field=field_value
@@ -98,6 +103,7 @@ service KclvmService {
 	rpc EvalCode(EvalCode_Args) returns(EvalCode_Result);
 	rpc ResolveCode(ResolveCode_Args) returns(ResolveCode_Result);
 	rpc GetSchemaType(GetSchemaType_Args) returns(GetSchemaType_Result);
+	rpc GetSchemaTypeMapping(GetSchemaTypeMapping_Args) returns(GetSchemaTypeMapping_Result);
 	rpc ValidateCode(ValidateCode_Args) returns(ValidateCode_Result);
 	rpc SpliceCode(SpliceCode_Args) returns(SpliceCode_Result);
 
@@ -174,9 +180,14 @@ message ExecProgram_Args {
 
 	// yaml/json: sort keys
 	bool sort_keys = 12;
-	// include schema type path in JSON/YAML result
-	bool include_schema_type_path = 13;
+
+	// -E --external : external packages path
+	repeated CmdExternalPkgSpec external_pkgs = 13;
+
+	// Whether including schema type in JSON/YAML result
+	bool include_schema_type_path = 14;
 }
+
 message ExecProgram_Result {
 	string json_result = 1;
 	string yaml_result = 2;
@@ -243,10 +254,19 @@ message ResolveCode_Result {
 message GetSchemaType_Args {
 	string file = 1;
 	string code = 2;
-	string schema_name = 3; // emtry is all
+	string schema_name = 3;
 }
 message GetSchemaType_Result {
 	repeated KclType schema_type_list = 1;
+}
+
+message GetSchemaTypeMapping_Args {
+	string file = 1;
+	string code = 2;
+	string schema_name = 3;
+}
+message GetSchemaTypeMapping_Result {
+	map<string, KclType> schema_type_mapping = 1;
 }
 
 message ValidateCode_Args {
@@ -355,6 +375,8 @@ message CliConfig {
 	bool disable_none = 6;
 	int64 verbose = 7;
 	bool debug = 8;
+	bool sort_keys = 9;
+	bool include_schema_type_path = 10;
 }
 
 message KeyValuePair {
@@ -363,11 +385,11 @@ message KeyValuePair {
 }
 
 // ----------------------------------------------------------------------------
-// JSON Schema Lit
+// KCL Type Structure
 // ----------------------------------------------------------------------------
 
 message KclType {
-	string type = 1;                     // schema, dict, list, str, int, float, bool, null, type_string
+	string type = 1;                     // schema, dict, list, str, int, float, bool, any, union, number_multiplier
 	repeated KclType union_types = 2 ;   // union types
 	string default = 3;                  // default value
 
@@ -382,12 +404,23 @@ message KclType {
 	int32 line = 10;
 
 	repeated Decorator decorators = 11;  // schema decorators
+
+	string filename = 12;                // `filename` represents the absolute path of the file name where the attribute is located.
+	string pkg_path = 13;                // `pkg_path` represents the path name of the package where the attribute is located.
+	string description = 14;             // `description` represents the document of the attribute.
+	map<string, Example> examples = 15;  // A map object to hold examples, the key is the example name.
 }
 
 message Decorator {
 	string name = 1;
 	repeated string arguments = 2;
 	map<string, string> keywords = 3;
+}
+
+message Example {
+	string summary = 1;                // Short description for the example.
+	string description = 2;            // Long description for the example.
+	google.protobuf.Any value = 3;     // Embedded literal example.
 }
 
 // ----------------------------------------------------------------------------

@@ -57,7 +57,6 @@ KclModFile_expected_section = _reflection.GeneratedProtocolMessageType(
 _sym_db.RegisterMessage(KclModFile_expected_section)
 
 if _descriptor._USE_C_DESCRIPTORS == False:
-
     DESCRIPTOR._options = None
     _KCLMODFILE._serialized_start = 41
     _KCLMODFILE._serialized_end = 203

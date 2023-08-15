@@ -105,7 +105,6 @@ class MergeStrategy(IntEnum):
 
 
 class MergeStrategyFactory:
-
     MAPPING = {
         MergeStrategy.UNION: UnifyMerger,
         MergeStrategy.OVERRIDE: Overrider,
