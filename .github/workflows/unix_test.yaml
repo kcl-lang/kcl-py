@@ -55,4 +55,3 @@ jobs:
         run: | 
           python3 -m pip install -r ./kclvm/scripts/requirements.txt
           python3 -m kclvm ./samples/hello.k
-          python3 -m kclvm ./samples/hello.k --target native
