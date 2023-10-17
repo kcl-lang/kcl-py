@@ -27,6 +27,7 @@ STANDARD_SYSTEM_MODULES = [
     "base64",
     "testing",
     "units",
+    "manifests",
 ]
 STANDARD_SYSTEM_MODULE_LOCATION = "kclvm.compiler.extension.builtin.system_module"
 
