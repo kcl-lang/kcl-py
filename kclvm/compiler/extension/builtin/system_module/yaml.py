@@ -44,3 +44,9 @@ def KMANGLED_dump_to_file(
 ):
     yaml_str = KMANGLED_encode(data, sort_keys, ignore_private, ignore_none)
     Path(filename).write_text(yaml_str)
+
+
+def KMANGLED_load_all(value: str):
+    buffer = StringIO(value)
+    data = yaml.safe_load_all(buffer)
+    return data

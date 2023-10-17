@@ -222,7 +222,9 @@ class ObjectPlanner:
             return self.plan_dict(var)
         elif isinstance(var, list):
             return [self.plan_dict(v) for v in var]
-        raise Exception("Invalid plan object type")
+        elif isinstance(var, obj.KCLListObject):
+            return [self.to_python(v) for v in var.items]
+        raise Exception(f"Invalid plan object type {type(var)}")
 
 
 @dataclass
@@ -295,7 +297,7 @@ class JSONPlanner(ObjectPlanner):
         var: Union[Dict[str, obj.KCLObject], list],
         *,
         only_first=False,
-        to_py: bool = True
+        to_py: bool = True,
     ) -> str:
         plan_obj = super().plan(var) if to_py else var
         results = filter_results(plan_obj)
@@ -317,7 +319,7 @@ def plan(
     val_map: Dict[str, obj.KCLObject],
     *,
     sort_keys: bool = False,
-    include_schema_type_path: bool = False
+    include_schema_type_path: bool = False,
 ) -> str:
     return YAMLPlanner(
         sort_keys=sort_keys, include_schema_type_path=include_schema_type_path

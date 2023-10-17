@@ -31,6 +31,7 @@ from kclvm.api.object import (
     KCLModuleObject,
     KCLSchemaTypeObject,
     KWArg,
+    to_kcl_obj,
 )
 
 from .code import Opcode, VM_OP_ACTIONS
@@ -69,13 +70,18 @@ class VirtualMachine:
     """KCL Virtual Machine"""
 
     pkgpath_stack: typing.List[str] = []
+    hook_output: str = ""
 
     @staticmethod
     def RunApp(app: KCLProgram, *, pkg: str = None) -> KCLResult:
         # Reset cache
         KCLSchemaTypeObject._eval_cache = {}
         VirtualMachine.pkgpath_stack = []
-        return VirtualMachine(app).Run(pkg=pkg)
+        VirtualMachine.hook_output = ""
+        result = VirtualMachine(app).Run(pkg=pkg)
+        if VirtualMachine.hook_output:
+            result.m = to_kcl_obj(VirtualMachine.hook_output)
+        return result
 
     def __init__(self, app: KCLProgram, state: VMState = None):
         super().__init__()
