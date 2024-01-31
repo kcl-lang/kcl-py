@@ -15,11 +15,9 @@ jobs:
         with:
           python-version: '3.9'
       - name: Install dependencies
-        working-directory: python
         run: |
           python3 -m pip install setuptools wheel twine
       - name: Upload pypi
-        working-directory: python
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
