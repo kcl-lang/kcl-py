@@ -7,921 +7,730 @@ from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-from google.protobuf import any_pb2 as google_dot_protobuf_dot_any__pb2
-from google.protobuf import descriptor_pb2 as google_dot_protobuf_dot_descriptor__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n\x13gpyrpc/gpyrpc.proto\x12\x06gpyrpc\x1a\x19google/protobuf/any.proto\x1a google/protobuf/descriptor.proto"8\n\x12\x43mdExternalPkgSpec\x12\x10\n\x08pkg_name\x18\x01 \x01(\t\x12\x10\n\x08pkg_path\x18\x02 \x01(\t")\n\nCmdArgSpec\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t"[\n\x0f\x43mdOverrideSpec\x12\x0f\n\x07pkgpath\x18\x01 \x01(\t\x12\x12\n\nfield_path\x18\x02 \x01(\t\x12\x13\n\x0b\x66ield_value\x18\x03 \x01(\t\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t"f\n\x0cRestResponse\x12$\n\x06result\x18\x01 \x01(\x0b\x32\x14.google.protobuf.Any\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x12!\n\x07kcl_err\x18\x03 \x01(\x0b\x32\x10.gpyrpc.KclError"`\n\x08KclError\x12\x0e\n\x06\x65wcode\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0b\n\x03msg\x18\x03 \x01(\t\x12)\n\x0b\x65rror_infos\x18\x04 \x03(\x0b\x32\x14.gpyrpc.KclErrorInfo"w\n\x0cKclErrorInfo\x12\x11\n\terr_level\x18\x01 \x01(\t\x12\x0f\n\x07\x61rg_msg\x18\x02 \x01(\t\x12\x10\n\x08\x66ilename\x18\x03 \x01(\t\x12\x10\n\x08src_code\x18\x04 \x01(\t\x12\x0f\n\x07line_no\x18\x05 \x01(\t\x12\x0e\n\x06\x63ol_no\x18\x06 \x01(\t"\x1a\n\tPing_Args\x12\r\n\x05value\x18\x01 \x01(\t"\x1c\n\x0bPing_Result\x12\r\n\x05value\x18\x01 \x01(\t"\x11\n\x0fListMethod_Args"-\n\x11ListMethod_Result\x12\x18\n\x10method_name_list\x18\x01 \x03(\t"Z\n\x17ParseFile_LarkTree_Args\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x13\n\x0bsource_code\x18\x02 \x01(\t\x12\x18\n\x10ignore_file_line\x18\x03 \x01(\x08"3\n\x19ParseFile_LarkTree_Result\x12\x16\n\x0elark_tree_json\x18\x01 \x01(\t";\n\x12ParseFile_AST_Args\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x13\n\x0bsource_code\x18\x02 \x01(\t"(\n\x14ParseFile_AST_Result\x12\x10\n\x08\x61st_json\x18\x01 \x01(\t"0\n\x15ParseProgram_AST_Args\x12\x17\n\x0fk_filename_list\x18\x01 \x03(\t"+\n\x17ParseProgram_AST_Result\x12\x10\n\x08\x61st_json\x18\x01 \x01(\t"\x93\x03\n\x10\x45xecProgram_Args\x12\x10\n\x08work_dir\x18\x01 \x01(\t\x12\x17\n\x0fk_filename_list\x18\x02 \x03(\t\x12\x13\n\x0bk_code_list\x18\x03 \x03(\t\x12 \n\x04\x61rgs\x18\x04 \x03(\x0b\x32\x12.gpyrpc.CmdArgSpec\x12*\n\toverrides\x18\x05 \x03(\x0b\x32\x17.gpyrpc.CmdOverrideSpec\x12\x1b\n\x13\x64isable_yaml_result\x18\x06 \x01(\x08\x12\x1a\n\x12print_override_ast\x18\x07 \x01(\x08\x12\x1a\n\x12strict_range_check\x18\x08 \x01(\x08\x12\x14\n\x0c\x64isable_none\x18\t \x01(\x08\x12\x0f\n\x07verbose\x18\n \x01(\x05\x12\r\n\x05\x64\x65\x62ug\x18\x0b \x01(\x05\x12\x11\n\tsort_keys\x18\x0c \x01(\x08\x12\x31\n\rexternal_pkgs\x18\r \x03(\x0b\x32\x1a.gpyrpc.CmdExternalPkgSpec\x12 \n\x18include_schema_type_path\x18\x0e \x01(\x08"T\n\x12\x45xecProgram_Result\x12\x13\n\x0bjson_result\x18\x01 \x01(\t\x12\x13\n\x0byaml_result\x18\x02 \x01(\t\x12\x14\n\x0c\x65scaped_time\x18\x65 \x01(\t"\'\n\x10ResetPlugin_Args\x12\x13\n\x0bplugin_root\x18\x01 \x01(\t"\x14\n\x12ResetPlugin_Result"!\n\x0f\x46ormatCode_Args\x12\x0e\n\x06source\x18\x01 \x01(\t"&\n\x11\x46ormatCode_Result\x12\x11\n\tformatted\x18\x01 \x01(\x0c"\x1f\n\x0f\x46ormatPath_Args\x12\x0c\n\x04path\x18\x01 \x01(\t")\n\x11\x46ormatPath_Result\x12\x14\n\x0c\x63hangedPaths\x18\x01 \x03(\t"\x1d\n\rLintPath_Args\x12\x0c\n\x04path\x18\x01 \x01(\t""\n\x0fLintPath_Result\x12\x0f\n\x07results\x18\x01 \x03(\t"F\n\x11OverrideFile_Args\x12\x0c\n\x04\x66ile\x18\x01 \x01(\t\x12\r\n\x05specs\x18\x02 \x03(\t\x12\x14\n\x0cimport_paths\x18\x03 \x03(\t"%\n\x13OverrideFile_Result\x12\x0e\n\x06result\x18\x01 \x01(\x08"\x1d\n\rEvalCode_Args\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t"&\n\x0f\x45valCode_Result\x12\x13\n\x0bjson_result\x18\x02 \x01(\t" \n\x10ResolveCode_Args\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t"%\n\x12ResolveCode_Result\x12\x0f\n\x07success\x18\x01 \x01(\x08"E\n\x12GetSchemaType_Args\x12\x0c\n\x04\x66ile\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t\x12\x13\n\x0bschema_name\x18\x03 \x01(\t"A\n\x14GetSchemaType_Result\x12)\n\x10schema_type_list\x18\x01 \x03(\x0b\x32\x0f.gpyrpc.KclType"L\n\x19GetSchemaTypeMapping_Args\x12\x0c\n\x04\x66ile\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t\x12\x13\n\x0bschema_name\x18\x03 \x01(\t"\xc1\x01\n\x1bGetSchemaTypeMapping_Result\x12W\n\x13schema_type_mapping\x18\x01 \x03(\x0b\x32:.gpyrpc.GetSchemaTypeMapping_Result.SchemaTypeMappingEntry\x1aI\n\x16SchemaTypeMappingEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1e\n\x05value\x18\x02 \x01(\x0b\x32\x0f.gpyrpc.KclType:\x02\x38\x01"g\n\x11ValidateCode_Args\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t\x12\x0e\n\x06schema\x18\x03 \x01(\t\x12\x16\n\x0e\x61ttribute_name\x18\x04 \x01(\t\x12\x0e\n\x06\x66ormat\x18\x05 \x01(\t";\n\x13ValidateCode_Result\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x13\n\x0b\x65rr_message\x18\x02 \x01(\t"+\n\x0b\x43odeSnippet\x12\x0e\n\x06schema\x18\x01 \x01(\t\x12\x0c\n\x04rule\x18\x02 \x01(\t"<\n\x0fSpliceCode_Args\x12)\n\x0c\x63odeSnippets\x18\x01 \x03(\x0b\x32\x13.gpyrpc.CodeSnippet"\'\n\x11SpliceCode_Result\x12\x12\n\nspliceCode\x18\x01 \x01(\t":\n\x08Position\x12\x0c\n\x04line\x18\x01 \x01(\x03\x12\x0e\n\x06\x63olumn\x18\x02 \x01(\x03\x12\x10\n\x08\x66ilename\x18\x03 \x01(\t"J\n\rComplete_Args\x12\x1d\n\x03pos\x18\x01 \x01(\x0b\x32\x10.gpyrpc.Position\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04\x63ode\x18\x03 \x01(\t"(\n\x0f\x43omplete_Result\x12\x15\n\rcompleteItems\x18\x01 \x01(\t";\n\x0cGoToDef_Args\x12\x1d\n\x03pos\x18\x01 \x01(\x0b\x32\x10.gpyrpc.Position\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t"#\n\x0eGoToDef_Result\x12\x11\n\tlocations\x18\x01 \x01(\t"1\n\x13\x44ocumentSymbol_Args\x12\x0c\n\x04\x66ile\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t"\'\n\x15\x44ocumentSymbol_Result\x12\x0e\n\x06symbol\x18\x01 \x01(\t"9\n\nHover_Args\x12\x1d\n\x03pos\x18\x01 \x01(\x0b\x32\x10.gpyrpc.Position\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t"#\n\x0cHover_Result\x12\x13\n\x0bhoverResult\x18\x01 \x01(\t"i\n\x11ListDepFiles_Args\x12\x10\n\x08work_dir\x18\x01 \x01(\t\x12\x14\n\x0cuse_abs_path\x18\x02 \x01(\x08\x12\x13\n\x0binclude_all\x18\x03 \x01(\x08\x12\x17\n\x0fuse_fast_parser\x18\x04 \x01(\x08"F\n\x13ListDepFiles_Result\x12\x0f\n\x07pkgroot\x18\x01 \x01(\t\x12\x0f\n\x07pkgpath\x18\x02 \x01(\t\x12\r\n\x05\x66iles\x18\x03 \x03(\t"9\n\x16LoadSettingsFiles_Args\x12\x10\n\x08work_dir\x18\x01 \x01(\t\x12\r\n\x05\x66iles\x18\x02 \x03(\t"q\n\x18LoadSettingsFiles_Result\x12*\n\x0fkcl_cli_configs\x18\x01 \x01(\x0b\x32\x11.gpyrpc.CliConfig\x12)\n\x0bkcl_options\x18\x02 \x03(\x0b\x32\x14.gpyrpc.KeyValuePair"\xdb\x01\n\tCliConfig\x12\r\n\x05\x66iles\x18\x01 \x03(\t\x12\x0e\n\x06output\x18\x02 \x01(\t\x12\x11\n\toverrides\x18\x03 \x03(\t\x12\x15\n\rpath_selector\x18\x04 \x03(\t\x12\x1a\n\x12strict_range_check\x18\x05 \x01(\x08\x12\x14\n\x0c\x64isable_none\x18\x06 \x01(\x08\x12\x0f\n\x07verbose\x18\x07 \x01(\x03\x12\r\n\x05\x64\x65\x62ug\x18\x08 \x01(\x08\x12\x11\n\tsort_keys\x18\t \x01(\x08\x12 \n\x18include_schema_type_path\x18\n \x01(\x08"*\n\x0cKeyValuePair\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t"\xa0\x04\n\x07KclType\x12\x0c\n\x04type\x18\x01 \x01(\t\x12$\n\x0bunion_types\x18\x02 \x03(\x0b\x32\x0f.gpyrpc.KclType\x12\x0f\n\x07\x64\x65\x66\x61ult\x18\x03 \x01(\t\x12\x13\n\x0bschema_name\x18\x04 \x01(\t\x12\x12\n\nschema_doc\x18\x05 \x01(\t\x12\x33\n\nproperties\x18\x06 \x03(\x0b\x32\x1f.gpyrpc.KclType.PropertiesEntry\x12\x10\n\x08required\x18\x07 \x03(\t\x12\x1c\n\x03key\x18\x08 \x01(\x0b\x32\x0f.gpyrpc.KclType\x12\x1d\n\x04item\x18\t \x01(\x0b\x32\x0f.gpyrpc.KclType\x12\x0c\n\x04line\x18\n \x01(\x05\x12%\n\ndecorators\x18\x0b \x03(\x0b\x32\x11.gpyrpc.Decorator\x12\x10\n\x08\x66ilename\x18\x0c \x01(\t\x12\x10\n\x08pkg_path\x18\r \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x0e \x01(\t\x12/\n\x08\x65xamples\x18\x0f \x03(\x0b\x32\x1d.gpyrpc.KclType.ExamplesEntry\x1a\x42\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1e\n\x05value\x18\x02 \x01(\x0b\x32\x0f.gpyrpc.KclType:\x02\x38\x01\x1a@\n\rExamplesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1e\n\x05value\x18\x02 \x01(\x0b\x32\x0f.gpyrpc.Example:\x02\x38\x01"\x90\x01\n\tDecorator\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x11\n\targuments\x18\x02 \x03(\t\x12\x31\n\x08keywords\x18\x03 \x03(\x0b\x32\x1f.gpyrpc.Decorator.KeywordsEntry\x1a/\n\rKeywordsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01"T\n\x07\x45xample\x12\x0f\n\x07summary\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12#\n\x05value\x18\x03 \x01(\x0b\x32\x14.google.protobuf.Any2\x82\x01\n\x0e\x42uiltinService\x12.\n\x04Ping\x12\x11.gpyrpc.Ping_Args\x1a\x13.gpyrpc.Ping_Result\x12@\n\nListMethod\x12\x17.gpyrpc.ListMethod_Args\x1a\x19.gpyrpc.ListMethod_Result2\x94\x0c\n\x0cKclvmService\x12.\n\x04Ping\x12\x11.gpyrpc.Ping_Args\x1a\x13.gpyrpc.Ping_Result\x12X\n\x12ParseFile_LarkTree\x12\x1f.gpyrpc.ParseFile_LarkTree_Args\x1a!.gpyrpc.ParseFile_LarkTree_Result\x12I\n\rParseFile_AST\x12\x1a.gpyrpc.ParseFile_AST_Args\x1a\x1c.gpyrpc.ParseFile_AST_Result\x12R\n\x10ParseProgram_AST\x12\x1d.gpyrpc.ParseProgram_AST_Args\x1a\x1f.gpyrpc.ParseProgram_AST_Result\x12\x43\n\x0b\x45xecProgram\x12\x18.gpyrpc.ExecProgram_Args\x1a\x1a.gpyrpc.ExecProgram_Result\x12\x43\n\x0bResetPlugin\x12\x18.gpyrpc.ResetPlugin_Args\x1a\x1a.gpyrpc.ResetPlugin_Result\x12@\n\nFormatCode\x12\x17.gpyrpc.FormatCode_Args\x1a\x19.gpyrpc.FormatCode_Result\x12@\n\nFormatPath\x12\x17.gpyrpc.FormatPath_Args\x1a\x19.gpyrpc.FormatPath_Result\x12:\n\x08LintPath\x12\x15.gpyrpc.LintPath_Args\x1a\x17.gpyrpc.LintPath_Result\x12\x46\n\x0cOverrideFile\x12\x19.gpyrpc.OverrideFile_Args\x1a\x1b.gpyrpc.OverrideFile_Result\x12:\n\x08\x45valCode\x12\x15.gpyrpc.EvalCode_Args\x1a\x17.gpyrpc.EvalCode_Result\x12\x43\n\x0bResolveCode\x12\x18.gpyrpc.ResolveCode_Args\x1a\x1a.gpyrpc.ResolveCode_Result\x12I\n\rGetSchemaType\x12\x1a.gpyrpc.GetSchemaType_Args\x1a\x1c.gpyrpc.GetSchemaType_Result\x12^\n\x14GetSchemaTypeMapping\x12!.gpyrpc.GetSchemaTypeMapping_Args\x1a#.gpyrpc.GetSchemaTypeMapping_Result\x12\x46\n\x0cValidateCode\x12\x19.gpyrpc.ValidateCode_Args\x1a\x1b.gpyrpc.ValidateCode_Result\x12@\n\nSpliceCode\x12\x17.gpyrpc.SpliceCode_Args\x1a\x19.gpyrpc.SpliceCode_Result\x12:\n\x08\x43omplete\x12\x15.gpyrpc.Complete_Args\x1a\x17.gpyrpc.Complete_Result\x12\x37\n\x07GoToDef\x12\x14.gpyrpc.GoToDef_Args\x1a\x16.gpyrpc.GoToDef_Result\x12L\n\x0e\x44ocumentSymbol\x12\x1b.gpyrpc.DocumentSymbol_Args\x1a\x1d.gpyrpc.DocumentSymbol_Result\x12\x31\n\x05Hover\x12\x12.gpyrpc.Hover_Args\x1a\x14.gpyrpc.Hover_Result\x12\x46\n\x0cListDepFiles\x12\x19.gpyrpc.ListDepFiles_Args\x1a\x1b.gpyrpc.ListDepFiles_Result\x12U\n\x11LoadSettingsFiles\x12\x1e.gpyrpc.LoadSettingsFiles_Args\x1a .gpyrpc.LoadSettingsFiles_Resultb\x06proto3'
-)
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13gpyrpc/gpyrpc.proto\x12\x0b\x63om.kcl.api\"8\n\x12\x43mdExternalPkgSpec\x12\x10\n\x08pkg_name\x18\x01 \x01(\t\x12\x10\n\x08pkg_path\x18\x02 \x01(\t\")\n\nCmdArgSpec\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"[\n\x0f\x43mdOverrideSpec\x12\x0f\n\x07pkgpath\x18\x01 \x01(\t\x12\x12\n\nfield_path\x18\x02 \x01(\t\x12\x13\n\x0b\x66ield_value\x18\x03 \x01(\t\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"L\n\x05\x45rror\x12\r\n\x05level\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t\x12&\n\x08messages\x18\x03 \x03(\x0b\x32\x14.com.kcl.api.Message\":\n\x07Message\x12\x0b\n\x03msg\x18\x01 \x01(\t\x12\"\n\x03pos\x18\x02 \x01(\x0b\x32\x15.com.kcl.api.Position\"\x1a\n\tPing_Args\x12\r\n\x05value\x18\x01 \x01(\t\"\x1c\n\x0bPing_Result\x12\r\n\x05value\x18\x01 \x01(\t\"\x11\n\x0fListMethod_Args\"-\n\x11ListMethod_Result\x12\x18\n\x10method_name_list\x18\x01 \x03(\t\"f\n\x0eParseFile_Args\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\x0e\n\x06source\x18\x02 \x01(\t\x12\x36\n\rexternal_pkgs\x18\x03 \x03(\x0b\x32\x1f.com.kcl.api.CmdExternalPkgSpec\"V\n\x10ParseFile_Result\x12\x10\n\x08\x61st_json\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x65ps\x18\x02 \x03(\t\x12\"\n\x06\x65rrors\x18\x03 \x03(\x0b\x32\x12.com.kcl.api.Error\"k\n\x11ParseProgram_Args\x12\r\n\x05paths\x18\x01 \x03(\t\x12\x0f\n\x07sources\x18\x02 \x03(\t\x12\x36\n\rexternal_pkgs\x18\x03 \x03(\x0b\x32\x1f.com.kcl.api.CmdExternalPkgSpec\"Z\n\x13ParseProgram_Result\x12\x10\n\x08\x61st_json\x18\x01 \x01(\t\x12\r\n\x05paths\x18\x02 \x03(\t\x12\"\n\x06\x65rrors\x18\x03 \x03(\x0b\x32\x12.com.kcl.api.Error\"\x89\x01\n\x10LoadPackage_Args\x12\x32\n\nparse_args\x18\x01 \x01(\x0b\x32\x1e.com.kcl.api.ParseProgram_Args\x12\x13\n\x0bresolve_ast\x18\x02 \x01(\x08\x12\x14\n\x0cload_builtin\x18\x03 \x01(\x08\x12\x16\n\x0ewith_ast_index\x18\x04 \x01(\x08\"\xf7\x07\n\x12LoadPackage_Result\x12\x0f\n\x07program\x18\x01 \x01(\t\x12\r\n\x05paths\x18\x02 \x03(\t\x12(\n\x0cparse_errors\x18\x03 \x03(\x0b\x32\x12.com.kcl.api.Error\x12\'\n\x0btype_errors\x18\x04 \x03(\x0b\x32\x12.com.kcl.api.Error\x12;\n\x06scopes\x18\x05 \x03(\x0b\x32+.com.kcl.api.LoadPackage_Result.ScopesEntry\x12=\n\x07symbols\x18\x06 \x03(\x0b\x32,.com.kcl.api.LoadPackage_Result.SymbolsEntry\x12K\n\x0fnode_symbol_map\x18\x07 \x03(\x0b\x32\x32.com.kcl.api.LoadPackage_Result.NodeSymbolMapEntry\x12K\n\x0fsymbol_node_map\x18\x08 \x03(\x0b\x32\x32.com.kcl.api.LoadPackage_Result.SymbolNodeMapEntry\x12\\\n\x18\x66ully_qualified_name_map\x18\t \x03(\x0b\x32:.com.kcl.api.LoadPackage_Result.FullyQualifiedNameMapEntry\x12G\n\rpkg_scope_map\x18\n \x03(\x0b\x32\x30.com.kcl.api.LoadPackage_Result.PkgScopeMapEntry\x1a\x41\n\x0bScopesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12!\n\x05value\x18\x02 \x01(\x0b\x32\x12.com.kcl.api.Scope:\x02\x38\x01\x1a\x43\n\x0cSymbolsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\"\n\x05value\x18\x02 \x01(\x0b\x32\x13.com.kcl.api.Symbol:\x02\x38\x01\x1aN\n\x12NodeSymbolMapEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.com.kcl.api.SymbolIndex:\x02\x38\x01\x1a\x34\n\x12SymbolNodeMapEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1aV\n\x1a\x46ullyQualifiedNameMapEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.com.kcl.api.SymbolIndex:\x02\x38\x01\x1aK\n\x10PkgScopeMapEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12&\n\x05value\x18\x02 \x01(\x0b\x32\x17.com.kcl.api.ScopeIndex:\x02\x38\x01\"\xc4\x01\n\x06Symbol\x12 \n\x02ty\x18\x01 \x01(\x0b\x32\x14.com.kcl.api.KclType\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\'\n\x05owner\x18\x03 \x01(\x0b\x32\x18.com.kcl.api.SymbolIndex\x12%\n\x03\x64\x65\x66\x18\x04 \x01(\x0b\x32\x18.com.kcl.api.SymbolIndex\x12\'\n\x05\x61ttrs\x18\x05 \x03(\x0b\x32\x18.com.kcl.api.SymbolIndex\x12\x11\n\tis_global\x18\x06 \x01(\x08\"\xba\x01\n\x05Scope\x12\x0c\n\x04kind\x18\x01 \x01(\t\x12\'\n\x06parent\x18\x02 \x01(\x0b\x32\x17.com.kcl.api.ScopeIndex\x12\'\n\x05owner\x18\x03 \x01(\x0b\x32\x18.com.kcl.api.SymbolIndex\x12)\n\x08\x63hildren\x18\x04 \x03(\x0b\x32\x17.com.kcl.api.ScopeIndex\x12&\n\x04\x64\x65\x66s\x18\x05 \x03(\x0b\x32\x18.com.kcl.api.SymbolIndex\"1\n\x0bSymbolIndex\x12\t\n\x01i\x18\x01 \x01(\x04\x12\t\n\x01g\x18\x02 \x01(\x04\x12\x0c\n\x04kind\x18\x03 \x01(\t\"0\n\nScopeIndex\x12\t\n\x01i\x18\x01 \x01(\x04\x12\t\n\x01g\x18\x02 \x01(\x04\x12\x0c\n\x04kind\x18\x03 \x01(\t\"\xcf\x03\n\x10\x45xecProgram_Args\x12\x10\n\x08work_dir\x18\x01 \x01(\t\x12\x17\n\x0fk_filename_list\x18\x02 \x03(\t\x12\x13\n\x0bk_code_list\x18\x03 \x03(\t\x12%\n\x04\x61rgs\x18\x04 \x03(\x0b\x32\x17.com.kcl.api.CmdArgSpec\x12/\n\toverrides\x18\x05 \x03(\x0b\x32\x1c.com.kcl.api.CmdOverrideSpec\x12\x1b\n\x13\x64isable_yaml_result\x18\x06 \x01(\x08\x12\x1a\n\x12print_override_ast\x18\x07 \x01(\x08\x12\x1a\n\x12strict_range_check\x18\x08 \x01(\x08\x12\x14\n\x0c\x64isable_none\x18\t \x01(\x08\x12\x0f\n\x07verbose\x18\n \x01(\x05\x12\r\n\x05\x64\x65\x62ug\x18\x0b \x01(\x05\x12\x11\n\tsort_keys\x18\x0c \x01(\x08\x12\x36\n\rexternal_pkgs\x18\r \x03(\x0b\x32\x1f.com.kcl.api.CmdExternalPkgSpec\x12 \n\x18include_schema_type_path\x18\x0e \x01(\x08\x12\x14\n\x0c\x63ompile_only\x18\x0f \x01(\x08\x12\x15\n\rpath_selector\x18\x11 \x03(\t\"h\n\x12\x45xecProgram_Result\x12\x13\n\x0bjson_result\x18\x01 \x01(\t\x12\x13\n\x0byaml_result\x18\x02 \x01(\t\x12\x13\n\x0blog_message\x18\x03 \x01(\t\x12\x13\n\x0b\x65rr_message\x18\x04 \x01(\t\"\'\n\x10ResetPlugin_Args\x12\x13\n\x0bplugin_root\x18\x01 \x01(\t\"\x14\n\x12ResetPlugin_Result\"!\n\x0f\x46ormatCode_Args\x12\x0e\n\x06source\x18\x01 \x01(\t\"&\n\x11\x46ormatCode_Result\x12\x11\n\tformatted\x18\x01 \x01(\x0c\"\x1f\n\x0f\x46ormatPath_Args\x12\x0c\n\x04path\x18\x01 \x01(\t\"*\n\x11\x46ormatPath_Result\x12\x15\n\rchanged_paths\x18\x01 \x03(\t\"\x1e\n\rLintPath_Args\x12\r\n\x05paths\x18\x01 \x03(\t\"\"\n\x0fLintPath_Result\x12\x0f\n\x07results\x18\x01 \x03(\t\"F\n\x11OverrideFile_Args\x12\x0c\n\x04\x66ile\x18\x01 \x01(\t\x12\r\n\x05specs\x18\x02 \x03(\t\x12\x14\n\x0cimport_paths\x18\x03 \x03(\t\"%\n\x13OverrideFile_Result\x12\x0e\n\x06result\x18\x01 \x01(\x08\"_\n\x16GetFullSchemaType_Args\x12\x30\n\texec_args\x18\x01 \x01(\x0b\x32\x1d.com.kcl.api.ExecProgram_Args\x12\x13\n\x0bschema_name\x18\x02 \x01(\t\"E\n\x12GetSchemaType_Args\x12\x0c\n\x04\x66ile\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t\x12\x13\n\x0bschema_name\x18\x03 \x01(\t\"F\n\x14GetSchemaType_Result\x12.\n\x10schema_type_list\x18\x01 \x03(\x0b\x32\x14.com.kcl.api.KclType\"L\n\x19GetSchemaTypeMapping_Args\x12\x0c\n\x04\x66ile\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\t\x12\x13\n\x0bschema_name\x18\x03 \x01(\t\"\xcb\x01\n\x1bGetSchemaTypeMapping_Result\x12\\\n\x13schema_type_mapping\x18\x01 \x03(\x0b\x32?.com.kcl.api.GetSchemaTypeMapping_Result.SchemaTypeMappingEntry\x1aN\n\x16SchemaTypeMappingEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12#\n\x05value\x18\x02 \x01(\x0b\x32\x14.com.kcl.api.KclType:\x02\x38\x01\"u\n\x11ValidateCode_Args\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\t\x12\x0c\n\x04\x66ile\x18\x02 \x01(\t\x12\x0c\n\x04\x63ode\x18\x03 \x01(\t\x12\x0e\n\x06schema\x18\x04 \x01(\t\x12\x16\n\x0e\x61ttribute_name\x18\x05 \x01(\t\x12\x0e\n\x06\x66ormat\x18\x06 \x01(\t\";\n\x13ValidateCode_Result\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x13\n\x0b\x65rr_message\x18\x02 \x01(\t\":\n\x08Position\x12\x0c\n\x04line\x18\x01 \x01(\x03\x12\x0e\n\x06\x63olumn\x18\x02 \x01(\x03\x12\x10\n\x08\x66ilename\x18\x03 \x01(\t\"i\n\x11ListDepFiles_Args\x12\x10\n\x08work_dir\x18\x01 \x01(\t\x12\x14\n\x0cuse_abs_path\x18\x02 \x01(\x08\x12\x13\n\x0binclude_all\x18\x03 \x01(\x08\x12\x17\n\x0fuse_fast_parser\x18\x04 \x01(\x08\"F\n\x13ListDepFiles_Result\x12\x0f\n\x07pkgroot\x18\x01 \x01(\t\x12\x0f\n\x07pkgpath\x18\x02 \x01(\t\x12\r\n\x05\x66iles\x18\x03 \x03(\t\"9\n\x16LoadSettingsFiles_Args\x12\x10\n\x08work_dir\x18\x01 \x01(\t\x12\r\n\x05\x66iles\x18\x02 \x03(\t\"{\n\x18LoadSettingsFiles_Result\x12/\n\x0fkcl_cli_configs\x18\x01 \x01(\x0b\x32\x16.com.kcl.api.CliConfig\x12.\n\x0bkcl_options\x18\x02 \x03(\x0b\x32\x19.com.kcl.api.KeyValuePair\"\xdb\x01\n\tCliConfig\x12\r\n\x05\x66iles\x18\x01 \x03(\t\x12\x0e\n\x06output\x18\x02 \x01(\t\x12\x11\n\toverrides\x18\x03 \x03(\t\x12\x15\n\rpath_selector\x18\x04 \x03(\t\x12\x1a\n\x12strict_range_check\x18\x05 \x01(\x08\x12\x14\n\x0c\x64isable_none\x18\x06 \x01(\x08\x12\x0f\n\x07verbose\x18\x07 \x01(\x03\x12\r\n\x05\x64\x65\x62ug\x18\x08 \x01(\x08\x12\x11\n\tsort_keys\x18\t \x01(\x08\x12 \n\x18include_schema_type_path\x18\n \x01(\x08\"*\n\x0cKeyValuePair\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"^\n\x0bRename_Args\x12\x14\n\x0cpackage_root\x18\x01 \x01(\t\x12\x13\n\x0bsymbol_path\x18\x02 \x01(\t\x12\x12\n\nfile_paths\x18\x03 \x03(\t\x12\x10\n\x08new_name\x18\x04 \x01(\t\"&\n\rRename_Result\x12\x15\n\rchanged_files\x18\x01 \x03(\t\"\xc7\x01\n\x0fRenameCode_Args\x12\x14\n\x0cpackage_root\x18\x01 \x01(\t\x12\x13\n\x0bsymbol_path\x18\x02 \x01(\t\x12\x43\n\x0csource_codes\x18\x03 \x03(\x0b\x32-.com.kcl.api.RenameCode_Args.SourceCodesEntry\x12\x10\n\x08new_name\x18\x04 \x01(\t\x1a\x32\n\x10SourceCodesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x91\x01\n\x11RenameCode_Result\x12G\n\rchanged_codes\x18\x01 \x03(\x0b\x32\x30.com.kcl.api.RenameCode_Result.ChangedCodesEntry\x1a\x33\n\x11\x43hangedCodesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"v\n\tTest_Args\x12\x30\n\texec_args\x18\x01 \x01(\x0b\x32\x1d.com.kcl.api.ExecProgram_Args\x12\x10\n\x08pkg_list\x18\x02 \x03(\t\x12\x12\n\nrun_regexp\x18\x03 \x01(\t\x12\x11\n\tfail_fast\x18\x04 \x01(\x08\"6\n\x0bTest_Result\x12\'\n\x04info\x18\x02 \x03(\x0b\x32\x19.com.kcl.api.TestCaseInfo\"R\n\x0cTestCaseInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x12\x10\n\x08\x64uration\x18\x03 \x01(\x04\x12\x13\n\x0blog_message\x18\x04 \x01(\t\"\xc8\x04\n\x07KclType\x12\x0c\n\x04type\x18\x01 \x01(\t\x12)\n\x0bunion_types\x18\x02 \x03(\x0b\x32\x14.com.kcl.api.KclType\x12\x0f\n\x07\x64\x65\x66\x61ult\x18\x03 \x01(\t\x12\x13\n\x0bschema_name\x18\x04 \x01(\t\x12\x12\n\nschema_doc\x18\x05 \x01(\t\x12\x38\n\nproperties\x18\x06 \x03(\x0b\x32$.com.kcl.api.KclType.PropertiesEntry\x12\x10\n\x08required\x18\x07 \x03(\t\x12!\n\x03key\x18\x08 \x01(\x0b\x32\x14.com.kcl.api.KclType\x12\"\n\x04item\x18\t \x01(\x0b\x32\x14.com.kcl.api.KclType\x12\x0c\n\x04line\x18\n \x01(\x05\x12*\n\ndecorators\x18\x0b \x03(\x0b\x32\x16.com.kcl.api.Decorator\x12\x10\n\x08\x66ilename\x18\x0c \x01(\t\x12\x10\n\x08pkg_path\x18\r \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x0e \x01(\t\x12\x34\n\x08\x65xamples\x18\x0f \x03(\x0b\x32\".com.kcl.api.KclType.ExamplesEntry\x1aG\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12#\n\x05value\x18\x02 \x01(\x0b\x32\x14.com.kcl.api.KclType:\x02\x38\x01\x1a\x45\n\rExamplesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12#\n\x05value\x18\x02 \x01(\x0b\x32\x14.com.kcl.api.Example:\x02\x38\x01\"\x95\x01\n\tDecorator\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x11\n\targuments\x18\x02 \x03(\t\x12\x36\n\x08keywords\x18\x03 \x03(\x0b\x32$.com.kcl.api.Decorator.KeywordsEntry\x1a/\n\rKeywordsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\">\n\x07\x45xample\x12\x0f\n\x07summary\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\r\n\x05value\x18\x03 \x01(\t2\x96\x01\n\x0e\x42uiltinService\x12\x38\n\x04Ping\x12\x16.com.kcl.api.Ping_Args\x1a\x18.com.kcl.api.Ping_Result\x12J\n\nListMethod\x12\x1c.com.kcl.api.ListMethod_Args\x1a\x1e.com.kcl.api.ListMethod_Result2\x98\x0b\n\x0cKclvmService\x12\x38\n\x04Ping\x12\x16.com.kcl.api.Ping_Args\x1a\x18.com.kcl.api.Ping_Result\x12M\n\x0b\x45xecProgram\x12\x1d.com.kcl.api.ExecProgram_Args\x1a\x1f.com.kcl.api.ExecProgram_Result\x12G\n\tParseFile\x12\x1b.com.kcl.api.ParseFile_Args\x1a\x1d.com.kcl.api.ParseFile_Result\x12P\n\x0cParseProgram\x12\x1e.com.kcl.api.ParseProgram_Args\x1a .com.kcl.api.ParseProgram_Result\x12M\n\x0bLoadPackage\x12\x1d.com.kcl.api.LoadPackage_Args\x1a\x1f.com.kcl.api.LoadPackage_Result\x12J\n\nFormatCode\x12\x1c.com.kcl.api.FormatCode_Args\x1a\x1e.com.kcl.api.FormatCode_Result\x12J\n\nFormatPath\x12\x1c.com.kcl.api.FormatPath_Args\x1a\x1e.com.kcl.api.FormatPath_Result\x12\x44\n\x08LintPath\x12\x1a.com.kcl.api.LintPath_Args\x1a\x1c.com.kcl.api.LintPath_Result\x12P\n\x0cOverrideFile\x12\x1e.com.kcl.api.OverrideFile_Args\x1a .com.kcl.api.OverrideFile_Result\x12S\n\rGetSchemaType\x12\x1f.com.kcl.api.GetSchemaType_Args\x1a!.com.kcl.api.GetSchemaType_Result\x12[\n\x11GetFullSchemaType\x12#.com.kcl.api.GetFullSchemaType_Args\x1a!.com.kcl.api.GetSchemaType_Result\x12h\n\x14GetSchemaTypeMapping\x12&.com.kcl.api.GetSchemaTypeMapping_Args\x1a(.com.kcl.api.GetSchemaTypeMapping_Result\x12P\n\x0cValidateCode\x12\x1e.com.kcl.api.ValidateCode_Args\x1a .com.kcl.api.ValidateCode_Result\x12P\n\x0cListDepFiles\x12\x1e.com.kcl.api.ListDepFiles_Args\x1a .com.kcl.api.ListDepFiles_Result\x12_\n\x11LoadSettingsFiles\x12#.com.kcl.api.LoadSettingsFiles_Args\x1a%.com.kcl.api.LoadSettingsFiles_Result\x12>\n\x06Rename\x12\x18.com.kcl.api.Rename_Args\x1a\x1a.com.kcl.api.Rename_Result\x12J\n\nRenameCode\x12\x1c.com.kcl.api.RenameCode_Args\x1a\x1e.com.kcl.api.RenameCode_Result\x12\x38\n\x04Test\x12\x16.com.kcl.api.Test_Args\x1a\x18.com.kcl.api.Test_Resultb\x06proto3')
 
 
-_CMDEXTERNALPKGSPEC = DESCRIPTOR.message_types_by_name["CmdExternalPkgSpec"]
-_CMDARGSPEC = DESCRIPTOR.message_types_by_name["CmdArgSpec"]
-_CMDOVERRIDESPEC = DESCRIPTOR.message_types_by_name["CmdOverrideSpec"]
-_RESTRESPONSE = DESCRIPTOR.message_types_by_name["RestResponse"]
-_KCLERROR = DESCRIPTOR.message_types_by_name["KclError"]
-_KCLERRORINFO = DESCRIPTOR.message_types_by_name["KclErrorInfo"]
-_PING_ARGS = DESCRIPTOR.message_types_by_name["Ping_Args"]
-_PING_RESULT = DESCRIPTOR.message_types_by_name["Ping_Result"]
-_LISTMETHOD_ARGS = DESCRIPTOR.message_types_by_name["ListMethod_Args"]
-_LISTMETHOD_RESULT = DESCRIPTOR.message_types_by_name["ListMethod_Result"]
-_PARSEFILE_LARKTREE_ARGS = DESCRIPTOR.message_types_by_name["ParseFile_LarkTree_Args"]
-_PARSEFILE_LARKTREE_RESULT = DESCRIPTOR.message_types_by_name[
-    "ParseFile_LarkTree_Result"
-]
-_PARSEFILE_AST_ARGS = DESCRIPTOR.message_types_by_name["ParseFile_AST_Args"]
-_PARSEFILE_AST_RESULT = DESCRIPTOR.message_types_by_name["ParseFile_AST_Result"]
-_PARSEPROGRAM_AST_ARGS = DESCRIPTOR.message_types_by_name["ParseProgram_AST_Args"]
-_PARSEPROGRAM_AST_RESULT = DESCRIPTOR.message_types_by_name["ParseProgram_AST_Result"]
-_EXECPROGRAM_ARGS = DESCRIPTOR.message_types_by_name["ExecProgram_Args"]
-_EXECPROGRAM_RESULT = DESCRIPTOR.message_types_by_name["ExecProgram_Result"]
-_RESETPLUGIN_ARGS = DESCRIPTOR.message_types_by_name["ResetPlugin_Args"]
-_RESETPLUGIN_RESULT = DESCRIPTOR.message_types_by_name["ResetPlugin_Result"]
-_FORMATCODE_ARGS = DESCRIPTOR.message_types_by_name["FormatCode_Args"]
-_FORMATCODE_RESULT = DESCRIPTOR.message_types_by_name["FormatCode_Result"]
-_FORMATPATH_ARGS = DESCRIPTOR.message_types_by_name["FormatPath_Args"]
-_FORMATPATH_RESULT = DESCRIPTOR.message_types_by_name["FormatPath_Result"]
-_LINTPATH_ARGS = DESCRIPTOR.message_types_by_name["LintPath_Args"]
-_LINTPATH_RESULT = DESCRIPTOR.message_types_by_name["LintPath_Result"]
-_OVERRIDEFILE_ARGS = DESCRIPTOR.message_types_by_name["OverrideFile_Args"]
-_OVERRIDEFILE_RESULT = DESCRIPTOR.message_types_by_name["OverrideFile_Result"]
-_EVALCODE_ARGS = DESCRIPTOR.message_types_by_name["EvalCode_Args"]
-_EVALCODE_RESULT = DESCRIPTOR.message_types_by_name["EvalCode_Result"]
-_RESOLVECODE_ARGS = DESCRIPTOR.message_types_by_name["ResolveCode_Args"]
-_RESOLVECODE_RESULT = DESCRIPTOR.message_types_by_name["ResolveCode_Result"]
-_GETSCHEMATYPE_ARGS = DESCRIPTOR.message_types_by_name["GetSchemaType_Args"]
-_GETSCHEMATYPE_RESULT = DESCRIPTOR.message_types_by_name["GetSchemaType_Result"]
-_GETSCHEMATYPEMAPPING_ARGS = DESCRIPTOR.message_types_by_name[
-    "GetSchemaTypeMapping_Args"
-]
-_GETSCHEMATYPEMAPPING_RESULT = DESCRIPTOR.message_types_by_name[
-    "GetSchemaTypeMapping_Result"
-]
-_GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY = (
-    _GETSCHEMATYPEMAPPING_RESULT.nested_types_by_name["SchemaTypeMappingEntry"]
-)
-_VALIDATECODE_ARGS = DESCRIPTOR.message_types_by_name["ValidateCode_Args"]
-_VALIDATECODE_RESULT = DESCRIPTOR.message_types_by_name["ValidateCode_Result"]
-_CODESNIPPET = DESCRIPTOR.message_types_by_name["CodeSnippet"]
-_SPLICECODE_ARGS = DESCRIPTOR.message_types_by_name["SpliceCode_Args"]
-_SPLICECODE_RESULT = DESCRIPTOR.message_types_by_name["SpliceCode_Result"]
-_POSITION = DESCRIPTOR.message_types_by_name["Position"]
-_COMPLETE_ARGS = DESCRIPTOR.message_types_by_name["Complete_Args"]
-_COMPLETE_RESULT = DESCRIPTOR.message_types_by_name["Complete_Result"]
-_GOTODEF_ARGS = DESCRIPTOR.message_types_by_name["GoToDef_Args"]
-_GOTODEF_RESULT = DESCRIPTOR.message_types_by_name["GoToDef_Result"]
-_DOCUMENTSYMBOL_ARGS = DESCRIPTOR.message_types_by_name["DocumentSymbol_Args"]
-_DOCUMENTSYMBOL_RESULT = DESCRIPTOR.message_types_by_name["DocumentSymbol_Result"]
-_HOVER_ARGS = DESCRIPTOR.message_types_by_name["Hover_Args"]
-_HOVER_RESULT = DESCRIPTOR.message_types_by_name["Hover_Result"]
-_LISTDEPFILES_ARGS = DESCRIPTOR.message_types_by_name["ListDepFiles_Args"]
-_LISTDEPFILES_RESULT = DESCRIPTOR.message_types_by_name["ListDepFiles_Result"]
-_LOADSETTINGSFILES_ARGS = DESCRIPTOR.message_types_by_name["LoadSettingsFiles_Args"]
-_LOADSETTINGSFILES_RESULT = DESCRIPTOR.message_types_by_name["LoadSettingsFiles_Result"]
-_CLICONFIG = DESCRIPTOR.message_types_by_name["CliConfig"]
-_KEYVALUEPAIR = DESCRIPTOR.message_types_by_name["KeyValuePair"]
-_KCLTYPE = DESCRIPTOR.message_types_by_name["KclType"]
-_KCLTYPE_PROPERTIESENTRY = _KCLTYPE.nested_types_by_name["PropertiesEntry"]
-_KCLTYPE_EXAMPLESENTRY = _KCLTYPE.nested_types_by_name["ExamplesEntry"]
-_DECORATOR = DESCRIPTOR.message_types_by_name["Decorator"]
-_DECORATOR_KEYWORDSENTRY = _DECORATOR.nested_types_by_name["KeywordsEntry"]
-_EXAMPLE = DESCRIPTOR.message_types_by_name["Example"]
-CmdExternalPkgSpec = _reflection.GeneratedProtocolMessageType(
-    "CmdExternalPkgSpec",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _CMDEXTERNALPKGSPEC,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.CmdExternalPkgSpec)
-    },
-)
+
+_CMDEXTERNALPKGSPEC = DESCRIPTOR.message_types_by_name['CmdExternalPkgSpec']
+_CMDARGSPEC = DESCRIPTOR.message_types_by_name['CmdArgSpec']
+_CMDOVERRIDESPEC = DESCRIPTOR.message_types_by_name['CmdOverrideSpec']
+_ERROR = DESCRIPTOR.message_types_by_name['Error']
+_MESSAGE = DESCRIPTOR.message_types_by_name['Message']
+_PING_ARGS = DESCRIPTOR.message_types_by_name['Ping_Args']
+_PING_RESULT = DESCRIPTOR.message_types_by_name['Ping_Result']
+_LISTMETHOD_ARGS = DESCRIPTOR.message_types_by_name['ListMethod_Args']
+_LISTMETHOD_RESULT = DESCRIPTOR.message_types_by_name['ListMethod_Result']
+_PARSEFILE_ARGS = DESCRIPTOR.message_types_by_name['ParseFile_Args']
+_PARSEFILE_RESULT = DESCRIPTOR.message_types_by_name['ParseFile_Result']
+_PARSEPROGRAM_ARGS = DESCRIPTOR.message_types_by_name['ParseProgram_Args']
+_PARSEPROGRAM_RESULT = DESCRIPTOR.message_types_by_name['ParseProgram_Result']
+_LOADPACKAGE_ARGS = DESCRIPTOR.message_types_by_name['LoadPackage_Args']
+_LOADPACKAGE_RESULT = DESCRIPTOR.message_types_by_name['LoadPackage_Result']
+_LOADPACKAGE_RESULT_SCOPESENTRY = _LOADPACKAGE_RESULT.nested_types_by_name['ScopesEntry']
+_LOADPACKAGE_RESULT_SYMBOLSENTRY = _LOADPACKAGE_RESULT.nested_types_by_name['SymbolsEntry']
+_LOADPACKAGE_RESULT_NODESYMBOLMAPENTRY = _LOADPACKAGE_RESULT.nested_types_by_name['NodeSymbolMapEntry']
+_LOADPACKAGE_RESULT_SYMBOLNODEMAPENTRY = _LOADPACKAGE_RESULT.nested_types_by_name['SymbolNodeMapEntry']
+_LOADPACKAGE_RESULT_FULLYQUALIFIEDNAMEMAPENTRY = _LOADPACKAGE_RESULT.nested_types_by_name['FullyQualifiedNameMapEntry']
+_LOADPACKAGE_RESULT_PKGSCOPEMAPENTRY = _LOADPACKAGE_RESULT.nested_types_by_name['PkgScopeMapEntry']
+_SYMBOL = DESCRIPTOR.message_types_by_name['Symbol']
+_SCOPE = DESCRIPTOR.message_types_by_name['Scope']
+_SYMBOLINDEX = DESCRIPTOR.message_types_by_name['SymbolIndex']
+_SCOPEINDEX = DESCRIPTOR.message_types_by_name['ScopeIndex']
+_EXECPROGRAM_ARGS = DESCRIPTOR.message_types_by_name['ExecProgram_Args']
+_EXECPROGRAM_RESULT = DESCRIPTOR.message_types_by_name['ExecProgram_Result']
+_RESETPLUGIN_ARGS = DESCRIPTOR.message_types_by_name['ResetPlugin_Args']
+_RESETPLUGIN_RESULT = DESCRIPTOR.message_types_by_name['ResetPlugin_Result']
+_FORMATCODE_ARGS = DESCRIPTOR.message_types_by_name['FormatCode_Args']
+_FORMATCODE_RESULT = DESCRIPTOR.message_types_by_name['FormatCode_Result']
+_FORMATPATH_ARGS = DESCRIPTOR.message_types_by_name['FormatPath_Args']
+_FORMATPATH_RESULT = DESCRIPTOR.message_types_by_name['FormatPath_Result']
+_LINTPATH_ARGS = DESCRIPTOR.message_types_by_name['LintPath_Args']
+_LINTPATH_RESULT = DESCRIPTOR.message_types_by_name['LintPath_Result']
+_OVERRIDEFILE_ARGS = DESCRIPTOR.message_types_by_name['OverrideFile_Args']
+_OVERRIDEFILE_RESULT = DESCRIPTOR.message_types_by_name['OverrideFile_Result']
+_GETFULLSCHEMATYPE_ARGS = DESCRIPTOR.message_types_by_name['GetFullSchemaType_Args']
+_GETSCHEMATYPE_ARGS = DESCRIPTOR.message_types_by_name['GetSchemaType_Args']
+_GETSCHEMATYPE_RESULT = DESCRIPTOR.message_types_by_name['GetSchemaType_Result']
+_GETSCHEMATYPEMAPPING_ARGS = DESCRIPTOR.message_types_by_name['GetSchemaTypeMapping_Args']
+_GETSCHEMATYPEMAPPING_RESULT = DESCRIPTOR.message_types_by_name['GetSchemaTypeMapping_Result']
+_GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY = _GETSCHEMATYPEMAPPING_RESULT.nested_types_by_name['SchemaTypeMappingEntry']
+_VALIDATECODE_ARGS = DESCRIPTOR.message_types_by_name['ValidateCode_Args']
+_VALIDATECODE_RESULT = DESCRIPTOR.message_types_by_name['ValidateCode_Result']
+_POSITION = DESCRIPTOR.message_types_by_name['Position']
+_LISTDEPFILES_ARGS = DESCRIPTOR.message_types_by_name['ListDepFiles_Args']
+_LISTDEPFILES_RESULT = DESCRIPTOR.message_types_by_name['ListDepFiles_Result']
+_LOADSETTINGSFILES_ARGS = DESCRIPTOR.message_types_by_name['LoadSettingsFiles_Args']
+_LOADSETTINGSFILES_RESULT = DESCRIPTOR.message_types_by_name['LoadSettingsFiles_Result']
+_CLICONFIG = DESCRIPTOR.message_types_by_name['CliConfig']
+_KEYVALUEPAIR = DESCRIPTOR.message_types_by_name['KeyValuePair']
+_RENAME_ARGS = DESCRIPTOR.message_types_by_name['Rename_Args']
+_RENAME_RESULT = DESCRIPTOR.message_types_by_name['Rename_Result']
+_RENAMECODE_ARGS = DESCRIPTOR.message_types_by_name['RenameCode_Args']
+_RENAMECODE_ARGS_SOURCECODESENTRY = _RENAMECODE_ARGS.nested_types_by_name['SourceCodesEntry']
+_RENAMECODE_RESULT = DESCRIPTOR.message_types_by_name['RenameCode_Result']
+_RENAMECODE_RESULT_CHANGEDCODESENTRY = _RENAMECODE_RESULT.nested_types_by_name['ChangedCodesEntry']
+_TEST_ARGS = DESCRIPTOR.message_types_by_name['Test_Args']
+_TEST_RESULT = DESCRIPTOR.message_types_by_name['Test_Result']
+_TESTCASEINFO = DESCRIPTOR.message_types_by_name['TestCaseInfo']
+_KCLTYPE = DESCRIPTOR.message_types_by_name['KclType']
+_KCLTYPE_PROPERTIESENTRY = _KCLTYPE.nested_types_by_name['PropertiesEntry']
+_KCLTYPE_EXAMPLESENTRY = _KCLTYPE.nested_types_by_name['ExamplesEntry']
+_DECORATOR = DESCRIPTOR.message_types_by_name['Decorator']
+_DECORATOR_KEYWORDSENTRY = _DECORATOR.nested_types_by_name['KeywordsEntry']
+_EXAMPLE = DESCRIPTOR.message_types_by_name['Example']
+CmdExternalPkgSpec = _reflection.GeneratedProtocolMessageType('CmdExternalPkgSpec', (_message.Message,), {
+  'DESCRIPTOR' : _CMDEXTERNALPKGSPEC,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.CmdExternalPkgSpec)
+  })
 _sym_db.RegisterMessage(CmdExternalPkgSpec)
 
-CmdArgSpec = _reflection.GeneratedProtocolMessageType(
-    "CmdArgSpec",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _CMDARGSPEC,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.CmdArgSpec)
-    },
-)
+CmdArgSpec = _reflection.GeneratedProtocolMessageType('CmdArgSpec', (_message.Message,), {
+  'DESCRIPTOR' : _CMDARGSPEC,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.CmdArgSpec)
+  })
 _sym_db.RegisterMessage(CmdArgSpec)
 
-CmdOverrideSpec = _reflection.GeneratedProtocolMessageType(
-    "CmdOverrideSpec",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _CMDOVERRIDESPEC,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.CmdOverrideSpec)
-    },
-)
+CmdOverrideSpec = _reflection.GeneratedProtocolMessageType('CmdOverrideSpec', (_message.Message,), {
+  'DESCRIPTOR' : _CMDOVERRIDESPEC,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.CmdOverrideSpec)
+  })
 _sym_db.RegisterMessage(CmdOverrideSpec)
 
-RestResponse = _reflection.GeneratedProtocolMessageType(
-    "RestResponse",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _RESTRESPONSE,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.RestResponse)
-    },
-)
-_sym_db.RegisterMessage(RestResponse)
+Error = _reflection.GeneratedProtocolMessageType('Error', (_message.Message,), {
+  'DESCRIPTOR' : _ERROR,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.Error)
+  })
+_sym_db.RegisterMessage(Error)
 
-KclError = _reflection.GeneratedProtocolMessageType(
-    "KclError",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _KCLERROR,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.KclError)
-    },
-)
-_sym_db.RegisterMessage(KclError)
+Message = _reflection.GeneratedProtocolMessageType('Message', (_message.Message,), {
+  'DESCRIPTOR' : _MESSAGE,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.Message)
+  })
+_sym_db.RegisterMessage(Message)
 
-KclErrorInfo = _reflection.GeneratedProtocolMessageType(
-    "KclErrorInfo",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _KCLERRORINFO,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.KclErrorInfo)
-    },
-)
-_sym_db.RegisterMessage(KclErrorInfo)
-
-Ping_Args = _reflection.GeneratedProtocolMessageType(
-    "Ping_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _PING_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.Ping_Args)
-    },
-)
+Ping_Args = _reflection.GeneratedProtocolMessageType('Ping_Args', (_message.Message,), {
+  'DESCRIPTOR' : _PING_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.Ping_Args)
+  })
 _sym_db.RegisterMessage(Ping_Args)
 
-Ping_Result = _reflection.GeneratedProtocolMessageType(
-    "Ping_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _PING_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.Ping_Result)
-    },
-)
+Ping_Result = _reflection.GeneratedProtocolMessageType('Ping_Result', (_message.Message,), {
+  'DESCRIPTOR' : _PING_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.Ping_Result)
+  })
 _sym_db.RegisterMessage(Ping_Result)
 
-ListMethod_Args = _reflection.GeneratedProtocolMessageType(
-    "ListMethod_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _LISTMETHOD_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ListMethod_Args)
-    },
-)
+ListMethod_Args = _reflection.GeneratedProtocolMessageType('ListMethod_Args', (_message.Message,), {
+  'DESCRIPTOR' : _LISTMETHOD_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.ListMethod_Args)
+  })
 _sym_db.RegisterMessage(ListMethod_Args)
 
-ListMethod_Result = _reflection.GeneratedProtocolMessageType(
-    "ListMethod_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _LISTMETHOD_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ListMethod_Result)
-    },
-)
+ListMethod_Result = _reflection.GeneratedProtocolMessageType('ListMethod_Result', (_message.Message,), {
+  'DESCRIPTOR' : _LISTMETHOD_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.ListMethod_Result)
+  })
 _sym_db.RegisterMessage(ListMethod_Result)
 
-ParseFile_LarkTree_Args = _reflection.GeneratedProtocolMessageType(
-    "ParseFile_LarkTree_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _PARSEFILE_LARKTREE_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ParseFile_LarkTree_Args)
-    },
-)
-_sym_db.RegisterMessage(ParseFile_LarkTree_Args)
+ParseFile_Args = _reflection.GeneratedProtocolMessageType('ParseFile_Args', (_message.Message,), {
+  'DESCRIPTOR' : _PARSEFILE_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.ParseFile_Args)
+  })
+_sym_db.RegisterMessage(ParseFile_Args)
 
-ParseFile_LarkTree_Result = _reflection.GeneratedProtocolMessageType(
-    "ParseFile_LarkTree_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _PARSEFILE_LARKTREE_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ParseFile_LarkTree_Result)
-    },
-)
-_sym_db.RegisterMessage(ParseFile_LarkTree_Result)
+ParseFile_Result = _reflection.GeneratedProtocolMessageType('ParseFile_Result', (_message.Message,), {
+  'DESCRIPTOR' : _PARSEFILE_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.ParseFile_Result)
+  })
+_sym_db.RegisterMessage(ParseFile_Result)
 
-ParseFile_AST_Args = _reflection.GeneratedProtocolMessageType(
-    "ParseFile_AST_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _PARSEFILE_AST_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ParseFile_AST_Args)
-    },
-)
-_sym_db.RegisterMessage(ParseFile_AST_Args)
+ParseProgram_Args = _reflection.GeneratedProtocolMessageType('ParseProgram_Args', (_message.Message,), {
+  'DESCRIPTOR' : _PARSEPROGRAM_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.ParseProgram_Args)
+  })
+_sym_db.RegisterMessage(ParseProgram_Args)
 
-ParseFile_AST_Result = _reflection.GeneratedProtocolMessageType(
-    "ParseFile_AST_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _PARSEFILE_AST_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ParseFile_AST_Result)
-    },
-)
-_sym_db.RegisterMessage(ParseFile_AST_Result)
+ParseProgram_Result = _reflection.GeneratedProtocolMessageType('ParseProgram_Result', (_message.Message,), {
+  'DESCRIPTOR' : _PARSEPROGRAM_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.ParseProgram_Result)
+  })
+_sym_db.RegisterMessage(ParseProgram_Result)
 
-ParseProgram_AST_Args = _reflection.GeneratedProtocolMessageType(
-    "ParseProgram_AST_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _PARSEPROGRAM_AST_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ParseProgram_AST_Args)
-    },
-)
-_sym_db.RegisterMessage(ParseProgram_AST_Args)
+LoadPackage_Args = _reflection.GeneratedProtocolMessageType('LoadPackage_Args', (_message.Message,), {
+  'DESCRIPTOR' : _LOADPACKAGE_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.LoadPackage_Args)
+  })
+_sym_db.RegisterMessage(LoadPackage_Args)
 
-ParseProgram_AST_Result = _reflection.GeneratedProtocolMessageType(
-    "ParseProgram_AST_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _PARSEPROGRAM_AST_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ParseProgram_AST_Result)
-    },
-)
-_sym_db.RegisterMessage(ParseProgram_AST_Result)
+LoadPackage_Result = _reflection.GeneratedProtocolMessageType('LoadPackage_Result', (_message.Message,), {
 
-ExecProgram_Args = _reflection.GeneratedProtocolMessageType(
-    "ExecProgram_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _EXECPROGRAM_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ExecProgram_Args)
-    },
-)
+  'ScopesEntry' : _reflection.GeneratedProtocolMessageType('ScopesEntry', (_message.Message,), {
+    'DESCRIPTOR' : _LOADPACKAGE_RESULT_SCOPESENTRY,
+    '__module__' : 'gpyrpc.gpyrpc_pb2'
+    # @@protoc_insertion_point(class_scope:com.kcl.api.LoadPackage_Result.ScopesEntry)
+    })
+  ,
+
+  'SymbolsEntry' : _reflection.GeneratedProtocolMessageType('SymbolsEntry', (_message.Message,), {
+    'DESCRIPTOR' : _LOADPACKAGE_RESULT_SYMBOLSENTRY,
+    '__module__' : 'gpyrpc.gpyrpc_pb2'
+    # @@protoc_insertion_point(class_scope:com.kcl.api.LoadPackage_Result.SymbolsEntry)
+    })
+  ,
+
+  'NodeSymbolMapEntry' : _reflection.GeneratedProtocolMessageType('NodeSymbolMapEntry', (_message.Message,), {
+    'DESCRIPTOR' : _LOADPACKAGE_RESULT_NODESYMBOLMAPENTRY,
+    '__module__' : 'gpyrpc.gpyrpc_pb2'
+    # @@protoc_insertion_point(class_scope:com.kcl.api.LoadPackage_Result.NodeSymbolMapEntry)
+    })
+  ,
+
+  'SymbolNodeMapEntry' : _reflection.GeneratedProtocolMessageType('SymbolNodeMapEntry', (_message.Message,), {
+    'DESCRIPTOR' : _LOADPACKAGE_RESULT_SYMBOLNODEMAPENTRY,
+    '__module__' : 'gpyrpc.gpyrpc_pb2'
+    # @@protoc_insertion_point(class_scope:com.kcl.api.LoadPackage_Result.SymbolNodeMapEntry)
+    })
+  ,
+
+  'FullyQualifiedNameMapEntry' : _reflection.GeneratedProtocolMessageType('FullyQualifiedNameMapEntry', (_message.Message,), {
+    'DESCRIPTOR' : _LOADPACKAGE_RESULT_FULLYQUALIFIEDNAMEMAPENTRY,
+    '__module__' : 'gpyrpc.gpyrpc_pb2'
+    # @@protoc_insertion_point(class_scope:com.kcl.api.LoadPackage_Result.FullyQualifiedNameMapEntry)
+    })
+  ,
+
+  'PkgScopeMapEntry' : _reflection.GeneratedProtocolMessageType('PkgScopeMapEntry', (_message.Message,), {
+    'DESCRIPTOR' : _LOADPACKAGE_RESULT_PKGSCOPEMAPENTRY,
+    '__module__' : 'gpyrpc.gpyrpc_pb2'
+    # @@protoc_insertion_point(class_scope:com.kcl.api.LoadPackage_Result.PkgScopeMapEntry)
+    })
+  ,
+  'DESCRIPTOR' : _LOADPACKAGE_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.LoadPackage_Result)
+  })
+_sym_db.RegisterMessage(LoadPackage_Result)
+_sym_db.RegisterMessage(LoadPackage_Result.ScopesEntry)
+_sym_db.RegisterMessage(LoadPackage_Result.SymbolsEntry)
+_sym_db.RegisterMessage(LoadPackage_Result.NodeSymbolMapEntry)
+_sym_db.RegisterMessage(LoadPackage_Result.SymbolNodeMapEntry)
+_sym_db.RegisterMessage(LoadPackage_Result.FullyQualifiedNameMapEntry)
+_sym_db.RegisterMessage(LoadPackage_Result.PkgScopeMapEntry)
+
+Symbol = _reflection.GeneratedProtocolMessageType('Symbol', (_message.Message,), {
+  'DESCRIPTOR' : _SYMBOL,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.Symbol)
+  })
+_sym_db.RegisterMessage(Symbol)
+
+Scope = _reflection.GeneratedProtocolMessageType('Scope', (_message.Message,), {
+  'DESCRIPTOR' : _SCOPE,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.Scope)
+  })
+_sym_db.RegisterMessage(Scope)
+
+SymbolIndex = _reflection.GeneratedProtocolMessageType('SymbolIndex', (_message.Message,), {
+  'DESCRIPTOR' : _SYMBOLINDEX,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.SymbolIndex)
+  })
+_sym_db.RegisterMessage(SymbolIndex)
+
+ScopeIndex = _reflection.GeneratedProtocolMessageType('ScopeIndex', (_message.Message,), {
+  'DESCRIPTOR' : _SCOPEINDEX,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.ScopeIndex)
+  })
+_sym_db.RegisterMessage(ScopeIndex)
+
+ExecProgram_Args = _reflection.GeneratedProtocolMessageType('ExecProgram_Args', (_message.Message,), {
+  'DESCRIPTOR' : _EXECPROGRAM_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.ExecProgram_Args)
+  })
 _sym_db.RegisterMessage(ExecProgram_Args)
 
-ExecProgram_Result = _reflection.GeneratedProtocolMessageType(
-    "ExecProgram_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _EXECPROGRAM_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ExecProgram_Result)
-    },
-)
+ExecProgram_Result = _reflection.GeneratedProtocolMessageType('ExecProgram_Result', (_message.Message,), {
+  'DESCRIPTOR' : _EXECPROGRAM_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.ExecProgram_Result)
+  })
 _sym_db.RegisterMessage(ExecProgram_Result)
 
-ResetPlugin_Args = _reflection.GeneratedProtocolMessageType(
-    "ResetPlugin_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _RESETPLUGIN_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ResetPlugin_Args)
-    },
-)
+ResetPlugin_Args = _reflection.GeneratedProtocolMessageType('ResetPlugin_Args', (_message.Message,), {
+  'DESCRIPTOR' : _RESETPLUGIN_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.ResetPlugin_Args)
+  })
 _sym_db.RegisterMessage(ResetPlugin_Args)
 
-ResetPlugin_Result = _reflection.GeneratedProtocolMessageType(
-    "ResetPlugin_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _RESETPLUGIN_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ResetPlugin_Result)
-    },
-)
+ResetPlugin_Result = _reflection.GeneratedProtocolMessageType('ResetPlugin_Result', (_message.Message,), {
+  'DESCRIPTOR' : _RESETPLUGIN_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.ResetPlugin_Result)
+  })
 _sym_db.RegisterMessage(ResetPlugin_Result)
 
-FormatCode_Args = _reflection.GeneratedProtocolMessageType(
-    "FormatCode_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _FORMATCODE_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.FormatCode_Args)
-    },
-)
+FormatCode_Args = _reflection.GeneratedProtocolMessageType('FormatCode_Args', (_message.Message,), {
+  'DESCRIPTOR' : _FORMATCODE_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.FormatCode_Args)
+  })
 _sym_db.RegisterMessage(FormatCode_Args)
 
-FormatCode_Result = _reflection.GeneratedProtocolMessageType(
-    "FormatCode_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _FORMATCODE_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.FormatCode_Result)
-    },
-)
+FormatCode_Result = _reflection.GeneratedProtocolMessageType('FormatCode_Result', (_message.Message,), {
+  'DESCRIPTOR' : _FORMATCODE_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.FormatCode_Result)
+  })
 _sym_db.RegisterMessage(FormatCode_Result)
 
-FormatPath_Args = _reflection.GeneratedProtocolMessageType(
-    "FormatPath_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _FORMATPATH_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.FormatPath_Args)
-    },
-)
+FormatPath_Args = _reflection.GeneratedProtocolMessageType('FormatPath_Args', (_message.Message,), {
+  'DESCRIPTOR' : _FORMATPATH_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.FormatPath_Args)
+  })
 _sym_db.RegisterMessage(FormatPath_Args)
 
-FormatPath_Result = _reflection.GeneratedProtocolMessageType(
-    "FormatPath_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _FORMATPATH_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.FormatPath_Result)
-    },
-)
+FormatPath_Result = _reflection.GeneratedProtocolMessageType('FormatPath_Result', (_message.Message,), {
+  'DESCRIPTOR' : _FORMATPATH_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.FormatPath_Result)
+  })
 _sym_db.RegisterMessage(FormatPath_Result)
 
-LintPath_Args = _reflection.GeneratedProtocolMessageType(
-    "LintPath_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _LINTPATH_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.LintPath_Args)
-    },
-)
+LintPath_Args = _reflection.GeneratedProtocolMessageType('LintPath_Args', (_message.Message,), {
+  'DESCRIPTOR' : _LINTPATH_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.LintPath_Args)
+  })
 _sym_db.RegisterMessage(LintPath_Args)
 
-LintPath_Result = _reflection.GeneratedProtocolMessageType(
-    "LintPath_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _LINTPATH_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.LintPath_Result)
-    },
-)
+LintPath_Result = _reflection.GeneratedProtocolMessageType('LintPath_Result', (_message.Message,), {
+  'DESCRIPTOR' : _LINTPATH_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.LintPath_Result)
+  })
 _sym_db.RegisterMessage(LintPath_Result)
 
-OverrideFile_Args = _reflection.GeneratedProtocolMessageType(
-    "OverrideFile_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _OVERRIDEFILE_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.OverrideFile_Args)
-    },
-)
+OverrideFile_Args = _reflection.GeneratedProtocolMessageType('OverrideFile_Args', (_message.Message,), {
+  'DESCRIPTOR' : _OVERRIDEFILE_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.OverrideFile_Args)
+  })
 _sym_db.RegisterMessage(OverrideFile_Args)
 
-OverrideFile_Result = _reflection.GeneratedProtocolMessageType(
-    "OverrideFile_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _OVERRIDEFILE_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.OverrideFile_Result)
-    },
-)
+OverrideFile_Result = _reflection.GeneratedProtocolMessageType('OverrideFile_Result', (_message.Message,), {
+  'DESCRIPTOR' : _OVERRIDEFILE_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.OverrideFile_Result)
+  })
 _sym_db.RegisterMessage(OverrideFile_Result)
 
-EvalCode_Args = _reflection.GeneratedProtocolMessageType(
-    "EvalCode_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _EVALCODE_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.EvalCode_Args)
-    },
-)
-_sym_db.RegisterMessage(EvalCode_Args)
+GetFullSchemaType_Args = _reflection.GeneratedProtocolMessageType('GetFullSchemaType_Args', (_message.Message,), {
+  'DESCRIPTOR' : _GETFULLSCHEMATYPE_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.GetFullSchemaType_Args)
+  })
+_sym_db.RegisterMessage(GetFullSchemaType_Args)
 
-EvalCode_Result = _reflection.GeneratedProtocolMessageType(
-    "EvalCode_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _EVALCODE_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.EvalCode_Result)
-    },
-)
-_sym_db.RegisterMessage(EvalCode_Result)
-
-ResolveCode_Args = _reflection.GeneratedProtocolMessageType(
-    "ResolveCode_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _RESOLVECODE_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ResolveCode_Args)
-    },
-)
-_sym_db.RegisterMessage(ResolveCode_Args)
-
-ResolveCode_Result = _reflection.GeneratedProtocolMessageType(
-    "ResolveCode_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _RESOLVECODE_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ResolveCode_Result)
-    },
-)
-_sym_db.RegisterMessage(ResolveCode_Result)
-
-GetSchemaType_Args = _reflection.GeneratedProtocolMessageType(
-    "GetSchemaType_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _GETSCHEMATYPE_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.GetSchemaType_Args)
-    },
-)
+GetSchemaType_Args = _reflection.GeneratedProtocolMessageType('GetSchemaType_Args', (_message.Message,), {
+  'DESCRIPTOR' : _GETSCHEMATYPE_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.GetSchemaType_Args)
+  })
 _sym_db.RegisterMessage(GetSchemaType_Args)
 
-GetSchemaType_Result = _reflection.GeneratedProtocolMessageType(
-    "GetSchemaType_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _GETSCHEMATYPE_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.GetSchemaType_Result)
-    },
-)
+GetSchemaType_Result = _reflection.GeneratedProtocolMessageType('GetSchemaType_Result', (_message.Message,), {
+  'DESCRIPTOR' : _GETSCHEMATYPE_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.GetSchemaType_Result)
+  })
 _sym_db.RegisterMessage(GetSchemaType_Result)
 
-GetSchemaTypeMapping_Args = _reflection.GeneratedProtocolMessageType(
-    "GetSchemaTypeMapping_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _GETSCHEMATYPEMAPPING_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.GetSchemaTypeMapping_Args)
-    },
-)
+GetSchemaTypeMapping_Args = _reflection.GeneratedProtocolMessageType('GetSchemaTypeMapping_Args', (_message.Message,), {
+  'DESCRIPTOR' : _GETSCHEMATYPEMAPPING_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.GetSchemaTypeMapping_Args)
+  })
 _sym_db.RegisterMessage(GetSchemaTypeMapping_Args)
 
-GetSchemaTypeMapping_Result = _reflection.GeneratedProtocolMessageType(
-    "GetSchemaTypeMapping_Result",
-    (_message.Message,),
-    {
-        "SchemaTypeMappingEntry": _reflection.GeneratedProtocolMessageType(
-            "SchemaTypeMappingEntry",
-            (_message.Message,),
-            {
-                "DESCRIPTOR": _GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY,
-                "__module__": "gpyrpc.gpyrpc_pb2"
-                # @@protoc_insertion_point(class_scope:gpyrpc.GetSchemaTypeMapping_Result.SchemaTypeMappingEntry)
-            },
-        ),
-        "DESCRIPTOR": _GETSCHEMATYPEMAPPING_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.GetSchemaTypeMapping_Result)
-    },
-)
+GetSchemaTypeMapping_Result = _reflection.GeneratedProtocolMessageType('GetSchemaTypeMapping_Result', (_message.Message,), {
+
+  'SchemaTypeMappingEntry' : _reflection.GeneratedProtocolMessageType('SchemaTypeMappingEntry', (_message.Message,), {
+    'DESCRIPTOR' : _GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY,
+    '__module__' : 'gpyrpc.gpyrpc_pb2'
+    # @@protoc_insertion_point(class_scope:com.kcl.api.GetSchemaTypeMapping_Result.SchemaTypeMappingEntry)
+    })
+  ,
+  'DESCRIPTOR' : _GETSCHEMATYPEMAPPING_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.GetSchemaTypeMapping_Result)
+  })
 _sym_db.RegisterMessage(GetSchemaTypeMapping_Result)
 _sym_db.RegisterMessage(GetSchemaTypeMapping_Result.SchemaTypeMappingEntry)
 
-ValidateCode_Args = _reflection.GeneratedProtocolMessageType(
-    "ValidateCode_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _VALIDATECODE_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ValidateCode_Args)
-    },
-)
+ValidateCode_Args = _reflection.GeneratedProtocolMessageType('ValidateCode_Args', (_message.Message,), {
+  'DESCRIPTOR' : _VALIDATECODE_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.ValidateCode_Args)
+  })
 _sym_db.RegisterMessage(ValidateCode_Args)
 
-ValidateCode_Result = _reflection.GeneratedProtocolMessageType(
-    "ValidateCode_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _VALIDATECODE_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ValidateCode_Result)
-    },
-)
+ValidateCode_Result = _reflection.GeneratedProtocolMessageType('ValidateCode_Result', (_message.Message,), {
+  'DESCRIPTOR' : _VALIDATECODE_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.ValidateCode_Result)
+  })
 _sym_db.RegisterMessage(ValidateCode_Result)
 
-CodeSnippet = _reflection.GeneratedProtocolMessageType(
-    "CodeSnippet",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _CODESNIPPET,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.CodeSnippet)
-    },
-)
-_sym_db.RegisterMessage(CodeSnippet)
-
-SpliceCode_Args = _reflection.GeneratedProtocolMessageType(
-    "SpliceCode_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _SPLICECODE_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.SpliceCode_Args)
-    },
-)
-_sym_db.RegisterMessage(SpliceCode_Args)
-
-SpliceCode_Result = _reflection.GeneratedProtocolMessageType(
-    "SpliceCode_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _SPLICECODE_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.SpliceCode_Result)
-    },
-)
-_sym_db.RegisterMessage(SpliceCode_Result)
-
-Position = _reflection.GeneratedProtocolMessageType(
-    "Position",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _POSITION,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.Position)
-    },
-)
+Position = _reflection.GeneratedProtocolMessageType('Position', (_message.Message,), {
+  'DESCRIPTOR' : _POSITION,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.Position)
+  })
 _sym_db.RegisterMessage(Position)
 
-Complete_Args = _reflection.GeneratedProtocolMessageType(
-    "Complete_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _COMPLETE_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.Complete_Args)
-    },
-)
-_sym_db.RegisterMessage(Complete_Args)
-
-Complete_Result = _reflection.GeneratedProtocolMessageType(
-    "Complete_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _COMPLETE_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.Complete_Result)
-    },
-)
-_sym_db.RegisterMessage(Complete_Result)
-
-GoToDef_Args = _reflection.GeneratedProtocolMessageType(
-    "GoToDef_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _GOTODEF_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.GoToDef_Args)
-    },
-)
-_sym_db.RegisterMessage(GoToDef_Args)
-
-GoToDef_Result = _reflection.GeneratedProtocolMessageType(
-    "GoToDef_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _GOTODEF_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.GoToDef_Result)
-    },
-)
-_sym_db.RegisterMessage(GoToDef_Result)
-
-DocumentSymbol_Args = _reflection.GeneratedProtocolMessageType(
-    "DocumentSymbol_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _DOCUMENTSYMBOL_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.DocumentSymbol_Args)
-    },
-)
-_sym_db.RegisterMessage(DocumentSymbol_Args)
-
-DocumentSymbol_Result = _reflection.GeneratedProtocolMessageType(
-    "DocumentSymbol_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _DOCUMENTSYMBOL_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.DocumentSymbol_Result)
-    },
-)
-_sym_db.RegisterMessage(DocumentSymbol_Result)
-
-Hover_Args = _reflection.GeneratedProtocolMessageType(
-    "Hover_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _HOVER_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.Hover_Args)
-    },
-)
-_sym_db.RegisterMessage(Hover_Args)
-
-Hover_Result = _reflection.GeneratedProtocolMessageType(
-    "Hover_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _HOVER_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.Hover_Result)
-    },
-)
-_sym_db.RegisterMessage(Hover_Result)
-
-ListDepFiles_Args = _reflection.GeneratedProtocolMessageType(
-    "ListDepFiles_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _LISTDEPFILES_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ListDepFiles_Args)
-    },
-)
+ListDepFiles_Args = _reflection.GeneratedProtocolMessageType('ListDepFiles_Args', (_message.Message,), {
+  'DESCRIPTOR' : _LISTDEPFILES_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.ListDepFiles_Args)
+  })
 _sym_db.RegisterMessage(ListDepFiles_Args)
 
-ListDepFiles_Result = _reflection.GeneratedProtocolMessageType(
-    "ListDepFiles_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _LISTDEPFILES_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.ListDepFiles_Result)
-    },
-)
+ListDepFiles_Result = _reflection.GeneratedProtocolMessageType('ListDepFiles_Result', (_message.Message,), {
+  'DESCRIPTOR' : _LISTDEPFILES_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.ListDepFiles_Result)
+  })
 _sym_db.RegisterMessage(ListDepFiles_Result)
 
-LoadSettingsFiles_Args = _reflection.GeneratedProtocolMessageType(
-    "LoadSettingsFiles_Args",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _LOADSETTINGSFILES_ARGS,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.LoadSettingsFiles_Args)
-    },
-)
+LoadSettingsFiles_Args = _reflection.GeneratedProtocolMessageType('LoadSettingsFiles_Args', (_message.Message,), {
+  'DESCRIPTOR' : _LOADSETTINGSFILES_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.LoadSettingsFiles_Args)
+  })
 _sym_db.RegisterMessage(LoadSettingsFiles_Args)
 
-LoadSettingsFiles_Result = _reflection.GeneratedProtocolMessageType(
-    "LoadSettingsFiles_Result",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _LOADSETTINGSFILES_RESULT,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.LoadSettingsFiles_Result)
-    },
-)
+LoadSettingsFiles_Result = _reflection.GeneratedProtocolMessageType('LoadSettingsFiles_Result', (_message.Message,), {
+  'DESCRIPTOR' : _LOADSETTINGSFILES_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.LoadSettingsFiles_Result)
+  })
 _sym_db.RegisterMessage(LoadSettingsFiles_Result)
 
-CliConfig = _reflection.GeneratedProtocolMessageType(
-    "CliConfig",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _CLICONFIG,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.CliConfig)
-    },
-)
+CliConfig = _reflection.GeneratedProtocolMessageType('CliConfig', (_message.Message,), {
+  'DESCRIPTOR' : _CLICONFIG,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.CliConfig)
+  })
 _sym_db.RegisterMessage(CliConfig)
 
-KeyValuePair = _reflection.GeneratedProtocolMessageType(
-    "KeyValuePair",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _KEYVALUEPAIR,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.KeyValuePair)
-    },
-)
+KeyValuePair = _reflection.GeneratedProtocolMessageType('KeyValuePair', (_message.Message,), {
+  'DESCRIPTOR' : _KEYVALUEPAIR,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.KeyValuePair)
+  })
 _sym_db.RegisterMessage(KeyValuePair)
 
-KclType = _reflection.GeneratedProtocolMessageType(
-    "KclType",
-    (_message.Message,),
-    {
-        "PropertiesEntry": _reflection.GeneratedProtocolMessageType(
-            "PropertiesEntry",
-            (_message.Message,),
-            {
-                "DESCRIPTOR": _KCLTYPE_PROPERTIESENTRY,
-                "__module__": "gpyrpc.gpyrpc_pb2"
-                # @@protoc_insertion_point(class_scope:gpyrpc.KclType.PropertiesEntry)
-            },
-        ),
-        "ExamplesEntry": _reflection.GeneratedProtocolMessageType(
-            "ExamplesEntry",
-            (_message.Message,),
-            {
-                "DESCRIPTOR": _KCLTYPE_EXAMPLESENTRY,
-                "__module__": "gpyrpc.gpyrpc_pb2"
-                # @@protoc_insertion_point(class_scope:gpyrpc.KclType.ExamplesEntry)
-            },
-        ),
-        "DESCRIPTOR": _KCLTYPE,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.KclType)
-    },
-)
+Rename_Args = _reflection.GeneratedProtocolMessageType('Rename_Args', (_message.Message,), {
+  'DESCRIPTOR' : _RENAME_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.Rename_Args)
+  })
+_sym_db.RegisterMessage(Rename_Args)
+
+Rename_Result = _reflection.GeneratedProtocolMessageType('Rename_Result', (_message.Message,), {
+  'DESCRIPTOR' : _RENAME_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.Rename_Result)
+  })
+_sym_db.RegisterMessage(Rename_Result)
+
+RenameCode_Args = _reflection.GeneratedProtocolMessageType('RenameCode_Args', (_message.Message,), {
+
+  'SourceCodesEntry' : _reflection.GeneratedProtocolMessageType('SourceCodesEntry', (_message.Message,), {
+    'DESCRIPTOR' : _RENAMECODE_ARGS_SOURCECODESENTRY,
+    '__module__' : 'gpyrpc.gpyrpc_pb2'
+    # @@protoc_insertion_point(class_scope:com.kcl.api.RenameCode_Args.SourceCodesEntry)
+    })
+  ,
+  'DESCRIPTOR' : _RENAMECODE_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.RenameCode_Args)
+  })
+_sym_db.RegisterMessage(RenameCode_Args)
+_sym_db.RegisterMessage(RenameCode_Args.SourceCodesEntry)
+
+RenameCode_Result = _reflection.GeneratedProtocolMessageType('RenameCode_Result', (_message.Message,), {
+
+  'ChangedCodesEntry' : _reflection.GeneratedProtocolMessageType('ChangedCodesEntry', (_message.Message,), {
+    'DESCRIPTOR' : _RENAMECODE_RESULT_CHANGEDCODESENTRY,
+    '__module__' : 'gpyrpc.gpyrpc_pb2'
+    # @@protoc_insertion_point(class_scope:com.kcl.api.RenameCode_Result.ChangedCodesEntry)
+    })
+  ,
+  'DESCRIPTOR' : _RENAMECODE_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.RenameCode_Result)
+  })
+_sym_db.RegisterMessage(RenameCode_Result)
+_sym_db.RegisterMessage(RenameCode_Result.ChangedCodesEntry)
+
+Test_Args = _reflection.GeneratedProtocolMessageType('Test_Args', (_message.Message,), {
+  'DESCRIPTOR' : _TEST_ARGS,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.Test_Args)
+  })
+_sym_db.RegisterMessage(Test_Args)
+
+Test_Result = _reflection.GeneratedProtocolMessageType('Test_Result', (_message.Message,), {
+  'DESCRIPTOR' : _TEST_RESULT,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.Test_Result)
+  })
+_sym_db.RegisterMessage(Test_Result)
+
+TestCaseInfo = _reflection.GeneratedProtocolMessageType('TestCaseInfo', (_message.Message,), {
+  'DESCRIPTOR' : _TESTCASEINFO,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.TestCaseInfo)
+  })
+_sym_db.RegisterMessage(TestCaseInfo)
+
+KclType = _reflection.GeneratedProtocolMessageType('KclType', (_message.Message,), {
+
+  'PropertiesEntry' : _reflection.GeneratedProtocolMessageType('PropertiesEntry', (_message.Message,), {
+    'DESCRIPTOR' : _KCLTYPE_PROPERTIESENTRY,
+    '__module__' : 'gpyrpc.gpyrpc_pb2'
+    # @@protoc_insertion_point(class_scope:com.kcl.api.KclType.PropertiesEntry)
+    })
+  ,
+
+  'ExamplesEntry' : _reflection.GeneratedProtocolMessageType('ExamplesEntry', (_message.Message,), {
+    'DESCRIPTOR' : _KCLTYPE_EXAMPLESENTRY,
+    '__module__' : 'gpyrpc.gpyrpc_pb2'
+    # @@protoc_insertion_point(class_scope:com.kcl.api.KclType.ExamplesEntry)
+    })
+  ,
+  'DESCRIPTOR' : _KCLTYPE,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.KclType)
+  })
 _sym_db.RegisterMessage(KclType)
 _sym_db.RegisterMessage(KclType.PropertiesEntry)
 _sym_db.RegisterMessage(KclType.ExamplesEntry)
 
-Decorator = _reflection.GeneratedProtocolMessageType(
-    "Decorator",
-    (_message.Message,),
-    {
-        "KeywordsEntry": _reflection.GeneratedProtocolMessageType(
-            "KeywordsEntry",
-            (_message.Message,),
-            {
-                "DESCRIPTOR": _DECORATOR_KEYWORDSENTRY,
-                "__module__": "gpyrpc.gpyrpc_pb2"
-                # @@protoc_insertion_point(class_scope:gpyrpc.Decorator.KeywordsEntry)
-            },
-        ),
-        "DESCRIPTOR": _DECORATOR,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.Decorator)
-    },
-)
+Decorator = _reflection.GeneratedProtocolMessageType('Decorator', (_message.Message,), {
+
+  'KeywordsEntry' : _reflection.GeneratedProtocolMessageType('KeywordsEntry', (_message.Message,), {
+    'DESCRIPTOR' : _DECORATOR_KEYWORDSENTRY,
+    '__module__' : 'gpyrpc.gpyrpc_pb2'
+    # @@protoc_insertion_point(class_scope:com.kcl.api.Decorator.KeywordsEntry)
+    })
+  ,
+  'DESCRIPTOR' : _DECORATOR,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.Decorator)
+  })
 _sym_db.RegisterMessage(Decorator)
 _sym_db.RegisterMessage(Decorator.KeywordsEntry)
 
-Example = _reflection.GeneratedProtocolMessageType(
-    "Example",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _EXAMPLE,
-        "__module__": "gpyrpc.gpyrpc_pb2"
-        # @@protoc_insertion_point(class_scope:gpyrpc.Example)
-    },
-)
+Example = _reflection.GeneratedProtocolMessageType('Example', (_message.Message,), {
+  'DESCRIPTOR' : _EXAMPLE,
+  '__module__' : 'gpyrpc.gpyrpc_pb2'
+  # @@protoc_insertion_point(class_scope:com.kcl.api.Example)
+  })
 _sym_db.RegisterMessage(Example)
 
-_BUILTINSERVICE = DESCRIPTOR.services_by_name["BuiltinService"]
-_KCLVMSERVICE = DESCRIPTOR.services_by_name["KclvmService"]
+_BUILTINSERVICE = DESCRIPTOR.services_by_name['BuiltinService']
+_KCLVMSERVICE = DESCRIPTOR.services_by_name['KclvmService']
 if _descriptor._USE_C_DESCRIPTORS == False:
-    DESCRIPTOR._options = None
-    _GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY._options = None
-    _GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY._serialized_options = b"8\001"
-    _KCLTYPE_PROPERTIESENTRY._options = None
-    _KCLTYPE_PROPERTIESENTRY._serialized_options = b"8\001"
-    _KCLTYPE_EXAMPLESENTRY._options = None
-    _KCLTYPE_EXAMPLESENTRY._serialized_options = b"8\001"
-    _DECORATOR_KEYWORDSENTRY._options = None
-    _DECORATOR_KEYWORDSENTRY._serialized_options = b"8\001"
-    _CMDEXTERNALPKGSPEC._serialized_start = 92
-    _CMDEXTERNALPKGSPEC._serialized_end = 148
-    _CMDARGSPEC._serialized_start = 150
-    _CMDARGSPEC._serialized_end = 191
-    _CMDOVERRIDESPEC._serialized_start = 193
-    _CMDOVERRIDESPEC._serialized_end = 284
-    _RESTRESPONSE._serialized_start = 286
-    _RESTRESPONSE._serialized_end = 388
-    _KCLERROR._serialized_start = 390
-    _KCLERROR._serialized_end = 486
-    _KCLERRORINFO._serialized_start = 488
-    _KCLERRORINFO._serialized_end = 607
-    _PING_ARGS._serialized_start = 609
-    _PING_ARGS._serialized_end = 635
-    _PING_RESULT._serialized_start = 637
-    _PING_RESULT._serialized_end = 665
-    _LISTMETHOD_ARGS._serialized_start = 667
-    _LISTMETHOD_ARGS._serialized_end = 684
-    _LISTMETHOD_RESULT._serialized_start = 686
-    _LISTMETHOD_RESULT._serialized_end = 731
-    _PARSEFILE_LARKTREE_ARGS._serialized_start = 733
-    _PARSEFILE_LARKTREE_ARGS._serialized_end = 823
-    _PARSEFILE_LARKTREE_RESULT._serialized_start = 825
-    _PARSEFILE_LARKTREE_RESULT._serialized_end = 876
-    _PARSEFILE_AST_ARGS._serialized_start = 878
-    _PARSEFILE_AST_ARGS._serialized_end = 937
-    _PARSEFILE_AST_RESULT._serialized_start = 939
-    _PARSEFILE_AST_RESULT._serialized_end = 979
-    _PARSEPROGRAM_AST_ARGS._serialized_start = 981
-    _PARSEPROGRAM_AST_ARGS._serialized_end = 1029
-    _PARSEPROGRAM_AST_RESULT._serialized_start = 1031
-    _PARSEPROGRAM_AST_RESULT._serialized_end = 1074
-    _EXECPROGRAM_ARGS._serialized_start = 1077
-    _EXECPROGRAM_ARGS._serialized_end = 1480
-    _EXECPROGRAM_RESULT._serialized_start = 1482
-    _EXECPROGRAM_RESULT._serialized_end = 1566
-    _RESETPLUGIN_ARGS._serialized_start = 1568
-    _RESETPLUGIN_ARGS._serialized_end = 1607
-    _RESETPLUGIN_RESULT._serialized_start = 1609
-    _RESETPLUGIN_RESULT._serialized_end = 1629
-    _FORMATCODE_ARGS._serialized_start = 1631
-    _FORMATCODE_ARGS._serialized_end = 1664
-    _FORMATCODE_RESULT._serialized_start = 1666
-    _FORMATCODE_RESULT._serialized_end = 1704
-    _FORMATPATH_ARGS._serialized_start = 1706
-    _FORMATPATH_ARGS._serialized_end = 1737
-    _FORMATPATH_RESULT._serialized_start = 1739
-    _FORMATPATH_RESULT._serialized_end = 1780
-    _LINTPATH_ARGS._serialized_start = 1782
-    _LINTPATH_ARGS._serialized_end = 1811
-    _LINTPATH_RESULT._serialized_start = 1813
-    _LINTPATH_RESULT._serialized_end = 1847
-    _OVERRIDEFILE_ARGS._serialized_start = 1849
-    _OVERRIDEFILE_ARGS._serialized_end = 1919
-    _OVERRIDEFILE_RESULT._serialized_start = 1921
-    _OVERRIDEFILE_RESULT._serialized_end = 1958
-    _EVALCODE_ARGS._serialized_start = 1960
-    _EVALCODE_ARGS._serialized_end = 1989
-    _EVALCODE_RESULT._serialized_start = 1991
-    _EVALCODE_RESULT._serialized_end = 2029
-    _RESOLVECODE_ARGS._serialized_start = 2031
-    _RESOLVECODE_ARGS._serialized_end = 2063
-    _RESOLVECODE_RESULT._serialized_start = 2065
-    _RESOLVECODE_RESULT._serialized_end = 2102
-    _GETSCHEMATYPE_ARGS._serialized_start = 2104
-    _GETSCHEMATYPE_ARGS._serialized_end = 2173
-    _GETSCHEMATYPE_RESULT._serialized_start = 2175
-    _GETSCHEMATYPE_RESULT._serialized_end = 2240
-    _GETSCHEMATYPEMAPPING_ARGS._serialized_start = 2242
-    _GETSCHEMATYPEMAPPING_ARGS._serialized_end = 2318
-    _GETSCHEMATYPEMAPPING_RESULT._serialized_start = 2321
-    _GETSCHEMATYPEMAPPING_RESULT._serialized_end = 2514
-    _GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY._serialized_start = 2441
-    _GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY._serialized_end = 2514
-    _VALIDATECODE_ARGS._serialized_start = 2516
-    _VALIDATECODE_ARGS._serialized_end = 2619
-    _VALIDATECODE_RESULT._serialized_start = 2621
-    _VALIDATECODE_RESULT._serialized_end = 2680
-    _CODESNIPPET._serialized_start = 2682
-    _CODESNIPPET._serialized_end = 2725
-    _SPLICECODE_ARGS._serialized_start = 2727
-    _SPLICECODE_ARGS._serialized_end = 2787
-    _SPLICECODE_RESULT._serialized_start = 2789
-    _SPLICECODE_RESULT._serialized_end = 2828
-    _POSITION._serialized_start = 2830
-    _POSITION._serialized_end = 2888
-    _COMPLETE_ARGS._serialized_start = 2890
-    _COMPLETE_ARGS._serialized_end = 2964
-    _COMPLETE_RESULT._serialized_start = 2966
-    _COMPLETE_RESULT._serialized_end = 3006
-    _GOTODEF_ARGS._serialized_start = 3008
-    _GOTODEF_ARGS._serialized_end = 3067
-    _GOTODEF_RESULT._serialized_start = 3069
-    _GOTODEF_RESULT._serialized_end = 3104
-    _DOCUMENTSYMBOL_ARGS._serialized_start = 3106
-    _DOCUMENTSYMBOL_ARGS._serialized_end = 3155
-    _DOCUMENTSYMBOL_RESULT._serialized_start = 3157
-    _DOCUMENTSYMBOL_RESULT._serialized_end = 3196
-    _HOVER_ARGS._serialized_start = 3198
-    _HOVER_ARGS._serialized_end = 3255
-    _HOVER_RESULT._serialized_start = 3257
-    _HOVER_RESULT._serialized_end = 3292
-    _LISTDEPFILES_ARGS._serialized_start = 3294
-    _LISTDEPFILES_ARGS._serialized_end = 3399
-    _LISTDEPFILES_RESULT._serialized_start = 3401
-    _LISTDEPFILES_RESULT._serialized_end = 3471
-    _LOADSETTINGSFILES_ARGS._serialized_start = 3473
-    _LOADSETTINGSFILES_ARGS._serialized_end = 3530
-    _LOADSETTINGSFILES_RESULT._serialized_start = 3532
-    _LOADSETTINGSFILES_RESULT._serialized_end = 3645
-    _CLICONFIG._serialized_start = 3648
-    _CLICONFIG._serialized_end = 3867
-    _KEYVALUEPAIR._serialized_start = 3869
-    _KEYVALUEPAIR._serialized_end = 3911
-    _KCLTYPE._serialized_start = 3914
-    _KCLTYPE._serialized_end = 4458
-    _KCLTYPE_PROPERTIESENTRY._serialized_start = 4326
-    _KCLTYPE_PROPERTIESENTRY._serialized_end = 4392
-    _KCLTYPE_EXAMPLESENTRY._serialized_start = 4394
-    _KCLTYPE_EXAMPLESENTRY._serialized_end = 4458
-    _DECORATOR._serialized_start = 4461
-    _DECORATOR._serialized_end = 4605
-    _DECORATOR_KEYWORDSENTRY._serialized_start = 4558
-    _DECORATOR_KEYWORDSENTRY._serialized_end = 4605
-    _EXAMPLE._serialized_start = 4607
-    _EXAMPLE._serialized_end = 4691
-    _BUILTINSERVICE._serialized_start = 4694
-    _BUILTINSERVICE._serialized_end = 4824
-    _KCLVMSERVICE._serialized_start = 4827
-    _KCLVMSERVICE._serialized_end = 6383
+
+  DESCRIPTOR._options = None
+  _LOADPACKAGE_RESULT_SCOPESENTRY._options = None
+  _LOADPACKAGE_RESULT_SCOPESENTRY._serialized_options = b'8\001'
+  _LOADPACKAGE_RESULT_SYMBOLSENTRY._options = None
+  _LOADPACKAGE_RESULT_SYMBOLSENTRY._serialized_options = b'8\001'
+  _LOADPACKAGE_RESULT_NODESYMBOLMAPENTRY._options = None
+  _LOADPACKAGE_RESULT_NODESYMBOLMAPENTRY._serialized_options = b'8\001'
+  _LOADPACKAGE_RESULT_SYMBOLNODEMAPENTRY._options = None
+  _LOADPACKAGE_RESULT_SYMBOLNODEMAPENTRY._serialized_options = b'8\001'
+  _LOADPACKAGE_RESULT_FULLYQUALIFIEDNAMEMAPENTRY._options = None
+  _LOADPACKAGE_RESULT_FULLYQUALIFIEDNAMEMAPENTRY._serialized_options = b'8\001'
+  _LOADPACKAGE_RESULT_PKGSCOPEMAPENTRY._options = None
+  _LOADPACKAGE_RESULT_PKGSCOPEMAPENTRY._serialized_options = b'8\001'
+  _GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY._options = None
+  _GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY._serialized_options = b'8\001'
+  _RENAMECODE_ARGS_SOURCECODESENTRY._options = None
+  _RENAMECODE_ARGS_SOURCECODESENTRY._serialized_options = b'8\001'
+  _RENAMECODE_RESULT_CHANGEDCODESENTRY._options = None
+  _RENAMECODE_RESULT_CHANGEDCODESENTRY._serialized_options = b'8\001'
+  _KCLTYPE_PROPERTIESENTRY._options = None
+  _KCLTYPE_PROPERTIESENTRY._serialized_options = b'8\001'
+  _KCLTYPE_EXAMPLESENTRY._options = None
+  _KCLTYPE_EXAMPLESENTRY._serialized_options = b'8\001'
+  _DECORATOR_KEYWORDSENTRY._options = None
+  _DECORATOR_KEYWORDSENTRY._serialized_options = b'8\001'
+  _CMDEXTERNALPKGSPEC._serialized_start=36
+  _CMDEXTERNALPKGSPEC._serialized_end=92
+  _CMDARGSPEC._serialized_start=94
+  _CMDARGSPEC._serialized_end=135
+  _CMDOVERRIDESPEC._serialized_start=137
+  _CMDOVERRIDESPEC._serialized_end=228
+  _ERROR._serialized_start=230
+  _ERROR._serialized_end=306
+  _MESSAGE._serialized_start=308
+  _MESSAGE._serialized_end=366
+  _PING_ARGS._serialized_start=368
+  _PING_ARGS._serialized_end=394
+  _PING_RESULT._serialized_start=396
+  _PING_RESULT._serialized_end=424
+  _LISTMETHOD_ARGS._serialized_start=426
+  _LISTMETHOD_ARGS._serialized_end=443
+  _LISTMETHOD_RESULT._serialized_start=445
+  _LISTMETHOD_RESULT._serialized_end=490
+  _PARSEFILE_ARGS._serialized_start=492
+  _PARSEFILE_ARGS._serialized_end=594
+  _PARSEFILE_RESULT._serialized_start=596
+  _PARSEFILE_RESULT._serialized_end=682
+  _PARSEPROGRAM_ARGS._serialized_start=684
+  _PARSEPROGRAM_ARGS._serialized_end=791
+  _PARSEPROGRAM_RESULT._serialized_start=793
+  _PARSEPROGRAM_RESULT._serialized_end=883
+  _LOADPACKAGE_ARGS._serialized_start=886
+  _LOADPACKAGE_ARGS._serialized_end=1023
+  _LOADPACKAGE_RESULT._serialized_start=1026
+  _LOADPACKAGE_RESULT._serialized_end=2041
+  _LOADPACKAGE_RESULT_SCOPESENTRY._serialized_start=1608
+  _LOADPACKAGE_RESULT_SCOPESENTRY._serialized_end=1673
+  _LOADPACKAGE_RESULT_SYMBOLSENTRY._serialized_start=1675
+  _LOADPACKAGE_RESULT_SYMBOLSENTRY._serialized_end=1742
+  _LOADPACKAGE_RESULT_NODESYMBOLMAPENTRY._serialized_start=1744
+  _LOADPACKAGE_RESULT_NODESYMBOLMAPENTRY._serialized_end=1822
+  _LOADPACKAGE_RESULT_SYMBOLNODEMAPENTRY._serialized_start=1824
+  _LOADPACKAGE_RESULT_SYMBOLNODEMAPENTRY._serialized_end=1876
+  _LOADPACKAGE_RESULT_FULLYQUALIFIEDNAMEMAPENTRY._serialized_start=1878
+  _LOADPACKAGE_RESULT_FULLYQUALIFIEDNAMEMAPENTRY._serialized_end=1964
+  _LOADPACKAGE_RESULT_PKGSCOPEMAPENTRY._serialized_start=1966
+  _LOADPACKAGE_RESULT_PKGSCOPEMAPENTRY._serialized_end=2041
+  _SYMBOL._serialized_start=2044
+  _SYMBOL._serialized_end=2240
+  _SCOPE._serialized_start=2243
+  _SCOPE._serialized_end=2429
+  _SYMBOLINDEX._serialized_start=2431
+  _SYMBOLINDEX._serialized_end=2480
+  _SCOPEINDEX._serialized_start=2482
+  _SCOPEINDEX._serialized_end=2530
+  _EXECPROGRAM_ARGS._serialized_start=2533
+  _EXECPROGRAM_ARGS._serialized_end=2996
+  _EXECPROGRAM_RESULT._serialized_start=2998
+  _EXECPROGRAM_RESULT._serialized_end=3102
+  _RESETPLUGIN_ARGS._serialized_start=3104
+  _RESETPLUGIN_ARGS._serialized_end=3143
+  _RESETPLUGIN_RESULT._serialized_start=3145
+  _RESETPLUGIN_RESULT._serialized_end=3165
+  _FORMATCODE_ARGS._serialized_start=3167
+  _FORMATCODE_ARGS._serialized_end=3200
+  _FORMATCODE_RESULT._serialized_start=3202
+  _FORMATCODE_RESULT._serialized_end=3240
+  _FORMATPATH_ARGS._serialized_start=3242
+  _FORMATPATH_ARGS._serialized_end=3273
+  _FORMATPATH_RESULT._serialized_start=3275
+  _FORMATPATH_RESULT._serialized_end=3317
+  _LINTPATH_ARGS._serialized_start=3319
+  _LINTPATH_ARGS._serialized_end=3349
+  _LINTPATH_RESULT._serialized_start=3351
+  _LINTPATH_RESULT._serialized_end=3385
+  _OVERRIDEFILE_ARGS._serialized_start=3387
+  _OVERRIDEFILE_ARGS._serialized_end=3457
+  _OVERRIDEFILE_RESULT._serialized_start=3459
+  _OVERRIDEFILE_RESULT._serialized_end=3496
+  _GETFULLSCHEMATYPE_ARGS._serialized_start=3498
+  _GETFULLSCHEMATYPE_ARGS._serialized_end=3593
+  _GETSCHEMATYPE_ARGS._serialized_start=3595
+  _GETSCHEMATYPE_ARGS._serialized_end=3664
+  _GETSCHEMATYPE_RESULT._serialized_start=3666
+  _GETSCHEMATYPE_RESULT._serialized_end=3736
+  _GETSCHEMATYPEMAPPING_ARGS._serialized_start=3738
+  _GETSCHEMATYPEMAPPING_ARGS._serialized_end=3814
+  _GETSCHEMATYPEMAPPING_RESULT._serialized_start=3817
+  _GETSCHEMATYPEMAPPING_RESULT._serialized_end=4020
+  _GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY._serialized_start=3942
+  _GETSCHEMATYPEMAPPING_RESULT_SCHEMATYPEMAPPINGENTRY._serialized_end=4020
+  _VALIDATECODE_ARGS._serialized_start=4022
+  _VALIDATECODE_ARGS._serialized_end=4139
+  _VALIDATECODE_RESULT._serialized_start=4141
+  _VALIDATECODE_RESULT._serialized_end=4200
+  _POSITION._serialized_start=4202
+  _POSITION._serialized_end=4260
+  _LISTDEPFILES_ARGS._serialized_start=4262
+  _LISTDEPFILES_ARGS._serialized_end=4367
+  _LISTDEPFILES_RESULT._serialized_start=4369
+  _LISTDEPFILES_RESULT._serialized_end=4439
+  _LOADSETTINGSFILES_ARGS._serialized_start=4441
+  _LOADSETTINGSFILES_ARGS._serialized_end=4498
+  _LOADSETTINGSFILES_RESULT._serialized_start=4500
+  _LOADSETTINGSFILES_RESULT._serialized_end=4623
+  _CLICONFIG._serialized_start=4626
+  _CLICONFIG._serialized_end=4845
+  _KEYVALUEPAIR._serialized_start=4847
+  _KEYVALUEPAIR._serialized_end=4889
+  _RENAME_ARGS._serialized_start=4891
+  _RENAME_ARGS._serialized_end=4985
+  _RENAME_RESULT._serialized_start=4987
+  _RENAME_RESULT._serialized_end=5025
+  _RENAMECODE_ARGS._serialized_start=5028
+  _RENAMECODE_ARGS._serialized_end=5227
+  _RENAMECODE_ARGS_SOURCECODESENTRY._serialized_start=5177
+  _RENAMECODE_ARGS_SOURCECODESENTRY._serialized_end=5227
+  _RENAMECODE_RESULT._serialized_start=5230
+  _RENAMECODE_RESULT._serialized_end=5375
+  _RENAMECODE_RESULT_CHANGEDCODESENTRY._serialized_start=5324
+  _RENAMECODE_RESULT_CHANGEDCODESENTRY._serialized_end=5375
+  _TEST_ARGS._serialized_start=5377
+  _TEST_ARGS._serialized_end=5495
+  _TEST_RESULT._serialized_start=5497
+  _TEST_RESULT._serialized_end=5551
+  _TESTCASEINFO._serialized_start=5553
+  _TESTCASEINFO._serialized_end=5635
+  _KCLTYPE._serialized_start=5638
+  _KCLTYPE._serialized_end=6222
+  _KCLTYPE_PROPERTIESENTRY._serialized_start=6080
+  _KCLTYPE_PROPERTIESENTRY._serialized_end=6151
+  _KCLTYPE_EXAMPLESENTRY._serialized_start=6153
+  _KCLTYPE_EXAMPLESENTRY._serialized_end=6222
+  _DECORATOR._serialized_start=6225
+  _DECORATOR._serialized_end=6374
+  _DECORATOR_KEYWORDSENTRY._serialized_start=6327
+  _DECORATOR_KEYWORDSENTRY._serialized_end=6374
+  _EXAMPLE._serialized_start=6376
+  _EXAMPLE._serialized_end=6438
+  _BUILTINSERVICE._serialized_start=6441
+  _BUILTINSERVICE._serialized_end=6591
+  _KCLVMSERVICE._serialized_start=6594
+  _KCLVMSERVICE._serialized_end=8026
 # @@protoc_insertion_point(module_scope)
