@@ -2,10 +2,7 @@ import json
 import unittest
 import pathlib
 
-import kclvm.kcl.ast as ast
-import kclvm.api.object as objpkg
 import kclvm.tools.list_attribute.schema as schema
-import kclvm.internal.gpyrpc.gpyrpc_pb2 as pb2
 
 
 import google.protobuf.json_format as json_format

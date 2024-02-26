@@ -9,15 +9,23 @@ import inspect
 
 from ctypes import *
 
-import google.protobuf.json_format as json_format
-
 import kclvm.compiler.extension.plugin.plugin as kcl_plugin
 import kclvm.kcl.info as kcl_info
-import kclvm.internal.gpyrpc.gpyrpc_pb2 as pb2
+import kcl_lib.api.spec_pb2 as pb2
 import kclvm.api.object as objpkg
-import kclvm.kcl.error as kcl_error
-import kclvm.config
+import kcl_lib.api as api
+from ruamel.yaml import YAML
 
+# Ruamel YAML instance
+ruamel_yaml = YAML(typ="unsafe", pure=True)
+# Convert None to null
+ruamel_yaml.representer.add_representer(
+    type(None),
+    lambda dumper, data: dumper.represent_scalar("tag:yaml.org,2002:null", "null"),
+)
+
+# Create the api instance
+_api = api.API()
 
 kclvm_PANIC_INFO_KEY = "__kcl_PanicInfo__"
 
@@ -125,89 +133,14 @@ def plugin_method_agent(method: str, args_json: str, kwargs_json: str) -> c_char
     return addressof(__plugin_method_agent_buffer__)
 
 
-def kclvm_cli_run(args: pb2.ExecProgram_Args) -> str:
-    init_cli_dll()
-
-    _cli_dll.kclvm_cli_run.restype = c_char_p
-    _cli_dll.kclvm_cli_run.argtypes = [c_char_p, c_void_p]
-
-    args_json = json_format.MessageToJson(
-        args, including_default_value_fields=True, preserving_proto_field_name=True
-    )
-
-    result_json = _cli_dll.kclvm_cli_run(args_json.encode("utf-8"), plugin_method_agent)
-    return result_json.decode(encoding="utf-8")
-
-
 def kclvm_cli_native_run_dylib(args: pb2.ExecProgram_Args) -> objpkg.KCLResult:
-    json_result = kclvm_cli_run(args)
-    warn_json_result = ""
+    result: pb2.ExecProgram_Result = _api.exec_program(args)
+    if result.err_message:
+        raise Exception(result.err_message)
 
-    if json_result.startswith("ERROR:"):
-        warn_json_result = json_result[len("ERROR:") :]
-        json_result = "{}"
+    if result.log_message:
+        print(result.log_message)
 
-    try:
-        data = json.loads(json_result or "{}")
-    except Exception as e:
-        raise Exception(f"Exception={e}, json_result={json_result}")
-
-    panic_info = {}
-    if kclvm_PANIC_INFO_KEY in data:
-        panic_info = data
-    else:
-        if warn_json_result:
-            try:
-                panic_info = json.loads(warn_json_result)
-            except Exception as e:
-                raise Exception(f"Exception={e}, warn_json_result={warn_json_result}")
-        else:
-            panic_info = {}
-
-    # check panic_info, kcl_col and kcl_config_meta_col are 0-based, kcl_line and kcl_config_meta_line is 1-based
-    if panic_info.get(kclvm_PANIC_INFO_KEY):
-        err_type_code = panic_info["err_type_code"]
-        if err_type_code:
-            err_type = kcl_error.ErrType((err_type_code,))
-        else:
-            err_type = kcl_error.ErrType.EvaluationError_TYPE
-
-        file_msg = [
-            kcl_error.ErrFileMsg(
-                filename=panic_info.get("kcl_file"),
-                line_no=panic_info.get("kcl_line"),
-                col_no=(panic_info.get("kcl_col") + 1)
-                if panic_info.get("kcl_col")
-                else panic_info.get("kcl_col"),
-                arg_msg=panic_info.get("kcl_arg_msg"),
-            )
-        ]
-        if kclvm.config.debug and kclvm.config.verbose >= 2:
-            rust_filename = panic_info.get("rust_file")
-            rust_line = panic_info.get("rust_line")
-            rust_col = panic_info.get("rust_col")
-            print(f"Rust error info: {rust_filename}:{rust_line}:{rust_col}")
-
-        config_meta_file_msg = kcl_error.ErrFileMsg(
-            filename=panic_info.get("kcl_config_meta_file"),
-            line_no=panic_info.get("kcl_config_meta_line"),
-            col_no=(panic_info.get("kcl_config_meta_col") + 1)
-            if panic_info.get("kcl_config_meta_col")
-            else panic_info.get("kcl_config_meta_col"),
-            arg_msg=panic_info.get("kcl_config_meta_arg_msg"),
-        )
-        if config_meta_file_msg.arg_msg:
-            file_msg.append(config_meta_file_msg)
-
-        if panic_info.get("is_warning") or panic_info.get("is_warnning"):
-            kcl_error.report_warning(
-                err_type=err_type, file_msgs=[], arg_msg=panic_info.get("message")
-            )
-        else:
-            kcl_error.report_exception(
-                err_type=err_type,
-                file_msgs=file_msg,
-                arg_msg=panic_info.get("message"),
-            )
+    data = list(ruamel_yaml.load_all(result.yaml_result))
 
     return objpkg.KCLResult(data, os.path.abspath(args.k_filename_list[-1]))

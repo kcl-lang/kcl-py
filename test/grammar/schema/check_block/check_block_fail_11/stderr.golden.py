@@ -9,7 +9,7 @@ kcl_error.print_kcl_error_message(
     kcl_error.get_exception(err_type=kcl_error.ErrType.SchemaCheckFailure_TYPE,
                             file_msgs=[
                                 kcl_error.ErrFileMsg(
-                                    filename=str(os.path.join(cwd, "pkg", "person.k")),
+                                    filename=cwd + "/pkg/person.k",
                                     line_no=5,
                                     arg_msg=kcl_error.SCHEMA_CHECK_FILE_MSG_COND
                                 ),

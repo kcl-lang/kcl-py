@@ -19,7 +19,7 @@ kcl_error.print_kcl_error_message(
             kcl_error.ErrFileMsg(
                 filename=str(os.path.join(cwd, "main.k")),
                 line_no=6,
-                col_no=27,
+                col_no=25,
                 arg_msg="got str(Doe)"
             )
         ],

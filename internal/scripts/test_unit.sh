@@ -14,6 +14,7 @@ unittest_path=$src/test/test_units/
 package_name=kclvm
 xunit_file=TEST-kclvm.xml
 # Install the dependency
+python3 -m pip install -r ${src}/kclvm/scripts/requirements.txt
 python3 -m pip install --upgrade pip
 python3 -m pip install pytest pytest-xdist
 # Unit test

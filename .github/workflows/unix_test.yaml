@@ -10,13 +10,15 @@ jobs:
   grammar-test:
     name: Grammar Test
     runs-on: ubuntu-latest
-    container:
-      image: kcllang/kcl-builder
     steps:
       - name: Check out code
         uses: actions/checkout@v3
         with:
           submodules: "true"
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
       - name: Grammar test
         run: make test-grammar
         shell: bash
@@ -24,13 +26,15 @@ jobs:
   unit-test:
     name: Unit Test
     runs-on: ubuntu-latest
-    container:
-      image: kcllang/kcl-builder
     steps:
       - name: Check out code
         uses: actions/checkout@v3
         with:
           submodules: "true"
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
       - name: unit test
         run: | 
           make test-unit

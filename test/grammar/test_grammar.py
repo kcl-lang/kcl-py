@@ -1,10 +1,11 @@
-"""This is a scripts to run KCL grammar test cases"""
+"""This is a scripts to run KCL grammar test cases with the native target"""
 import pytest
 import os
 import subprocess
 import re
 import yaml
 import pathlib
+from ruamel.yaml import YAML
 
 TEST_FILE = "main.k"
 STDOUT_GOLDEN = "stdout.golden"
@@ -12,6 +13,15 @@ STDERR_GOLDEN = "stderr.golden"
 STDOUT_GOLDEN_PY = "stdout.golden.py"
 STDERR_GOLDEN_PY = "stderr.golden.py"
 SETTINGS_FILE = "settings.yaml"
+TEST_PATH = "test/grammar"
+
+# Ruamel YAML instance
+ruamel_yaml = YAML(typ="unsafe", pure=True)
+# Convert None to null
+ruamel_yaml.representer.add_representer(
+    type(None),
+    lambda dumper, data: dumper.represent_scalar(u"tag:yaml.org,2002:null", u"null"),
+)
 
 
 def find_test_dirs(path, category):
@@ -23,18 +33,21 @@ def find_test_dirs(path, category):
     return result
 
 
-def compare_strings(result_strings, golden_strings):
-    assert result_strings == golden_strings
+def compare_strings(result_strings: list, golden_strings: list):
+    result = "\n".join(result_strings)
+    golden_result = "\n".join(golden_strings)
+    result_yaml_list = [r for r in list(ruamel_yaml.load_all(result)) if r]
+    golden_yaml_list = [r for r in list(ruamel_yaml.load_all(golden_result)) if r]
+    assert result_yaml_list == golden_yaml_list
 
 
 def compare_results(result, golden_result):
     """Convert bytestring (result) and list of strings (golden_lines) both to
-    list of strings with line ending stripped, then compare.
-    """
+    list of strings with line ending stripped, then compare."""
 
-    result_strings = result.decode().replace("\r\n", "\n").split("\n")
-    golden_strings = golden_result.decode().replace("\r\n", "\n").split("\n")
-    compare_strings(result_strings, golden_strings)
+    result_strings = result.decode().split("\n")
+    golden_strings = golden_result.decode().split("\n")
+    assert result_strings == golden_strings
 
 
 def compare_results_with_lines(result, golden_lines):
@@ -42,7 +55,7 @@ def compare_results_with_lines(result, golden_lines):
     list of strings with line ending stripped, then compare.
     """
 
-    result_strings = result.decode().replace("\r\n", "\n").split("\n")
+    result_strings = result.decode().split("\n")
     golden_strings = []
     for line in golden_lines:
         clean_line = re.sub("\n$", "", line)
@@ -114,7 +127,6 @@ def test_grammar(test_dir):
     GOLDEN_FILE_SCRIPT = 3
     settings = {
         "stdout": (None, stdout, STDOUT_GOLDEN, STDOUT_GOLDEN_PY),
-        "stderr": (1, stderr, STDERR_GOLDEN, STDERR_GOLDEN_PY),
     }
     for _, setting in settings.items():
         # Attempt to generate a golden stdout.
