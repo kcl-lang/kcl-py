@@ -18,10 +18,9 @@ import kclvm.api.object as objpkg
 import kclvm.kcl.error as kcl_error
 import kclvm.config
 import kcl_lib.api as api
-import kcl_lib.bootstrap as bootstrap
 
-os.environ[bootstrap.KCLVM_CLI_USE_RELEASE_ENV_VAR] = "ok"
-api.API()
+# Create the api instance
+_api = api.API()
 
 kclvm_PANIC_INFO_KEY = "__kcl_PanicInfo__"
 

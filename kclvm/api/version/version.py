@@ -3,5 +3,5 @@
 import os
 from pathlib import Path
 
-VERSION = "0.8.0-alpha.5"
+VERSION = "0.8.0-alpha.6"
 CHECKSUM = Path(os.path.dirname(__file__)).joinpath("checksum.txt").read_text().strip()
