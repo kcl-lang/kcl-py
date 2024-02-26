@@ -1,8 +1,0 @@
-CONSTANT:
-  key1: value1
-  key2: value2
-data:
-  jsonStr: '{"key1": "value1", "key2": "value2"}'
-  yamlStr: |
-    key1: value1
-    key2: value2
