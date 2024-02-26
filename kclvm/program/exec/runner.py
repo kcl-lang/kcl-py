@@ -1,7 +1,6 @@
 # Copyright 2021 The KCL Authors. All rights reserved.
 
 import os
-import platform
 import typing
 import json
 
@@ -15,7 +14,7 @@ import kclvm.compiler.parser.parser as parser
 import kclvm.compiler.build.compiler as compiler
 import kclvm.compiler.vfs as vfs
 import kclvm.vm as vm
-import kclvm.internal.gpyrpc.gpyrpc_pb2 as pb2
+import kcl_lib.api.spec_pb2 as pb2
 
 from kclvm.api.object.internal import (
     kcl_option_reset,
@@ -46,7 +45,7 @@ def Run(
     debug: int = None,
     print_override_ast: bool = False,
     # --target
-    target: str = "",
+    target: str = "native",
 ) -> objpkg.KCLResult:
     assert len(path_list) > 0
 
@@ -66,7 +65,6 @@ def Run(
     kclvm.config.input_file = path_list
     kclvm.config.current_path = work_dir
     kclvm.config.is_target_native = target == "native"
-    kclvm.config.is_target_wasm = target == "wasm"
 
     if strict_range_check is not None:
         kclvm.config.strict_range_check = strict_range_check
@@ -87,13 +85,13 @@ def Run(
                 kclvm.config.arguments.append((x.name, x.value))
 
     # rust: build/link/run
-    if target == "native" or target == "wasm":
+    if target == "native":
         kclvm.config.is_target_native = True
 
         args = pb2.ExecProgram_Args()
         args.work_dir = work_dir
-        args.k_filename_list.extend(path_list)
-        args.k_code_list.extend(k_code_list)
+        args.k_filename_list.extend(path_list or [])
+        args.k_code_list.extend(k_code_list or [])
 
         for kv in kclvm.config.arguments or []:
             key, value = kv

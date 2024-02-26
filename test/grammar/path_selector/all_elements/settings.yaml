@@ -1,1 +1,0 @@
-kcl_options: -S :JohnDoe.* -S :list_data.* -S :dict_data.*

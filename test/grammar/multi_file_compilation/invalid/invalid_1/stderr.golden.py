@@ -17,7 +17,7 @@ kcl_error.print_kcl_error_message(
                 err_level=kcl_error.ErrLevel.ORDINARY
             ),
             kcl_error.ErrFileMsg(
-                filename=str(os.path.join(cwd, "pkg.k")),
+                filename=cwd + "/pkg.k",
                 line_no=3,
                 col_no=5,
                 arg_msg="got str(18)"

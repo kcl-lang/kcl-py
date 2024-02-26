@@ -13,11 +13,15 @@ import google.protobuf.json_format as json_format
 
 import kclvm.compiler.extension.plugin.plugin as kcl_plugin
 import kclvm.kcl.info as kcl_info
-import kclvm.internal.gpyrpc.gpyrpc_pb2 as pb2
+import kcl_lib.api.spec_pb2 as pb2
 import kclvm.api.object as objpkg
 import kclvm.kcl.error as kcl_error
 import kclvm.config
+import kcl_lib.api as api
+import kcl_lib.bootstrap as bootstrap
 
+os.environ[bootstrap.KCLVM_CLI_USE_RELEASE_ENV_VAR] = "ok"
+api.API()
 
 kclvm_PANIC_INFO_KEY = "__kcl_PanicInfo__"
 

@@ -9,7 +9,7 @@ kcl_error.print_kcl_error_message(
         err_type=kcl_error.ErrType.ImmutableCompileError_TYPE,
         file_msgs=[
             kcl_error.ErrFileMsg(
-                filename=str(os.path.join(cwd, "pkg.k")),
+                filename=cwd + "/pkg.k",
                 line_no=1,
                 col_no=1
             )
