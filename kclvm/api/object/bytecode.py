@@ -12,9 +12,7 @@ import kclvm.api.object.internal as internal
 
 class KCLResult:
     def __init__(
-        self,
-        m: typing.Union[typing.Dict[str, KCLObject], typing.List[KCLObject]],
-        filename: typing.Optional[str] = None,
+        self, m: typing.Dict[str, KCLObject], filename: typing.Optional[str] = None
     ):
         self.m: typing.Union[typing.Dict[str, KCLObject], typing.List[KCLObject]] = m
         self.filename: str = filename

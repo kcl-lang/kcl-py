@@ -215,6 +215,7 @@ def Main():
                     work_dir=work_dir,
                     cmd_overrides=overrides,
                     print_override_ast=len(overrides) > 0 and kclvm.config.debug,
+                    target=f"{target}",
                 )
 
                 if kclvm.config.list_option_mode > 0:
@@ -223,9 +224,14 @@ def Main():
                 if not compile_only:
                     output = planner.YAMLPlanner(sort_keys=args.sort_keys).plan(
                         output.filter_by_path_selector(
-                            to_kcl=not kclvm.config.is_target_native
+                            to_kcl=not (
+                                kclvm.config.is_target_native
+                                or kclvm.config.is_target_wasm
+                            )
                         ),
-                        to_py=not kclvm.config.is_target_native,
+                        to_py=not (
+                            kclvm.config.is_target_native or kclvm.config.is_target_wasm
+                        ),
                     )
                 klog.write_out(output)
             return

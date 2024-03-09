@@ -5,7 +5,7 @@ from typing import List
 
 import kclvm.config
 import kclvm.internal.util as util
-import kcl_lib.api.spec_pb2 as pb2
+import kclvm.internal.gpyrpc.gpyrpc_pb2 as pb2
 
 
 KCL_MOD_PATH_ENV = "${KCL_MOD}"

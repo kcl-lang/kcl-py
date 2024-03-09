@@ -8,7 +8,7 @@ import kclvm.compiler.parser as parser
 import kclvm.api.object as objpkg
 import kclvm.kcl.ast as ast
 import kclvm.kcl.types as types
-import kcl_lib.api.spec_pb2 as pb2
+import kclvm.internal.gpyrpc.gpyrpc_pb2 as pb2
 import kclvm.tools.printer as printer
 
 

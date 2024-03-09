@@ -25,7 +25,7 @@ with open(require_path) as f:
 setup(
     name="kclvm",
     author="KCL Authors",
-    version="0.8.0-alpha.6",
+    version="0.7.6",
     license="Apache License 2.0",
     python_requires=">=3.7",
     description="KCL Python SDK",
