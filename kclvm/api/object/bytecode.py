@@ -24,7 +24,7 @@ class KCLResult:
         return f"{self.m}"
 
     def filter_by_path_selector(
-        self, to_kcl: bool = kclvm.config.is_target_native
+        self, to_kcl: bool = not kclvm.config.is_target_native
     ) -> typing.Dict[str, KCLObject]:
         if not internal.is_selector_mode():
             return self.m

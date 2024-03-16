@@ -236,7 +236,7 @@ class YAMLPlanner(ObjectPlanner):
             sort_keys=sort_keys, include_schema_type_path=include_schema_type_path
         )
 
-    def plan(self, var_dict: Dict[str, obj.KCLObject], to_py: bool = True) -> str:
+    def plan(self, var_dict: Dict[str, obj.KCLObject], to_py: bool = not kclvm.config.is_target_native) -> str:
         plan_obj = super().plan(var_dict) if to_py else var_dict
         # Represent OrderedDict as dict.
         yaml = YAML()
