@@ -80,7 +80,7 @@ overrides = []
 The configuration override path and value
 """
 
-is_target_native = False
+is_target_native = True
 """Whether the target is 'native'"""
 
 
