@@ -8,6 +8,7 @@ from .object import (
     to_kcl_obj,
 )
 import kclvm.api.object.internal as internal
+import kclvm.config
 
 
 class KCLResult:
@@ -23,7 +24,7 @@ class KCLResult:
         return f"{self.m}"
 
     def filter_by_path_selector(
-        self, to_kcl: bool = True
+        self, to_kcl: bool = kclvm.config.is_target_native
     ) -> typing.Dict[str, KCLObject]:
         if not internal.is_selector_mode():
             return self.m
