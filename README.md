@@ -7,7 +7,12 @@
   <img src="https://img.shields.io/github/license/kcl-lang/kcl-py.svg">
 </p>
 
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkcl-lang%2Fkcl-py.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkcl-lang%2Fkcl-py?ref=badge_large)
+
 ## How to use
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkcl-lang%2Fkcl-py.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkcl-lang%2Fkcl-py?ref=badge_shield)
+
 
 ### Installation
 
