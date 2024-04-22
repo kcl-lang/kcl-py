@@ -1,18 +1,14 @@
 <h1 align="center">KCL Python SDK</h1>
 
 <p align="center">
-  <img src="https://github.com/kcl-lang/kcl-py/workflows/test/badge.svg">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square">
   <img src="https://img.shields.io/github/release/kcl-lang/kcl-py.svg">
   <img src="https://img.shields.io/github/license/kcl-lang/kcl-py.svg">
+  <img src="https://app.fossa.com/projects/git%2Bgithub.com%2Fkcl-lang%2Fkcl-py?ref=badge_shield">
+  <img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkcl-lang%2Fkcl-py.svg?type=shield">
 </p>
 
-
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkcl-lang%2Fkcl-py.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkcl-lang%2Fkcl-py?ref=badge_large)
-
 ## How to use
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkcl-lang%2Fkcl-py.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkcl-lang%2Fkcl-py?ref=badge_shield)
-
 
 ### Installation
 
@@ -83,3 +79,5 @@ x1:
   name: kcl
   age: 101
 ```
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkcl-lang%2Fkcl-py.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkcl-lang%2Fkcl-py?ref=badge_large)
