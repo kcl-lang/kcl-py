@@ -59,7 +59,7 @@ def init_cli_dll():
     _cli_dll = CDLL(_cli_dll_path)
 
 
-class PluginContex:
+class PluginContext:
     def __init__(self):
         self._plugin_dict: typing.Dict[str, any] = {}
 
@@ -116,7 +116,7 @@ class PluginContex:
         return json.dumps(result)
 
 
-__plugin_context__ = PluginContex()
+__plugin_context__ = PluginContext()
 __plugin_method_agent_buffer__ = create_string_buffer(1024)
 
 
