@@ -11,4 +11,4 @@ uvicorn
 gunicorn==20.1.0
 parsy==1.3.0
 pyopenssl==23.0.0
-kcl_lib==0.8.5
+kcl_lib==0.8.7
