@@ -64,23 +64,6 @@ class OverrideAction(Enum):
     DELETE = "Delete"
 
 
-class CmdOverrideSpec:
-    """KCL command line override spec, e.g. `kcl main.k -O pkgpath:path.to.field=field_value`"""
-
-    def __init__(
-        self,
-        *,
-        pkgpath: str = "",
-        field_path: str = "",
-        field_value: str = "",
-        action: OverrideAction = OverrideAction.CREATE_OR_UPDATE,
-    ):
-        self.pkgpath: str = pkgpath
-        self.field_path: str = field_path
-        self.field_value: str = field_value
-        self.action: OverrideAction = action
-
-
 class LarkToken(lark_token.LarkToken):
     @staticmethod
     def is_string(token: str):
@@ -1593,14 +1576,14 @@ class Program:
         main: str = "",
         pkgs: Dict[str, List[Module]] = None,
         cmd_args: List[CmdArgSpec] = None,
-        cmd_overrides: List[CmdOverrideSpec] = None,
+        cmd_overrides: List[str] = None,
     ):
         self.root: str = root if root else ""
         self.main: str = main if main else ""
         self.pkgs: Dict[str, List[Module]] = pkgs if pkgs else {}
 
         self.cmd_args: List[CmdArgSpec] = cmd_args if cmd_args else []
-        self.cmd_overrides: List[CmdOverrideSpec] = (
+        self.cmd_overrides: List[str] = (
             cmd_overrides if cmd_overrides else []
         )
 

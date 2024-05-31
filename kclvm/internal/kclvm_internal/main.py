@@ -182,17 +182,9 @@ def Main():
                         ListAttributePrinter(file).print()
                     exit(0)
 
-                overrides: typing.List[kcl_ast.CmdOverrideSpec] = []
+                overrides: typing.List[str] = []
                 for x in kclvm.config.overrides:
-                    if len(x) == 4:
-                        overrides.append(
-                            kcl_ast.CmdOverrideSpec(
-                                pkgpath=x[0],
-                                field_path=x[1],
-                                field_value=x[2],
-                                action=x[3],
-                            )
-                        )
+                    overrides.append(x)
 
                 if work_dir:
                     # If the input file or path is a relative path and it is not a absolute path in the KCL module VFS,

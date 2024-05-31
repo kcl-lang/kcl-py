@@ -23,7 +23,7 @@ with open(require_path) as f:
         install_requires.append(require)
 
 setup(
-    name="kclvm",
+    name="kcl-py",
     author="KCL Authors",
     version="0.9.0-beta.1",
     license="Apache License 2.0",

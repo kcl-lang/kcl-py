@@ -9,7 +9,6 @@ from ast import literal_eval
 import kclvm.config
 import kclvm.kcl.ast as ast
 import kclvm.api.object as objpkg
-import kclvm.tools.query as query
 import kclvm.compiler.parser.parser as parser
 import kclvm.compiler.build.compiler as compiler
 import kclvm.compiler.vfs as vfs
@@ -34,7 +33,7 @@ def Run(
     work_dir: str = "",
     k_code_list: typing.List[str] = None,
     cmd_args: typing.List[ast.CmdArgSpec] = None,
-    cmd_overrides: typing.List[ast.CmdOverrideSpec] = None,
+    cmd_overrides: typing.List[str] = None,
     # -r --strict-range-check
     strict_range_check: bool = None,
     # -n --disable-none
@@ -102,21 +101,14 @@ def Run(
             else:
                 value = str(value)
             args.args.append(
-                pb2.CmdArgSpec(
+                pb2.Argument(
                     name=key,
                     value=value,
                 )
             )
 
         for x in cmd_overrides or []:
-            args.overrides.append(
-                pb2.CmdOverrideSpec(
-                    pkgpath=x.pkgpath,
-                    field_path=x.field_path,
-                    field_value=x.field_value,
-                    action=x.action.value,
-                )
-            )
+            args.overrides.append(x)
 
         args.print_override_ast = print_override_ast or False
         args.strict_range_check = strict_range_check or False

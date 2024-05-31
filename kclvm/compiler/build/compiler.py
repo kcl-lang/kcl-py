@@ -34,7 +34,6 @@ import kclvm.compiler.extension.builtin as builtin
 import kclvm.compiler.astutil.fix as fix
 import kclvm.vm.code as vm
 import kclvm.unification as unification
-import kclvm.tools.query as query
 
 from kclvm.api.object.internal import Undefined
 from kclvm.kcl.types import ResolveProgram, ProgramScope, ANY_TYPE, parse_type_str
